@@ -57,5 +57,6 @@
 
 (require 'openwith)
 (openwith-mode t)
-(setq openwith-associations '(("\\.pdf\\'" "open" (file))))
-
+(setq openwith-associations
+      '(("\\.pdf\\'" "open" (file))
+        ("\\.docx\\'" "open" (file))))

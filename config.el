@@ -28,17 +28,6 @@
 ;; trusting the org-blocks in org automatically
 (setq org-confirm-babel-evaluate nil)
 
-;; org capture templates
-(after! org
-  (setq org-capture-templates
-        '(("t" "School Todo" entry (file+headline "~/uni/current-course/todo.org" "Tasks")
-           "* TODO %?\n  %i\n  %a")
-          ("j" "Journal" entry (file+datetree "~/org/journal.org")
-           "* %?\nEntered on %U\n  %i\n  %a")
-          ("n" "Class Note" entry (file+datetree "~/uni/current-course/notes/%A.org")
-           "* %?\nEntered on %U\n  %i\n  %a")))
-        )
-
 ;; -------- to open emacs with orgmode --------
 ;; Define the keyboard shortcut as a string
 (setq my-keyboard-shortcut "SPC o a a n")
@@ -51,6 +40,17 @@
 ;; Call the function when Emacs starts up
 (add-hook 'emacs-startup-hook 'my-send-keyboard-shortcut)
 ;; ---------------------------------------------
+
+;; org capture templates
+(after! org
+  (setq org-capture-templates
+        '(("t" "School Todo" entry (file+headline "~/uni/current-course/todo.org" "Tasks")
+           "* TODO %?\n  %i\n  %a")
+          ("j" "Journal" entry (file+datetree "~/org/journal.org")
+           "* %?\nEntered on %U\n  %i\n  %a")
+          ("n" "Class Note" entry (file+datetree "~/uni/current-course/notes/%A.org")
+           "* %?\nEntered on %U\n  %i\n  %a")))
+        )
 
 ;; ---------------------------------------------
 (defun open-finder-and-copy-path ()

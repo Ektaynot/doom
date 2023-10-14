@@ -1,5 +1,15 @@
 ;; first year in uni, mba2022
 
+;; to make latex and latex export work the code snippet below have to be excuted
+;; thanks to https://tex.stackexchange.com/a/385125
+;; brew install basictex
+;; cd /Library/TeX/texbin
+;; sudo tlmgr update --self
+;; sudo tlmgr install wrapfig
+;; sudo tlmgr install marvosym
+;; sudo tlmgr install wasysym
+;; sudo tlmgr install capt-of
+
 ;; my contact informations
 (setq user-full-name "İsmail Efe Top"
       user-mail-address "ismailefetop@gmail.com")

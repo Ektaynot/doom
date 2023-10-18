@@ -25,6 +25,9 @@
 ;; do not confirm when you want to exit
 (setq confirm-kill-emacs nil)
 
+;; remember window position
+;; (desktop-save-mode 1)
+
 ;; how many days should org mode display 
 (setq org-agenda-span 10)
 (add-hook 'org-mode-hook (lambda () (setq org-agenda-span 10)))
@@ -92,4 +95,3 @@
         ;; Add more image formats as needed
         ))
 ;; ---------------------------------------------
-

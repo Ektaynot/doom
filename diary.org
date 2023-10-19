@@ -14,3 +14,15 @@ fi
 ** :lang sh ! Couldn't find shellcheck. Shell script linting will not work
    npm install -g marked
    brew install shellcheck
+
+* to make latex and latex export work the code snippet below have to be excuted
+# thanks to https://tex.stackexchange.com/a/385125
+#+begin_src shell
+brew install basictex
+cd /Library/TeX/texbin
+sudo tlmgr update --self
+sudo tlmgr install wrapfig
+sudo tlmgr install marvosym
+sudo tlmgr install wasysym
+sudo tlmgr install capt-of
+#+end_src

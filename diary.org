@@ -1,0 +1,16 @@
+* Doom Doctor warnings.
+** ! The installed ripgrep binary was not built with support for PCRE lookaheads.
+  brew uninstall ripgrep
+  brew install rust
+  cargo install --features pcre2 ripgrep
+
+** ! The installed grep binary was not built with support for PCRE lookaheads.
+brew install grep
+# In .zshrc/.bashrc
+if [ -d "$(brew --prefix)/opt/grep/libexec/gnubin" ]; then
+    PATH="$(brew --prefix)/opt/grep/libexec/gnubin:$PATH"
+fi
+
+** :lang sh ! Couldn't find shellcheck. Shell script linting will not work
+   npm install -g marked
+   brew install shellcheck

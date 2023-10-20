@@ -1,21 +1,12 @@
 ;; first year in uni, mba2022
 
-;; to make latex and latex export work the code snippet below have to be excuted
-;; thanks to https://tex.stackexchange.com/a/385125
-;; brew install basictex
-;; cd /Library/TeX/texbin
-;; sudo tlmgr update --self
-;; sudo tlmgr install wrapfig
-;; sudo tlmgr install marvosym
-;; sudo tlmgr install wasysym
-;; sudo tlmgr install capt-of
-
 ;; my contact informations
 (setq user-full-name "İsmail Efe Top"
       user-mail-address "ismailefetop@gmail.com")
 
 ;; doom emacs theme setter
 (setq doom-theme 'doom-dracula)
+
 ;; changing doom emacs's font
 (setq doom-font (font-spec :family "JetBrains Mono" :size 22))
 
@@ -25,12 +16,13 @@
 ;; do not confirm when you want to exit
 (setq confirm-kill-emacs nil)
 
-;; remember window position
-;; (desktop-save-mode 1)
+;; to start the agende from the current day 
+(setq org-agenda-start-on-weekday nil)
+(setq org-agenda-start-day "+0d")
 
 ;; how many days should org mode display 
-(setq org-agenda-span 10)
-(add-hook 'org-mode-hook (lambda () (setq org-agenda-span 10)))
+(setq org-agenda-span 8)
+(add-hook 'org-mode-hook (lambda () (setq org-agenda-span 8)))
 
 ;; setting the main org directory
 (setq org-directory "~/.orgs/org/")

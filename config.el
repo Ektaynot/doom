@@ -16,14 +16,6 @@
 ;; do not confirm when you want to exit
 (setq confirm-kill-emacs nil)
 
-;; to start the agende from the current day 
-(setq org-agenda-start-on-weekday nil)
-(setq org-agenda-start-day "+0d")
-
-;; how many days should org mode display 
-(setq org-agenda-span 8)
-(add-hook 'org-mode-hook (lambda () (setq org-agenda-span 8)))
-
 ;; setting the main org directory
 (setq org-directory "~/.orgs/org/")
 
@@ -45,6 +37,17 @@
 ;; Call the function when Emacs starts up
 (add-hook 'emacs-startup-hook 'my-send-keyboard-shortcut)
 ;; ---------------------------------------------
+
+;; set agenda view
+(use-package! org
+  :config
+  ;; to start the agende from the current day 
+  (setq org-agenda-start-on-weekday nil)
+  (setq org-agenda-start-day "+0d")
+  ;; set span 7
+  (setq org-agenda-span 7)
+  ; Add additional configuration here
+  )
 
 ;; org capture templates
 (after! org
@@ -87,3 +90,5 @@
         ;; Add more image formats as needed
         ))
 ;; ---------------------------------------------
+
+

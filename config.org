@@ -1,6 +1,199 @@
-#+PROPERTY: header-args :tangle confil.el
+#+title: İsmail Efe Top's Doom Emacs Config
+#+PROPERTY: header-args :tangle /Users/ismailefetop/.config/doom/config.el
 
+# first year in uni, mba2022
+
+* Table Of Content :toc:
+- [[#my-contact-information][My contact information]]
+- [[#theme][Theme]]
+- [[#font][Font]]
+- [[#line-numbers][Line Numbers]]
+- [[#disable-confirm-on-exit][Disable Confirm on exit.]]
+- [[#org][Org]]
+  - [[#org-directories][Org directories]]
+  - [[#trusting-the-org-blocks-in-org-automatically][Trusting the org-blocks in org automatically]]
+  - [[#to-open-emacs-with-orgmode][to open emacs with orgmode]]
+  - [[#set-agenda-view][Set Agenda View]]
+  - [[#org-capture-templates][Org Capture Templates]]
+- [[#functions][Functions]]
+  - [[#copy-path-function][Copy Path Function]]
+- [[#defaults][Defaults]]
+  - [[#email-client][Email Client]]
+  - [[#openwith-defaults][Openwith Defaults]]
+- [[#sets-olivettis-body-width][Sets olivettis body width]]
+- [[#notes-for-myself][Notes for myself]]
+  - [[#doom-doctor-warnings][Doom Doctor warnings.]]
+  - [[#to-make-latex-and-latex-export-work-the-code-snippet-below-have-to-be-excuted][to make latex and latex export work the code snippet below have to be excuted]]
+  - [[#to-save-window-sitecauses-graphical-errors][to save window site(causes graphical errors)]]
+
+* My contact information
+#+BEGIN_SRC emacs-lisp
+(setq user-full-name "İsmail Efe Top"
+      user-mail-address "ismailefetop@gmail.com")
+#+END_SRC
+
+* Theme
+#+BEGIN_SRC emacs-lisp
+(setq doom-theme 'doom-dracula)
+#+END_SRC
+
+* Font
 #+BEGIN_SRC emacs-lisp
 (setq doom-font (font-spec :family "JetBrains Mono" :size 22))
- #+END_SRC
+#+END_SRC
 
+* Line Numbers
+#+BEGIN_SRC emacs-lisp
+(setq display-line-numbers-type t)
+#+END_SRC
+
+* Disable Confirm on exit.
+#+BEGIN_SRC emacs-lisp
+(setq confirm-kill-emacs nil)
+#+END_SRC
+
+* Org
+** Org directories
+*** Main Directory
+#+BEGIN_SRC emacs-lisp
+(setq org-directory "~/.orgs/org/")
+#+END_SRC
+
+*** Other Org Directories
+#+BEGIN_SRC emacs-lisp
+(setq org-agenda-files '("~/uni/current-course/" "~/.orgs/org/" "/Users/ismailefetop/Library/Mobile Documents/com~apple~CloudDocs/org/"))
+#+END_SRC
+
+** Trusting the org-blocks in org automatically
+#+BEGIN_SRC emacs-lisp
+(setq org-confirm-babel-evaluate nil)
+#+END_SRC
+
+** to open emacs with orgmode
+*** Define the keyboard shortcut as a string
+#+BEGIN_SRC emacs-lisp
+(setq my-keyboard-shortcut "SPC o a a n")
+#+END_SRC
+
+*** Define a function to execute the keyboard shortcut
+#+BEGIN_SRC emacs-lisp
+(defun my-send-keyboard-shortcut ()
+  (interactive)
+  (execute-kbd-macro (kbd my-keyboard-shortcut)))
+#+END_SRC
+
+*** Call the function when Emacs starts up
+#+BEGIN_SRC emacs-lisp
+(add-hook 'emacs-startup-hook 'my-send-keyboard-shortcut)
+#+END_SRC
+
+** Set Agenda View
+#+BEGIN_SRC emacs-lisp
+(use-package! org
+  :config
+  ;; to start the agende from the current day
+  (setq org-agenda-start-on-weekday nil)
+  (setq org-agenda-start-day "+0d")
+  ;; set span 7
+  (setq org-agenda-span 7)
+  ;; Add additional configuration here
+  )
+#+END_SRC
+
+** Org Capture Templates
+#+BEGIN_SRC emacs-lisp
+(after! org
+  (setq org-capture-templates
+        '(("t" "School Todo" entry (file+headline "~/uni/current-course/todo.org" "Tasks")
+           "* TODO %?\n  %i\n  %a")
+          ("j" "Journal" entry (file+datetree "~/org/journal.org")
+           "* %?\nEntered on %U\n  %i\n  %a")
+          ("n" "Class Note" entry (file+datetree "~/uni/current-course/notes/%A.org")
+           "* %?\nEntered on %U\n  %i\n  %a")))
+        )
+#+END_SRC
+
+* Functions
+** Copy Path Function
+#+BEGIN_SRC emacs-lisp
+(defun open-finder-and-copy-path ()
+  "Open Finder and copy the selected file's path."
+  (interactive)
+  (let ((file-path (read-file-name "Select a file: ")))
+    (kill-new file-path)
+    (message "Copied file path: %s" file-path)
+    (start-process "finder" nil "open" "-R" file-path)))
+(defun close-all-buffers ()
+(interactive)
+  (mapc 'kill-buffer (buffer-list)))
+#+END_SRC
+
+* Defaults
+** Email Client
+#+BEGIN_SRC emacs-lisp
+(setq browse-url-mailto-function 'browse-url-generic)
+(setq browse-url-generic-program "open")
+#+END_SRC
+
+** Openwith Defaults
+#+BEGIN_SRC emacs-lisp
+(require 'openwith)
+(openwith-mode t)
+(setq openwith-associations
+      '(("\\.pdf\\'" "open" (file))
+        ("\\.docx\\'" "open" (file))
+        ("\\.jpg\\'" "open" (file))
+        ("\\.jpeg\\'" "open" (file))
+        ("\\.png\\'" "open" (file))
+        ("\\.gif\\'" "open" (file))
+        ;; Add more image formats as needed
+        ))
+#+END_SRC
+
+* Sets olivettis body width
+#+BEGIN_SRC emacs-lisp
+(setq olivetti-body-width 100)
+#+END_SRC
+
+* Notes for myself
+** Doom Doctor warnings.
+*** ! The installed ripgrep binary was not built with support for PCRE lookaheads.
+#+begin_src shell :tangle no
+  brew uninstall ripgrep
+  brew install rust
+  cargo install --features pcre2 ripgrep
+#+end_src
+
+*** ! The installed grep binary was not built with support for PCRE lookaheads.
+#+begin_src shell :tangle no
+brew install grep
+# In .zshrc/.bashrc
+if [ -d "$(brew --prefix)/opt/grep/libexec/gnubin" ]; then
+    PATH="$(brew --prefix)/opt/grep/libexec/gnubin:$PATH"
+fi
+#+end_src
+
+*** :lang sh ! Couldn't find shellcheck. Shell script linting will not work
+#+begin_src shell :tangle no
+   npm install -g marked
+   brew install shellcheck
+#+end_src
+
+** to make latex and latex export work the code snippet below have to be excuted
+# thanks to https://tex.stackexchange.com/a/385125
+
+#+begin_src shell :tangle no
+brew install basictex
+cd /Library/TeX/texbin
+sudo tlmgr update --self
+sudo tlmgr install wrapfig
+sudo tlmgr install marvosym
+sudo tlmgr install wasysym
+sudo tlmgr install capt-of
+#+end_src
+
+** to save window site(causes graphical errors)
+#+BEGIN_SRC emacs-lisp :tangle no
+  ;; remember window position
+  (desktop-save-mode 1)
+#+end_src

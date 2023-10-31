@@ -1,38 +1,55 @@
+;; first year in uni, mba2022
+
+;; my contact informations
 (setq user-full-name "İsmail Efe Top"
       user-mail-address "ismailefetop@gmail.com")
 
+;; doom emacs theme setter
 (setq doom-theme 'doom-dracula)
 
+;; changing doom emacs's font
 (setq doom-font (font-spec :family "JetBrains Mono" :size 22))
 
+;; to display line numbers
 (setq display-line-numbers-type t)
 
+;; do not confirm when you want to exit
 (setq confirm-kill-emacs nil)
 
+;; setting the main org directory
 (setq org-directory "~/.orgs/org/")
 
+;; different places that org files can live
 (setq org-agenda-files '("~/uni/current-course/" "~/.orgs/org/" "/Users/ismailefetop/Library/Mobile Documents/com~apple~CloudDocs/org/"))
 
+;; trusting the org-blocks in org automatically
 (setq org-confirm-babel-evaluate nil)
 
+;; -------- to open emacs with orgmode --------
+;; Define the keyboard shortcut as a string
 (setq my-keyboard-shortcut "SPC o a a n")
 
+;; Define a function to execute the keyboard shortcut
 (defun my-send-keyboard-shortcut ()
   (interactive)
   (execute-kbd-macro (kbd my-keyboard-shortcut)))
 
+;; Call the function when Emacs starts up
 (add-hook 'emacs-startup-hook 'my-send-keyboard-shortcut)
+;; ---------------------------------------------
 
+;; set agenda view
 (use-package! org
   :config
-  ;; to start the agende from the current day
+  ;; to start the agende from the current day 
   (setq org-agenda-start-on-weekday nil)
   (setq org-agenda-start-day "+0d")
   ;; set span 7
   (setq org-agenda-span 7)
-  ;; Add additional configuration here
+  ; Add additional configuration here
   )
 
+;; org capture templates
 (after! org
   (setq org-capture-templates
         '(("t" "School Todo" entry (file+headline "~/uni/current-course/todo.org" "Tasks")
@@ -43,6 +60,7 @@
            "* %?\nEntered on %U\n  %i\n  %a")))
         )
 
+;; ---------------------------------------------
 (defun open-finder-and-copy-path ()
   "Open Finder and copy the selected file's path."
   (interactive)
@@ -53,10 +71,13 @@
 (defun close-all-buffers ()
 (interactive)
   (mapc 'kill-buffer (buffer-list)))
+;; ---------------------------------------------
 
+;; changes the default mail client to the default mac one
 (setq browse-url-mailto-function 'browse-url-generic)
 (setq browse-url-generic-program "open")
 
+;; changes the default emacs openers to mac 
 (require 'openwith)
 (openwith-mode t)
 (setq openwith-associations
@@ -68,5 +89,7 @@
         ("\\.gif\\'" "open" (file))
         ;; Add more image formats as needed
         ))
+;; ---------------------------------------------
 
+;; Sets olivettis body width
 (setq olivetti-body-width 100)

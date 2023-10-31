@@ -1,0 +1,6 @@
+#+PROPERTY: header-args :tangle confil.el
+
+#+BEGIN_SRC emacs-lisp
+(setq doom-font (font-spec :family "JetBrains Mono" :size 22))
+ #+END_SRC
+

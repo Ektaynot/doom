@@ -5,7 +5,7 @@
       user-mail-address "ismailefetop@gmail.com")
 
 ;; doom emacs theme setter
-(setq doom-theme 'doom-dracula)
+(setq doom-theme 'doom-nord-light)
 
 ;; changing doom emacs's font
 (setq doom-font (font-spec :family "JetBrains Mono" :size 22))
@@ -91,4 +91,5 @@
         ))
 ;; ---------------------------------------------
 
-
+;; Sets olivettis body width
+(setq olivetti-body-width 100)

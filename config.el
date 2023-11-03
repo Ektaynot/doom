@@ -9,6 +9,17 @@
 
 (setq confirm-kill-emacs nil)
 
+;disable backup
+ (setq backup-inhibited t)
+;disable auto save
+ (setq auto-save-default nil)
+
+(global-set-key (kbd "C-+") 'text-scale-increase)
+(global-set-key (kbd "C--") 'text-scale-decrease)
+
+(add-hook 'markdown-mode-hook 'pandoc-mode)
+(setq pandoc-binary "/opt/homebrew/bin/pandoc")
+
 (setq org-directory "~/.orgs/org/")
 
 (setq org-agenda-files '("~/uni/current-course/" "~/.orgs/org/" "/Users/ismailefetop/Library/Mobile Documents/com~apple~CloudDocs/org/"))
@@ -43,6 +54,10 @@
            "* %?\nEntered on %U\n  %i\n  %a")))
         )
 
+   (require 'org-auto-tangle)
+
+(add-hook 'org-mode-hook 'org-auto-tangle-mode)
+
 (defun open-finder-and-copy-path ()
   "Open Finder and copy the selected file's path."
   (interactive)
@@ -69,4 +84,24 @@
         ;; Add more image formats as needed
         ))
 
+(use-package! mw-thesaurus
+  :defer t
+  :commands mw-thesaurus-lookup-dwim
+  :hook (mw-thesaurus-mode . variable-pitch-mode)
+  :config
+  (map! :map mw-thesaurus-mode-map [remap evil-record-macro] #'mw-thesaurus--quit)
+
+  ;; window on the right side
+  (add-to-list
+   'display-buffer-alist
+   `(,mw-thesaurus-buffer-name
+     (display-buffer-reuse-window
+      display-buffer-in-direction)
+     (direction . right)
+     (window . root)
+     (window-width . 0.3))))
+
 (setq olivetti-body-width 100)
+
+(after! gcmh
+  (setq gcmh-high-cons-threshold (* 64 1048576)))

@@ -1,5 +1,6 @@
 #+title: İsmail Efe Top's Doom Emacs Config
 #+PROPERTY: header-args :tangle /Users/ismailefetop/.config/doom/config.el
+#+auto_tangle: t
 
 # first year in uni, mba2022
 
@@ -9,18 +10,24 @@
 - [[#font][Font]]
 - [[#line-numbers][Line Numbers]]
 - [[#disable-confirm-on-exit][Disable Confirm on exit.]]
+- [[#disable-autosave][Disable autosave]]
+- [[#zoom][Zoom]]
+- [[#pandoc][Pandoc]]
 - [[#org][Org]]
   - [[#org-directories][Org directories]]
   - [[#trusting-the-org-blocks-in-org-automatically][Trusting the org-blocks in org automatically]]
   - [[#to-open-emacs-with-orgmode][to open emacs with orgmode]]
   - [[#set-agenda-view][Set Agenda View]]
   - [[#org-capture-templates][Org Capture Templates]]
+  - [[#org-auto-tangle][Org Auto Tangle]]
 - [[#functions][Functions]]
   - [[#copy-path-function][Copy Path Function]]
 - [[#defaults][Defaults]]
   - [[#email-client][Email Client]]
   - [[#openwith-defaults][Openwith Defaults]]
+- [[#merriam-webster-thesaurus][Merriam-Webster Thesaurus]]
 - [[#sets-olivettis-body-width][Sets olivettis body width]]
+- [[#garbage-collection][Garbage collection]]
 - [[#notes-for-myself][Notes for myself]]
   - [[#doom-doctor-warnings][Doom Doctor warnings.]]
   - [[#to-make-latex-and-latex-export-work-the-code-snippet-below-have-to-be-excuted][to make latex and latex export work the code snippet below have to be excuted]]
@@ -50,6 +57,26 @@
 * Disable Confirm on exit.
 #+BEGIN_SRC emacs-lisp
 (setq confirm-kill-emacs nil)
+#+END_SRC
+
+* Disable autosave
+#+BEGIN_SRC emacs-lisp
+;disable backup
+ (setq backup-inhibited t)
+;disable auto save
+ (setq auto-save-default nil)
+#+END_SRC
+
+* Zoom
+#+BEGIN_SRC emacs-lisp
+(global-set-key (kbd "C-+") 'text-scale-increase)
+(global-set-key (kbd "C--") 'text-scale-decrease)
+#+END_SRC
+
+* Pandoc
+#+BEGIN_SRC emacs-lisp
+(add-hook 'markdown-mode-hook 'pandoc-mode)
+(setq pandoc-binary "/opt/homebrew/bin/pandoc")
 #+END_SRC
 
 * Org
@@ -112,7 +139,12 @@
            "* %?\nEntered on %U\n  %i\n  %a")))
         )
 #+END_SRC
+** Org Auto Tangle
+#+BEGIN_SRC emacs-lisp
+   (require 'org-auto-tangle)
 
+(add-hook 'org-mode-hook 'org-auto-tangle-mode)
+#+END_SRC
 * Functions
 ** Copy Path Function
 #+BEGIN_SRC emacs-lisp
@@ -150,11 +182,35 @@
         ))
 #+END_SRC
 
+* Merriam-Webster Thesaurus
+#+BEGIN_SRC emacs-lisp
+(use-package! mw-thesaurus
+  :defer t
+  :commands mw-thesaurus-lookup-dwim
+  :hook (mw-thesaurus-mode . variable-pitch-mode)
+  :config
+  (map! :map mw-thesaurus-mode-map [remap evil-record-macro] #'mw-thesaurus--quit)
+
+  ;; window on the right side
+  (add-to-list
+   'display-buffer-alist
+   `(,mw-thesaurus-buffer-name
+     (display-buffer-reuse-window
+      display-buffer-in-direction)
+     (direction . right)
+     (window . root)
+     (window-width . 0.3))))
+#+END_SRC
+
 * Sets olivettis body width
 #+BEGIN_SRC emacs-lisp
 (setq olivetti-body-width 100)
 #+END_SRC
-
+* Garbage collection
+#+BEGIN_SRC emacs-lisp
+(after! gcmh
+  (setq gcmh-high-cons-threshold (* 64 1048576)))
+#+END_SRC
 * Notes for myself
 ** Doom Doctor warnings.
 *** ! The installed ripgrep binary was not built with support for PCRE lookaheads.

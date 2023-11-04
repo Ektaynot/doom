@@ -50,6 +50,7 @@
 ;(unpin! t)
 
 (package! olivetti)
+(package! openwith)
 (package! pandoc-mode)
 (package! mw-thesaurus)
 (package! org-auto-tangle)

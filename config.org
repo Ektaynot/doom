@@ -32,6 +32,7 @@
   - [[#doom-doctor-warnings][Doom Doctor warnings.]]
   - [[#to-make-latex-and-latex-export-work-the-code-snippet-below-have-to-be-excuted][to make latex and latex export work the code snippet below have to be excuted]]
   - [[#to-save-window-sitecauses-graphical-errors][to save window site(causes graphical errors)]]
+  - [[#using-emacs-plus][Using emacs-plus]]
 
 * My contact information
 #+BEGIN_SRC emacs-lisp
@@ -252,4 +253,20 @@ sudo tlmgr install capt-of
 #+BEGIN_SRC emacs-lisp :tangle no
   ;; remember window position
   (desktop-save-mode 1)
+#+end_src
+** Using emacs-plus
+*** Installing
+#+begin_src shell :tangle no
+brew tap d12frosted/emacs-plus
+brew install emacs-plus --with-native-comp --with-xwidgets --with-imagemagick --with-retro-emacs-logo-icon
+#+end_src
+*** Background service
+#+begin_src shell :tangle no
+#To start d12frosted/emacs-plus/emacs-plus@29 now and restart at login:
+
+brew services start d12frosted/emacs-plus/emacs-plus@29
+
+#Or, if you don't want/need a background service you can just run:
+
+/opt/homebrew/opt/emacs-plus@29/bin/emacs =fg-daemon
 #+end_src

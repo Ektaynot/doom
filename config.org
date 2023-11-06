@@ -11,6 +11,8 @@
 - [[#line-numbers][Line Numbers]]
 - [[#disable-confirm-on-exit][Disable Confirm on exit.]]
 - [[#disable-autosave][Disable autosave]]
+- [[#calendar][Calendar]]
+  - [[#make-calendar-start-on-monday][Make calendar start on monday]]
 - [[#zoom][Zoom]]
 - [[#pandoc][Pandoc]]
 - [[#org][Org]]
@@ -25,8 +27,11 @@
 - [[#defaults][Defaults]]
   - [[#email-client][Email Client]]
   - [[#openwith-defaults][Openwith Defaults]]
-- [[#merriam-webster-thesaurus][Merriam-Webster Thesaurus]]
+- [[#dictionary-servers][Dictionary Servers]]
+  - [[#merriam-webster-thesaurus][Merriam-Webster Thesaurus]]
+  - [[#emacs-dictionary][Emacs Dictionary]]
 - [[#sets-olivettis-body-width][Sets olivettis body width]]
+- [[#after-save-hook][After Save hook]]
 - [[#garbage-collection][Garbage collection]]
 - [[#notes-for-myself][Notes for myself]]
   - [[#doom-doctor-warnings][Doom Doctor warnings.]]
@@ -68,6 +73,11 @@
  (setq auto-save-default nil)
 #+END_SRC
 
+* Calendar
+** Make calendar start on monday
+#+begin_src emacs-lisp
+(setq calendar-week-start-day 1)
+#+end_src
 * Zoom
 #+BEGIN_SRC emacs-lisp
 (global-set-key (kbd "C-+") 'text-scale-increase)
@@ -178,12 +188,14 @@
         ("\\.jpg\\'" "open" (file))
         ("\\.jpeg\\'" "open" (file))
         ("\\.png\\'" "open" (file))
+        ("\\.svg\\'" "open" (file))
         ("\\.gif\\'" "open" (file))
         ;; Add more image formats as needed
         ))
 #+END_SRC
 
-* Merriam-Webster Thesaurus
+* Dictionary Servers
+** Merriam-Webster Thesaurus
 #+BEGIN_SRC emacs-lisp
 (use-package! mw-thesaurus
   :defer t
@@ -203,10 +215,19 @@
      (window-width . 0.3))))
 #+END_SRC
 
+** Emacs Dictionary
+#+begin_src emacs-lisp
+(setq dictionary-server "dict.org")
+#+end_src
 * Sets olivettis body width
 #+BEGIN_SRC emacs-lisp
 (setq olivetti-body-width 100)
 #+END_SRC
+* After Save hook
+#+begin_src emacs-lisp
+(add-hook 'after-save-hook
+          'executable-make-buffer-file-executable-if-script-p)
+#+end_src
 * Garbage collection
 #+BEGIN_SRC emacs-lisp
 (after! gcmh

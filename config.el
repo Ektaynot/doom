@@ -14,6 +14,8 @@
 ;disable auto save
  (setq auto-save-default nil)
 
+(setq calendar-week-start-day 1)
+
 (global-set-key (kbd "C-+") 'text-scale-increase)
 (global-set-key (kbd "C--") 'text-scale-decrease)
 
@@ -80,6 +82,7 @@
         ("\\.jpg\\'" "open" (file))
         ("\\.jpeg\\'" "open" (file))
         ("\\.png\\'" "open" (file))
+        ("\\.svg\\'" "open" (file))
         ("\\.gif\\'" "open" (file))
         ;; Add more image formats as needed
         ))
@@ -101,7 +104,12 @@
      (window . root)
      (window-width . 0.3))))
 
+(setq dictionary-server "dict.org")
+
 (setq olivetti-body-width 100)
+
+(add-hook 'after-save-hook
+          'executable-make-buffer-file-executable-if-script-p)
 
 (after! gcmh
   (setq gcmh-high-cons-threshold (* 64 1048576)))

@@ -5,16 +5,21 @@
 # first year in uni, mba2022
 
 * Table Of Content :toc:
-- [[#my-contact-information][My contact information]]
-- [[#theme][Theme]]
-- [[#font][Font]]
-- [[#line-numbers][Line Numbers]]
-- [[#disable-confirm-on-exit][Disable Confirm on exit.]]
-- [[#disable-autosave][Disable autosave]]
-- [[#calendar][Calendar]]
-  - [[#make-calendar-start-on-monday][Make calendar start on monday]]
-- [[#zoom][Zoom]]
-- [[#pandoc][Pandoc]]
+- [[#one-liners][One Liners]]
+  - [[#my-contact-information][My contact information]]
+  - [[#theme][Theme]]
+  - [[#font][Font]]
+  - [[#line-numbers][Line Numbers]]
+  - [[#disable-confirm-on-exit][Disable Confirm on exit.]]
+  - [[#disable-autosave][Disable autosave]]
+  - [[#automatically-kill-running-processes-on-exit][Automatically Kill Running Processes on Exit]]
+  - [[#csv][CSV]]
+  - [[#zoom][Zoom]]
+  - [[#calendar][Calendar]]
+  - [[#pandoc][Pandoc]]
+  - [[#sets-olivettis-body-width][Sets olivettis body width]]
+  - [[#super-save][Super-save]]
+  - [[#opening-large-files][Opening Large Files]]
 - [[#org][Org]]
   - [[#org-directories][Org directories]]
   - [[#trusting-the-org-blocks-in-org-automatically][Trusting the org-blocks in org automatically]]
@@ -23,6 +28,7 @@
   - [[#org-capture-templates][Org Capture Templates]]
   - [[#org-auto-tangle][Org Auto Tangle]]
 - [[#functions][Functions]]
+  - [[#heading-inserting][heading inserting]]
   - [[#copy-path-function][Copy Path Function]]
 - [[#defaults][Defaults]]
   - [[#email-client][Email Client]]
@@ -30,7 +36,6 @@
 - [[#dictionary-servers][Dictionary Servers]]
   - [[#merriam-webster-thesaurus][Merriam-Webster Thesaurus]]
   - [[#emacs-dictionary][Emacs Dictionary]]
-- [[#sets-olivettis-body-width][Sets olivettis body width]]
 - [[#after-save-hook][After Save hook]]
 - [[#garbage-collection][Garbage collection]]
 - [[#notes-for-myself][Notes for myself]]
@@ -39,33 +44,35 @@
   - [[#to-save-window-sitecauses-graphical-errors][to save window site(causes graphical errors)]]
   - [[#using-emacs-plus][Using emacs-plus]]
 
-* My contact information
+* One Liners
+** My contact information
 #+BEGIN_SRC emacs-lisp
 (setq user-full-name "İsmail Efe Top"
       user-mail-address "ismailefetop@gmail.com")
 #+END_SRC
 
-* Theme
+** Theme
 #+BEGIN_SRC emacs-lisp
 (setq doom-theme 'doom-dracula)
+(setq-default frame-title-format '("%f"))
 #+END_SRC
 
-* Font
+** Font
 #+BEGIN_SRC emacs-lisp
 (setq doom-font (font-spec :family "JetBrains Mono" :size 22))
 #+END_SRC
 
-* Line Numbers
+** Line Numbers
 #+BEGIN_SRC emacs-lisp
 (setq display-line-numbers-type t)
 #+END_SRC
 
-* Disable Confirm on exit.
+** Disable Confirm on exit.
 #+BEGIN_SRC emacs-lisp
 (setq confirm-kill-emacs nil)
 #+END_SRC
 
-* Disable autosave
+** Disable autosave
 #+BEGIN_SRC emacs-lisp
 ;disable backup
  (setq backup-inhibited t)
@@ -73,22 +80,48 @@
  (setq auto-save-default nil)
 #+END_SRC
 
-* Calendar
-** Make calendar start on monday
+** [[https://emacsredux.com/blog/2020/07/18/automatically-kill-running-processes-on-exit/][Automatically Kill Running Processes on Exit]]
 #+begin_src emacs-lisp
-(setq calendar-week-start-day 1)
+(setq confirm-kill-processes nil)
 #+end_src
-* Zoom
+
+** CSV
+#+begin_src emacs-lisp
+(setq csv-separators '("," "    "))
+#+end_src
+
+** Zoom
 #+BEGIN_SRC emacs-lisp
 (global-set-key (kbd "C-+") 'text-scale-increase)
 (global-set-key (kbd "C--") 'text-scale-decrease)
 #+END_SRC
 
-* Pandoc
+** Calendar
+*** Make calendar start on monday
+#+begin_src emacs-lisp
+(setq calendar-week-start-day 1)
+#+end_src
+
+** Pandoc
 #+BEGIN_SRC emacs-lisp
 (add-hook 'markdown-mode-hook 'pandoc-mode)
 (setq pandoc-binary "/opt/homebrew/bin/pandoc")
 #+END_SRC
+
+** Sets olivettis body width
+#+BEGIN_SRC emacs-lisp
+(setq olivetti-body-width 100)
+#+END_SRC
+
+** Super-save
+#+begin_src emacs-lisp
+(super-save-mode +1)
+#+end_src
+** Opening Large Files
+#+begin_src emacs-lisp
+;; warn when opening files bigger than 200MB
+(setq large-file-warning-threshold 200000000)
+#+end_src
 
 * Org
 ** Org directories
@@ -157,6 +190,15 @@
 (add-hook 'org-mode-hook 'org-auto-tangle-mode)
 #+END_SRC
 * Functions
+** heading inserting
+#+begin_src emacs-lisp
+(define-skeleton künye
+"Header info for an Org file."
+"Title: ""#+TITLE:" str " \n"
+"#+AUTHOR: " user-full-name "\n"
+"#+DATE: " (format-time-string "%Y-%m-%d") "\n")
+#+end_src
+
 ** Copy Path Function
 #+BEGIN_SRC emacs-lisp
 (defun open-finder-and-copy-path ()
@@ -177,7 +219,6 @@
 (setq browse-url-mailto-function 'browse-url-generic)
 (setq browse-url-generic-program "open")
 #+END_SRC
-
 ** Openwith Defaults
 #+BEGIN_SRC emacs-lisp
 (require 'openwith)
@@ -219,10 +260,6 @@
 #+begin_src emacs-lisp
 (setq dictionary-server "dict.org")
 #+end_src
-* Sets olivettis body width
-#+BEGIN_SRC emacs-lisp
-(setq olivetti-body-width 100)
-#+END_SRC
 * After Save hook
 #+begin_src emacs-lisp
 (add-hook 'after-save-hook

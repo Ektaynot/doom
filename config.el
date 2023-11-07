@@ -2,6 +2,7 @@
       user-mail-address "ismailefetop@gmail.com")
 
 (setq doom-theme 'doom-dracula)
+(setq-default frame-title-format '("%f"))
 
 (setq doom-font (font-spec :family "JetBrains Mono" :size 22))
 
@@ -14,13 +15,24 @@
 ;disable auto save
  (setq auto-save-default nil)
 
-(setq calendar-week-start-day 1)
+(setq confirm-kill-processes nil)
+
+(setq csv-separators '("," "    "))
 
 (global-set-key (kbd "C-+") 'text-scale-increase)
 (global-set-key (kbd "C--") 'text-scale-decrease)
 
+(setq calendar-week-start-day 1)
+
 (add-hook 'markdown-mode-hook 'pandoc-mode)
 (setq pandoc-binary "/opt/homebrew/bin/pandoc")
+
+(setq olivetti-body-width 100)
+
+(super-save-mode +1)
+
+;; warn when opening files bigger than 200MB
+(setq large-file-warning-threshold 200000000)
 
 (setq org-directory "~/.orgs/org/")
 
@@ -59,6 +71,12 @@
    (require 'org-auto-tangle)
 
 (add-hook 'org-mode-hook 'org-auto-tangle-mode)
+
+(define-skeleton künye
+"Header info for an Org file."
+"Title: ""#+TITLE:" str " \n"
+"#+AUTHOR: " user-full-name "\n"
+"#+DATE: " (format-time-string "%Y-%m-%d") "\n")
 
 (defun open-finder-and-copy-path ()
   "Open Finder and copy the selected file's path."
@@ -105,8 +123,6 @@
      (window-width . 0.3))))
 
 (setq dictionary-server "dict.org")
-
-(setq olivetti-body-width 100)
 
 (add-hook 'after-save-hook
           'executable-make-buffer-file-executable-if-script-p)

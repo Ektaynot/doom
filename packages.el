@@ -55,3 +55,4 @@
 (package! mw-thesaurus)
 (package! org-auto-tangle)
 (package! insert-shebang)
+(package! super-save)

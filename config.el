@@ -2,7 +2,6 @@
       user-mail-address "ismailefetop@gmail.com")
 
 (setq doom-theme 'doom-dracula)
-(setq-default frame-title-format '("%f"))
 
 (setq doom-font (font-spec :family "JetBrains Mono" :size 22))
 
@@ -60,13 +59,13 @@
 
 (after! org
   (setq org-capture-templates
-        '(("t" "School Todo" entry (file+headline "~/uni/current-course/todo.org" "Tasks")
+        '(("t" "School Todo" entry (file+olp+datetree "~/uni/current-course/todo.org" "Tasks")
            "* TODO %?\n  %i\n  %a")
-          ("j" "Journal" entry (file+datetree "~/org/journal.org")
+          ("j" "Journal" entry (file+olp+datetree "~/org/journal.org")
            "* %?\nEntered on %U\n  %i\n  %a")
-          ("n" "Class Note" entry (file+datetree "~/uni/current-course/notes/%A.org")
+          ("n" "Class Note" entry (file+olp+datetree "~/uni/current-course/notes/%A.org")
            "* %?\nEntered on %U\n  %i\n  %a")))
-        )
+)
 
    (require 'org-auto-tangle)
 

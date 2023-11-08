@@ -1,4 +1,5 @@
 #+title: İsmail Efe Top's Doom Emacs Config
+#+AUTHOR: İsmail Efe Top
 #+PROPERTY: header-args :tangle /Users/ismailefetop/.config/doom/config.el
 #+auto_tangle: t
 
@@ -54,7 +55,6 @@
 ** Theme
 #+BEGIN_SRC emacs-lisp
 (setq doom-theme 'doom-dracula)
-(setq-default frame-title-format '("%f"))
 #+END_SRC
 
 ** Font
@@ -122,7 +122,6 @@
 ;; warn when opening files bigger than 200MB
 (setq large-file-warning-threshold 200000000)
 #+end_src
-
 * Org
 ** Org directories
 *** Main Directory
@@ -175,13 +174,14 @@
 #+BEGIN_SRC emacs-lisp
 (after! org
   (setq org-capture-templates
-        '(("t" "School Todo" entry (file+headline "~/uni/current-course/todo.org" "Tasks")
+        '(("t" "School Todo" entry (file+olp+datetree "~/uni/current-course/todo.org" "Tasks")
            "* TODO %?\n  %i\n  %a")
-          ("j" "Journal" entry (file+datetree "~/org/journal.org")
+          ("j" "Journal" entry (file+olp+datetree "~/org/journal.org")
            "* %?\nEntered on %U\n  %i\n  %a")
-          ("n" "Class Note" entry (file+datetree "~/uni/current-course/notes/%A.org")
+          ("n" "Class Note" entry (file+olp+datetree "~/uni/current-course/notes/%A.org")
            "* %?\nEntered on %U\n  %i\n  %a")))
-        )
+)
+
 #+END_SRC
 ** Org Auto Tangle
 #+BEGIN_SRC emacs-lisp
@@ -316,7 +316,7 @@ sudo tlmgr install capt-of
 *** Installing
 #+begin_src shell :tangle no
 brew tap d12frosted/emacs-plus
-brew install emacs-plus --with-native-comp --with-xwidgets --with-imagemagick --with-retro-emacs-logo-icon
+brew install emacs-plus --with-native-comp --with-imagemagick --with-retro-emacs-logo-icon
 #+end_src
 *** Background service
 #+begin_src shell :tangle no

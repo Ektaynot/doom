@@ -120,6 +120,7 @@
 #+begin_src emacs-lisp
 (super-save-mode +1)
 #+end_src
+
 ** Opening Large Files
 #+begin_src emacs-lisp
 ;; warn when opening files bigger than 200MB

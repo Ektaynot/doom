@@ -31,6 +31,8 @@
 - [[#functions][Functions]]
   - [[#heading-inserting][heading inserting]]
   - [[#copy-path-function][Copy Path Function]]
+  - [[#reading-mode][Reading Mode]]
+  - [[#undo-reading-mode][Undo Reading Mode]]
 - [[#defaults][Defaults]]
   - [[#email-client][Email Client]]
   - [[#openwith-defaults][Openwith Defaults]]
@@ -44,6 +46,7 @@
   - [[#to-make-latex-and-latex-export-work-the-code-snippet-below-have-to-be-excuted][to make latex and latex export work the code snippet below have to be excuted]]
   - [[#to-save-window-sitecauses-graphical-errors][to save window site(causes graphical errors)]]
   - [[#using-emacs-plus][Using emacs-plus]]
+- [[#testing][Testing]]
 
 * One Liners
 ** My contact information
@@ -212,7 +215,24 @@
 (interactive)
   (mapc 'kill-buffer (buffer-list)))
 #+END_SRC
-
+** Reading Mode
+#+begin_src emacs-lisp
+(defun reading-mode ()
+  "Toggle reading mode."
+  (interactive)
+  (hide-mode-line-mode +1)
+  (olivetti-mode)
+  (menu-bar--display-line-numbers-mode-none))
+#+end_src
+** Undo Reading Mode
+#+begin_src emacs-lisp
+(defun undo-reading-mode ()
+  "undo reading mode."
+  (interactive)
+  (hide-mode-line-mode -1)
+  (setq olivetti-mode nil)
+  (menu-bar--display-line-numbers-mode-absolute))
+#+end_src
 * Defaults
 ** Email Client
 #+BEGIN_SRC emacs-lisp
@@ -328,3 +348,4 @@ brew services start d12frosted/emacs-plus/emacs-plus@29
 
 /opt/homebrew/opt/emacs-plus@29/bin/emacs =fg-daemon
 #+end_src
+* Testing

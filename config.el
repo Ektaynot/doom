@@ -88,6 +88,20 @@
 (interactive)
   (mapc 'kill-buffer (buffer-list)))
 
+(defun reading-mode ()
+  "Toggle reading mode."
+  (interactive)
+  (hide-mode-line-mode +1)
+  (olivetti-mode)
+  (menu-bar--display-line-numbers-mode-none))
+
+(defun undo-reading-mode ()
+  "undo reading mode."
+  (interactive)
+  (hide-mode-line-mode -1)
+  (setq olivetti-mode nil)
+  (menu-bar--display-line-numbers-mode-absolute))
+
 (setq browse-url-mailto-function 'browse-url-generic)
 (setq browse-url-generic-program "open")
 

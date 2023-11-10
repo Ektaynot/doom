@@ -23,15 +23,16 @@
 
 (setq calendar-week-start-day 1)
 
-(add-hook 'markdown-mode-hook 'pandoc-mode)
-(setq pandoc-binary "/opt/homebrew/bin/pandoc")
-
 (setq olivetti-body-width 100)
 
 (super-save-mode +1)
 
 ;; warn when opening files bigger than 200MB
 (setq large-file-warning-threshold 200000000)
+
+(setq pandoc-binary "/opt/homebrew/bin/pandoc")
+
+(setq pandoc-data-dir "/Users/ismailefetop/.config/doom/etc/pandoc/")
 
 (setq org-directory "~/.orgs/org/")
 
@@ -59,7 +60,7 @@
 
 (after! org
   (setq org-capture-templates
-        '(("t" "School Todo" entry (file+olp+datetree "~/uni/current-course/todo.org" "Tasks")
+        '(("t" "School Todo" entry (file+olp+datetree "~/uni/current-course/todo.org")
            "* TODO %?\n  %i\n  %a")
           ("j" "Journal" entry (file+olp+datetree "~/org/journal.org")
            "* %?\nEntered on %U\n  %i\n  %a")
@@ -88,19 +89,21 @@
 (interactive)
   (mapc 'kill-buffer (buffer-list)))
 
-(defun reading-mode ()
+(defun efe/reading-mode ()
   "Toggle reading mode."
   (interactive)
   (hide-mode-line-mode +1)
   (olivetti-mode)
   (menu-bar--display-line-numbers-mode-none))
 
-(defun undo-reading-mode ()
+(defun efe/undo-reading-mode ()
   "undo reading mode."
   (interactive)
   (hide-mode-line-mode -1)
   (setq olivetti-mode nil)
   (menu-bar--display-line-numbers-mode-absolute))
+
+(set-file-template! "\\.org$" :trigger "__week.org" :mode 'org-mode)
 
 (setq browse-url-mailto-function 'browse-url-generic)
 (setq browse-url-generic-program "open")

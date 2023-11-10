@@ -17,10 +17,12 @@
   - [[#csv][CSV]]
   - [[#zoom][Zoom]]
   - [[#calendar][Calendar]]
-  - [[#pandoc][Pandoc]]
   - [[#sets-olivettis-body-width][Sets olivettis body width]]
   - [[#super-save][Super-save]]
   - [[#opening-large-files][Opening Large Files]]
+- [[#pandoc][Pandoc]]
+  - [[#set-pandoc-binary][Set Pandoc Binary]]
+  - [[#global-settingsdata-file][Global Settings/Data File]]
 - [[#org][Org]]
   - [[#org-directories][Org directories]]
   - [[#trusting-the-org-blocks-in-org-automatically][Trusting the org-blocks in org automatically]]
@@ -33,6 +35,8 @@
   - [[#copy-path-function][Copy Path Function]]
   - [[#reading-mode][Reading Mode]]
   - [[#undo-reading-mode][Undo Reading Mode]]
+- [[#snippet-templates][Snippet Templates]]
+  - [[#week-templates][Week Templates]]
 - [[#defaults][Defaults]]
   - [[#email-client][Email Client]]
   - [[#openwith-defaults][Openwith Defaults]]
@@ -105,12 +109,6 @@
 (setq calendar-week-start-day 1)
 #+end_src
 
-** Pandoc
-#+BEGIN_SRC emacs-lisp
-(add-hook 'markdown-mode-hook 'pandoc-mode)
-(setq pandoc-binary "/opt/homebrew/bin/pandoc")
-#+END_SRC
-
 ** Sets olivettis body width
 #+BEGIN_SRC emacs-lisp
 (setq olivetti-body-width 100)
@@ -125,6 +123,16 @@
 #+begin_src emacs-lisp
 ;; warn when opening files bigger than 200MB
 (setq large-file-warning-threshold 200000000)
+#+end_src
+
+* Pandoc
+** Set Pandoc Binary
+#+BEGIN_SRC emacs-lisp
+(setq pandoc-binary "/opt/homebrew/bin/pandoc")
+#+END_SRC
+** Global Settings/Data File
+#+begin_src emacs-lisp
+(setq pandoc-data-dir "/Users/ismailefetop/.config/doom/etc/pandoc/")
 #+end_src
 * Org
 ** Org directories
@@ -178,7 +186,7 @@
 #+BEGIN_SRC emacs-lisp
 (after! org
   (setq org-capture-templates
-        '(("t" "School Todo" entry (file+olp+datetree "~/uni/current-course/todo.org" "Tasks")
+        '(("t" "School Todo" entry (file+olp+datetree "~/uni/current-course/todo.org")
            "* TODO %?\n  %i\n  %a")
           ("j" "Journal" entry (file+olp+datetree "~/org/journal.org")
            "* %?\nEntered on %U\n  %i\n  %a")
@@ -218,7 +226,7 @@
 #+END_SRC
 ** Reading Mode
 #+begin_src emacs-lisp
-(defun reading-mode ()
+(defun efe/reading-mode ()
   "Toggle reading mode."
   (interactive)
   (hide-mode-line-mode +1)
@@ -227,12 +235,17 @@
 #+end_src
 ** Undo Reading Mode
 #+begin_src emacs-lisp
-(defun undo-reading-mode ()
+(defun efe/undo-reading-mode ()
   "undo reading mode."
   (interactive)
   (hide-mode-line-mode -1)
   (setq olivetti-mode nil)
   (menu-bar--display-line-numbers-mode-absolute))
+#+end_src
+* Snippet Templates
+** Week Templates
+#+begin_src emacs-lisp
+(set-file-template! "\\.org$" :trigger "__week.org" :mode 'org-mode)
 #+end_src
 * Defaults
 ** Email Client

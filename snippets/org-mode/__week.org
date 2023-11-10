@@ -1,0 +1,3 @@
+#+title: `(buffer-file-name)`
+#+AUTHOR: `(user-full-name)`
+#+DATE: `(format-time-string "%Y-%m-%d")`

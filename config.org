@@ -35,6 +35,7 @@
   - [[#copy-path-function][Copy Path Function]]
   - [[#reading-mode][Reading Mode]]
   - [[#undo-reading-mode][Undo Reading Mode]]
+  - [[#export-to-docx][Export to docx]]
 - [[#snippet-templates][Snippet Templates]]
   - [[#week-templates][Week Templates]]
 - [[#defaults][Defaults]]
@@ -241,6 +242,16 @@
   (hide-mode-line-mode -1)
   (setq olivetti-mode nil)
   (menu-bar--display-line-numbers-mode-absolute))
+#+end_src
+** Export to docx
+#+begin_src emacs-lisp
+(defun efe/export-to-docx ()
+  "Output to docx using pandoc-mode"
+  (interactive)
+  (pandoc-mode)
+  (execute-kbd-macro (kbd "C-c / O W d b b r"))
+  (setq pandoc-mode nil)
+  )
 #+end_src
 * Snippet Templates
 ** Week Templates

@@ -103,6 +103,14 @@
   (setq olivetti-mode nil)
   (menu-bar--display-line-numbers-mode-absolute))
 
+(defun efe/export-to-docx ()
+  "Output to docx using pandoc-mode"
+  (interactive)
+  (pandoc-mode)
+  (execute-kbd-macro (kbd "C-c / O W d b b r"))
+  (setq pandoc-mode nil)
+  )
+
 (set-file-template! "\\.org$" :trigger "__week.org" :mode 'org-mode)
 
 (setq browse-url-mailto-function 'browse-url-generic)

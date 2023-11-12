@@ -14,12 +14,12 @@
   - [[#disable-confirm-on-exit][Disable Confirm on exit.]]
   - [[#disable-autosave][Disable autosave]]
   - [[#automatically-kill-running-processes-on-exit][Automatically Kill Running Processes on Exit]]
-  - [[#csv][CSV]]
   - [[#zoom][Zoom]]
   - [[#calendar][Calendar]]
   - [[#sets-olivettis-body-width][Sets olivettis body width]]
   - [[#super-save][Super-save]]
   - [[#opening-large-files][Opening Large Files]]
+  - [[#disable-tilde-on-empty-lines][Disable tilde on empty lines]]
 - [[#pandoc][Pandoc]]
   - [[#set-pandoc-binary][Set Pandoc Binary]]
   - [[#global-settingsdata-file][Global Settings/Data File]]
@@ -31,7 +31,6 @@
   - [[#org-capture-templates][Org Capture Templates]]
   - [[#org-auto-tangle][Org Auto Tangle]]
 - [[#functions][Functions]]
-  - [[#heading-inserting][heading inserting]]
   - [[#copy-path-function][Copy Path Function]]
   - [[#reading-mode][Reading Mode]]
   - [[#undo-reading-mode][Undo Reading Mode]]
@@ -93,11 +92,6 @@
 (setq confirm-kill-processes nil)
 #+end_src
 
-** CSV
-#+begin_src emacs-lisp
-(setq csv-separators '("," "    "))
-#+end_src
-
 ** Zoom
 #+BEGIN_SRC emacs-lisp
 (global-set-key (kbd "C-+") 'text-scale-increase)
@@ -125,7 +119,10 @@
 ;; warn when opening files bigger than 200MB
 (setq large-file-warning-threshold 200000000)
 #+end_src
-
+** Disable tilde on empty lines
+#+begin_src emacs-lisp
+(remove-hook 'text-mode-hook #'vi-tilde-fringe-mode)
+#+end_src
 * Pandoc
 ** Set Pandoc Binary
 #+BEGIN_SRC emacs-lisp
@@ -144,7 +141,7 @@
 
 *** Other Org Directories
 #+BEGIN_SRC emacs-lisp
-(setq org-agenda-files '("~/uni/current-course/" "~/.orgs/org/" "/Users/ismailefetop/Library/Mobile Documents/com~apple~CloudDocs/org/"))
+(setq org-agenda-files '("~/uni/current-course/" "~/.orgs/org/" "~/ideas/" "/Users/ismailefetop/Library/Mobile Documents/com~apple~CloudDocs/org/"))
 #+END_SRC
 
 ** Trusting the org-blocks in org automatically
@@ -167,7 +164,7 @@
 
 *** Call the function when Emacs starts up
 #+BEGIN_SRC emacs-lisp
-(add-hook 'emacs-startup-hook 'my-send-keyboard-shortcut)
+;; (add-hook 'emacs-startup-hook 'my-send-keyboard-shortcut)
 #+END_SRC
 
 ** Set Agenda View
@@ -203,15 +200,6 @@
 (add-hook 'org-mode-hook 'org-auto-tangle-mode)
 #+END_SRC
 * Functions
-** heading inserting
-#+begin_src emacs-lisp
-(define-skeleton künye
-"Header info for an Org file."
-"Title: ""#+TITLE:" str " \n"
-"#+AUTHOR: " user-full-name "\n"
-"#+DATE: " (format-time-string "%Y-%m-%d") "\n")
-#+end_src
-
 ** Copy Path Function
 #+BEGIN_SRC emacs-lisp
 (defun open-finder-and-copy-path ()
@@ -232,6 +220,7 @@
   (interactive)
   (hide-mode-line-mode +1)
   (olivetti-mode)
+  (setq hl-line-mode nil)
   (menu-bar--display-line-numbers-mode-none))
 #+end_src
 ** Undo Reading Mode
@@ -241,6 +230,7 @@
   (interactive)
   (hide-mode-line-mode -1)
   (setq olivetti-mode nil)
+  (setq hl-line-mode t)
   (menu-bar--display-line-numbers-mode-absolute))
 #+end_src
 ** Export to docx
@@ -252,6 +242,16 @@
   (execute-kbd-macro (kbd "C-c / O W d b b r"))
   (setq pandoc-mode nil)
   )
+#+end_src
+#+begin_src emacs-lisp
+(defun insert-idiom-template ()
+  "Inserts a template for an idiom."
+  (interactive)
+  (insert "\n* Idiom\n"
+          "- *Meaning:*\n"
+          "- *Example Sentence:*\n"
+          "- *Source:*\n"
+          "- *Date:*\n"))
 #+end_src
 * Snippet Templates
 ** Week Templates

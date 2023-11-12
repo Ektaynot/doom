@@ -16,8 +16,6 @@
 
 (setq confirm-kill-processes nil)
 
-(setq csv-separators '("," "    "))
-
 (global-set-key (kbd "C-+") 'text-scale-increase)
 (global-set-key (kbd "C--") 'text-scale-decrease)
 
@@ -30,13 +28,15 @@
 ;; warn when opening files bigger than 200MB
 (setq large-file-warning-threshold 200000000)
 
+(remove-hook 'text-mode-hook #'vi-tilde-fringe-mode)
+
 (setq pandoc-binary "/opt/homebrew/bin/pandoc")
 
 (setq pandoc-data-dir "/Users/ismailefetop/.config/doom/etc/pandoc/")
 
 (setq org-directory "~/.orgs/org/")
 
-(setq org-agenda-files '("~/uni/current-course/" "~/.orgs/org/" "/Users/ismailefetop/Library/Mobile Documents/com~apple~CloudDocs/org/"))
+(setq org-agenda-files '("~/uni/current-course/" "~/.orgs/org/" "~/ideas/" "/Users/ismailefetop/Library/Mobile Documents/com~apple~CloudDocs/org/"))
 
 (setq org-confirm-babel-evaluate nil)
 
@@ -46,7 +46,7 @@
   (interactive)
   (execute-kbd-macro (kbd my-keyboard-shortcut)))
 
-(add-hook 'emacs-startup-hook 'my-send-keyboard-shortcut)
+;; (add-hook 'emacs-startup-hook 'my-send-keyboard-shortcut)
 
 (use-package! org
   :config
@@ -72,12 +72,6 @@
 
 (add-hook 'org-mode-hook 'org-auto-tangle-mode)
 
-(define-skeleton künye
-"Header info for an Org file."
-"Title: ""#+TITLE:" str " \n"
-"#+AUTHOR: " user-full-name "\n"
-"#+DATE: " (format-time-string "%Y-%m-%d") "\n")
-
 (defun open-finder-and-copy-path ()
   "Open Finder and copy the selected file's path."
   (interactive)
@@ -94,6 +88,7 @@
   (interactive)
   (hide-mode-line-mode +1)
   (olivetti-mode)
+  (setq hl-line-mode nil)
   (menu-bar--display-line-numbers-mode-none))
 
 (defun efe/undo-reading-mode ()
@@ -101,6 +96,7 @@
   (interactive)
   (hide-mode-line-mode -1)
   (setq olivetti-mode nil)
+  (setq hl-line-mode t)
   (menu-bar--display-line-numbers-mode-absolute))
 
 (defun efe/export-to-docx ()
@@ -110,6 +106,15 @@
   (execute-kbd-macro (kbd "C-c / O W d b b r"))
   (setq pandoc-mode nil)
   )
+
+(defun insert-idiom-template ()
+  "Inserts a template for an idiom."
+  (interactive)
+  (insert "\n* Idiom\n"
+          "- *Meaning:*\n"
+          "- *Example Sentence:*\n"
+          "- *Source:*\n"
+          "- *Date:*\n"))
 
 (set-file-template! "\\.org$" :trigger "__week.org" :mode 'org-mode)
 

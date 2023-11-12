@@ -129,7 +129,7 @@
         ("\\.jpg\\'" "open" (file))
         ("\\.jpeg\\'" "open" (file))
         ("\\.png\\'" "open" (file))
-        ("\\.svg\\'" "open" (file))
+        ;; ("\\.svg\\'" "open" (file))
         ("\\.gif\\'" "open" (file))
         ;; Add more image formats as needed
         ))

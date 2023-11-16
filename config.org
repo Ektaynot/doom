@@ -15,6 +15,7 @@
   - [[#disable-autosave][Disable autosave]]
   - [[#automatically-kill-running-processes-on-exit][Automatically Kill Running Processes on Exit]]
   - [[#zoom][Zoom]]
+  - [[#enable-word-count][Enable Word Count]]
   - [[#calendar][Calendar]]
   - [[#sets-olivettis-body-width][Sets olivettis body width]]
   - [[#super-save][Super-save]]
@@ -26,6 +27,7 @@
 - [[#org][Org]]
   - [[#org-directories][Org directories]]
   - [[#trusting-the-org-blocks-in-org-automatically][Trusting the org-blocks in org automatically]]
+  - [[#change-the-look-of-org-agenda-to-do-view][Change the look of org-agenda to-do view.]]
   - [[#to-open-emacs-with-orgmode][to open emacs with orgmode]]
   - [[#set-agenda-view][Set Agenda View]]
   - [[#org-capture-templates][Org Capture Templates]]
@@ -50,6 +52,7 @@
   - [[#to-make-latex-and-latex-export-work-the-code-snippet-below-have-to-be-excuted][to make latex and latex export work the code snippet below have to be excuted]]
   - [[#to-save-window-sitecauses-graphical-errors][to save window site(causes graphical errors)]]
   - [[#using-emacs-plus][Using emacs-plus]]
+  - [[#to-only-show-todo-list-on-custom-agenda][To only show todo list on custom agenda]]
 - [[#testing][Testing]]
 
 * One Liners
@@ -97,6 +100,10 @@
 (global-set-key (kbd "C-+") 'text-scale-increase)
 (global-set-key (kbd "C--") 'text-scale-decrease)
 #+END_SRC
+** Enable Word Count
+#+begin_src emacs-lisp
+(setq doom-modeline-enable-word-count t)
+#+end_src
 
 ** Calendar
 *** Make calendar start on monday
@@ -148,7 +155,14 @@
 #+BEGIN_SRC emacs-lisp
 (setq org-confirm-babel-evaluate nil)
 #+END_SRC
-
+** Change the look of org-agenda to-do view.
+#+begin_src emacs-lisp
+(setq org-agenda-prefix-format
+      '((agenda . " %i %-12:c%?-12t% s")
+        (todo   . " ")
+        (tags   . " %i %-12:c")
+        (search . " %i %-12:c")))
+#+end_src
 ** to open emacs with orgmode
 *** Define the keyboard shortcut as a string
 #+BEGIN_SRC emacs-lisp
@@ -274,6 +288,7 @@
         ("\\.jpg\\'" "open" (file))
         ("\\.jpeg\\'" "open" (file))
         ("\\.png\\'" "open" (file))
+        ("\\.pptx\\'" "open" (file))
         ;; ("\\.svg\\'" "open" (file))
         ("\\.gif\\'" "open" (file))
         ;; Add more image formats as needed
@@ -373,4 +388,12 @@ brew services start d12frosted/emacs-plus/emacs-plus@29
 
 /opt/homebrew/opt/emacs-plus@29/bin/emacs =fg-daemon
 #+end_src
+** To only show todo list on custom agenda
+#+begin_src emacs-lisp :tangle no
+(setq org-agenda-custom-commands
+      '(("n" "Agenda and all TODOs"
+        ((alltodo "")
+         ))))
+#+end_src
+
 * Testing

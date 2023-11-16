@@ -19,6 +19,8 @@
 (global-set-key (kbd "C-+") 'text-scale-increase)
 (global-set-key (kbd "C--") 'text-scale-decrease)
 
+(setq doom-modeline-enable-word-count t)
+
 (setq calendar-week-start-day 1)
 
 (setq olivetti-body-width 100)
@@ -39,6 +41,12 @@
 (setq org-agenda-files '("~/uni/current-course/" "~/.orgs/org/" "~/ideas/" "/Users/ismailefetop/Library/Mobile Documents/com~apple~CloudDocs/org/"))
 
 (setq org-confirm-babel-evaluate nil)
+
+(setq org-agenda-prefix-format
+      '((agenda . " %i %-12:c%?-12t% s")
+        (todo   . " ")
+        (tags   . " %i %-12:c")
+        (search . " %i %-12:c")))
 
 (setq my-keyboard-shortcut "SPC o a a n")
 
@@ -129,6 +137,7 @@
         ("\\.jpg\\'" "open" (file))
         ("\\.jpeg\\'" "open" (file))
         ("\\.png\\'" "open" (file))
+        ("\\.pptx\\'" "open" (file))
         ;; ("\\.svg\\'" "open" (file))
         ("\\.gif\\'" "open" (file))
         ;; Add more image formats as needed

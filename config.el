@@ -21,6 +21,8 @@
 
 (setq doom-modeline-enable-word-count t)
 
+(setq use-dialog-box nil)'
+
 (setq calendar-week-start-day 1)
 
 (setq olivetti-body-width 100)
@@ -31,6 +33,11 @@
 (setq large-file-warning-threshold 200000000)
 
 (remove-hook 'text-mode-hook #'vi-tilde-fringe-mode)
+(remove-hook 'doom-first-buffer-hook #'global-vi-tilde-fringe-mode)
+
+(remove-hook 'doom-first-buffer-hook #'global-hl-line-mode)
+
+;; (add-hook 'org-mode-hook 'olivetti-mode)
 
 (setq pandoc-binary "/opt/homebrew/bin/pandoc")
 
@@ -96,7 +103,7 @@
   (interactive)
   (hide-mode-line-mode +1)
   (olivetti-mode)
-  (setq hl-line-mode nil)
+  ;; (setq hl-line-mode nil)
   (menu-bar--display-line-numbers-mode-none))
 
 (defun efe/undo-reading-mode ()
@@ -104,7 +111,7 @@
   (interactive)
   (hide-mode-line-mode -1)
   (setq olivetti-mode nil)
-  (setq hl-line-mode t)
+  ;; (setq hl-line-mode t)
   (menu-bar--display-line-numbers-mode-absolute))
 
 (defun efe/export-to-docx ()
@@ -167,3 +174,8 @@
 
 (after! gcmh
   (setq gcmh-high-cons-threshold (* 64 1048576)))
+
+(setq byte-compile-warnings '(not obsolete))
+(setq warning-suppress-log-types '((comp) (bytecomp)))
+(setq native-comp-async-report-warnings-errors 'silent)
+(setq inhibit-startup-echo-area-message (user-login-name))

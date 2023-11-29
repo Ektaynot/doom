@@ -56,3 +56,7 @@
 (package! org-auto-tangle)
 ;; (package! insert-shebang)
 (package! super-save)
+
+;; Custom Themes
+(package! autothemer)
+(package! kanagawa-theme)

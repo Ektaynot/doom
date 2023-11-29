@@ -16,11 +16,14 @@
   - [[#automatically-kill-running-processes-on-exit][Automatically Kill Running Processes on Exit]]
   - [[#zoom][Zoom]]
   - [[#enable-word-count][Enable Word Count]]
+  - [[#disable-unnecessary-new-os-windows][Disable unnecessary new os windows]]
   - [[#calendar][Calendar]]
   - [[#sets-olivettis-body-width][Sets olivettis body width]]
   - [[#super-save][Super-save]]
   - [[#opening-large-files][Opening Large Files]]
   - [[#disable-tilde-on-empty-lines][Disable tilde on empty lines]]
+  - [[#disable-hl-line-mode][Disable hl-line-mode]]
+  - [[#open-olivetti-mode][Open olivetti Mode]]
 - [[#pandoc][Pandoc]]
   - [[#set-pandoc-binary][Set Pandoc Binary]]
   - [[#global-settingsdata-file][Global Settings/Data File]]
@@ -47,6 +50,7 @@
   - [[#emacs-dictionary][Emacs Dictionary]]
 - [[#after-save-hook][After Save hook]]
 - [[#garbage-collection][Garbage collection]]
+- [[#make-emacs-silent][Make emacs silent]]
 - [[#notes-for-myself][Notes for myself]]
   - [[#doom-doctor-warnings][Doom Doctor warnings.]]
   - [[#to-make-latex-and-latex-export-work-the-code-snippet-below-have-to-be-excuted][to make latex and latex export work the code snippet below have to be excuted]]
@@ -66,6 +70,10 @@
 #+BEGIN_SRC emacs-lisp
 (setq doom-theme 'doom-dracula)
 #+END_SRC
+
+*** Good themes
+- doom-dracula
+- kanagawa
 
 ** Font
 #+BEGIN_SRC emacs-lisp
@@ -104,7 +112,10 @@
 #+begin_src emacs-lisp
 (setq doom-modeline-enable-word-count t)
 #+end_src
-
+** Disable unnecessary new os windows
+#+begin_src emacs-lisp
+(setq use-dialog-box nil)'
+#+end_src
 ** Calendar
 *** Make calendar start on monday
 #+begin_src emacs-lisp
@@ -126,27 +137,39 @@
 ;; warn when opening files bigger than 200MB
 (setq large-file-warning-threshold 200000000)
 #+end_src
+
 ** Disable tilde on empty lines
 #+begin_src emacs-lisp
 (remove-hook 'text-mode-hook #'vi-tilde-fringe-mode)
+(remove-hook 'doom-first-buffer-hook #'global-vi-tilde-fringe-mode)
+#+end_src
+
+** Disable hl-line-mode
+#+begin_src emacs-lisp
+(remove-hook 'doom-first-buffer-hook #'global-hl-line-mode)
+#+end_src
+
+** Open olivetti Mode
+#+begin_src emacs-lisp
+;; (add-hook 'org-mode-hook 'olivetti-mode)
 #+end_src
 * Pandoc
-** Set Pandoc Binary
+** Set Pandoc Binary :mac:
 #+BEGIN_SRC emacs-lisp
 (setq pandoc-binary "/opt/homebrew/bin/pandoc")
 #+END_SRC
-** Global Settings/Data File
+** Global Settings/Data File :mac:
 #+begin_src emacs-lisp
 (setq pandoc-data-dir "/Users/ismailefetop/.config/doom/etc/pandoc/")
 #+end_src
 * Org
 ** Org directories
-*** Main Directory
+*** Main Directory :mac:
 #+BEGIN_SRC emacs-lisp
 (setq org-directory "~/.orgs/org/")
 #+END_SRC
 
-*** Other Org Directories
+*** Other Org Directories :mac:
 #+BEGIN_SRC emacs-lisp
 (setq org-agenda-files '("~/uni/current-course/" "~/.orgs/org/" "~/ideas/" "/Users/ismailefetop/Library/Mobile Documents/com~apple~CloudDocs/org/"))
 #+END_SRC
@@ -194,7 +217,7 @@
   )
 #+END_SRC
 
-** Org Capture Templates
+** Org Capture Templates :mac:
 #+BEGIN_SRC emacs-lisp
 (after! org
   (setq org-capture-templates
@@ -214,7 +237,7 @@
 (add-hook 'org-mode-hook 'org-auto-tangle-mode)
 #+END_SRC
 * Functions
-** Copy Path Function
+** Copy Path Function :mac:
 #+BEGIN_SRC emacs-lisp
 (defun open-finder-and-copy-path ()
   "Open Finder and copy the selected file's path."
@@ -234,7 +257,7 @@
   (interactive)
   (hide-mode-line-mode +1)
   (olivetti-mode)
-  (setq hl-line-mode nil)
+  ;; (setq hl-line-mode nil)
   (menu-bar--display-line-numbers-mode-none))
 #+end_src
 ** Undo Reading Mode
@@ -244,7 +267,7 @@
   (interactive)
   (hide-mode-line-mode -1)
   (setq olivetti-mode nil)
-  (setq hl-line-mode t)
+  ;; (setq hl-line-mode t)
   (menu-bar--display-line-numbers-mode-absolute))
 #+end_src
 ** Export to docx
@@ -278,7 +301,7 @@
 (setq browse-url-mailto-function 'browse-url-generic)
 (setq browse-url-generic-program "open")
 #+END_SRC
-** Openwith Defaults
+** Openwith Defaults :mac:
 #+BEGIN_SRC emacs-lisp
 (require 'openwith)
 (openwith-mode t)
@@ -330,6 +353,14 @@
 (after! gcmh
   (setq gcmh-high-cons-threshold (* 64 1048576)))
 #+END_SRC
+* Make emacs silent
+#+begin_src emacs-lisp
+(setq byte-compile-warnings '(not obsolete))
+(setq warning-suppress-log-types '((comp) (bytecomp)))
+(setq native-comp-async-report-warnings-errors 'silent)
+(setq inhibit-startup-echo-area-message (user-login-name))
+
+#+end_src
 * Notes for myself
 ** Doom Doctor warnings.
 *** ! The installed ripgrep binary was not built with support for PCRE lookaheads.

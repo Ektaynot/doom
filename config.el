@@ -32,9 +32,6 @@
 ;; warn when opening files bigger than 200MB
 (setq large-file-warning-threshold 200000000)
 
-(remove-hook 'text-mode-hook #'vi-tilde-fringe-mode)
-(remove-hook 'doom-first-buffer-hook #'global-vi-tilde-fringe-mode)
-
 (remove-hook 'doom-first-buffer-hook #'global-hl-line-mode)
 
 ;; (add-hook 'org-mode-hook 'olivetti-mode)

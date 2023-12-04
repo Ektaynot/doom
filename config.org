@@ -21,7 +21,6 @@
   - [[#sets-olivettis-body-width][Sets olivettis body width]]
   - [[#super-save][Super-save]]
   - [[#opening-large-files][Opening Large Files]]
-  - [[#disable-tilde-on-empty-lines][Disable tilde on empty lines]]
   - [[#disable-hl-line-mode][Disable hl-line-mode]]
   - [[#open-olivetti-mode][Open olivetti Mode]]
 - [[#pandoc][Pandoc]]
@@ -55,6 +54,7 @@
   - [[#doom-doctor-warnings][Doom Doctor warnings.]]
   - [[#to-make-latex-and-latex-export-work-the-code-snippet-below-have-to-be-excuted][to make latex and latex export work the code snippet below have to be excuted]]
   - [[#to-save-window-sitecauses-graphical-errors][to save window site(causes graphical errors)]]
+  - [[#disabling-tilde-outside-of-doom-emacs][Disabling tilde outside of doom emacs]]
   - [[#using-emacs-plus][Using emacs-plus]]
   - [[#to-only-show-todo-list-on-custom-agenda][To only show todo list on custom agenda]]
 - [[#testing][Testing]]
@@ -136,12 +136,6 @@
 #+begin_src emacs-lisp
 ;; warn when opening files bigger than 200MB
 (setq large-file-warning-threshold 200000000)
-#+end_src
-
-** Disable tilde on empty lines
-#+begin_src emacs-lisp
-(remove-hook 'text-mode-hook #'vi-tilde-fringe-mode)
-(remove-hook 'doom-first-buffer-hook #'global-vi-tilde-fringe-mode)
 #+end_src
 
 ** Disable hl-line-mode
@@ -402,6 +396,13 @@ sudo tlmgr install capt-of
 #+BEGIN_SRC emacs-lisp :tangle no
   ;; remember window position
   (desktop-save-mode 1)
+#+end_src
+** Disabling tilde outside of doom emacs
+#+begin_src emacs-lisp :tangle no
+(remove-hook 'text-mode-hook #'vi-tilde-fringe-mode)
+(remove-hook 'doom-first-buffer-hook #'global-vi-tilde-fringe-mode)
+#+end_src
+
 #+end_src
 ** Using emacs-plus
 *** Installing

@@ -56,7 +56,9 @@
 (package! org-auto-tangle)
 ;; (package! insert-shebang)
 (package! super-save)
+(package! nov)
 
 ;; Custom Themes
-(package! autothemer)
+;; (package! autothemer)
 (package! kanagawa-theme)
+(package! catppuccin-theme)

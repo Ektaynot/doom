@@ -1,6 +1,8 @@
 (setq user-full-name "İsmail Efe Top"
       user-mail-address "ismailefetop@gmail.com")
 
+(setq shell-file-name (executable-find "bash"))
+
 (setq doom-theme 'doom-dracula)
 
 (setq doom-font (font-spec :family "JetBrains Mono" :size 22))
@@ -25,7 +27,7 @@
 
 (setq calendar-week-start-day 1)
 
-(setq olivetti-body-width 100)
+(setq olivetti-body-width 94)
 
 (super-save-mode +1)
 
@@ -99,17 +101,24 @@
   "Toggle reading mode."
   (interactive)
   (hide-mode-line-mode +1)
+  (load-theme 'catppuccin t)
   (olivetti-mode)
   ;; (setq hl-line-mode nil)
   (menu-bar--display-line-numbers-mode-none))
+(global-set-key (kbd "C-ö") 'efe/reading-mode)
 
 (defun efe/undo-reading-mode ()
   "undo reading mode."
   (interactive)
+  (disable-theme 'kanagawa)
+
+  (load-theme 'doom-dracula t)
+
   (hide-mode-line-mode -1)
   (setq olivetti-mode nil)
   ;; (setq hl-line-mode t)
   (menu-bar--display-line-numbers-mode-absolute))
+(global-set-key (kbd "C-ç") 'efe/undo-reading-mode)
 
 (defun efe/export-to-docx ()
   "Output to docx using pandoc-mode"
@@ -142,6 +151,7 @@
         ("\\.jpeg\\'" "open" (file))
         ("\\.png\\'" "open" (file))
         ("\\.pptx\\'" "open" (file))
+        ("\\.epub\\'" "open" (file))
         ;; ("\\.svg\\'" "open" (file))
         ("\\.gif\\'" "open" (file))
         ;; Add more image formats as needed
@@ -176,3 +186,5 @@
 (setq warning-suppress-log-types '((comp) (bytecomp)))
 (setq native-comp-async-report-warnings-errors 'silent)
 (setq inhibit-startup-echo-area-message (user-login-name))
+
+

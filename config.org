@@ -8,6 +8,7 @@
 * Table Of Content :toc:
 - [[#one-liners][One Liners]]
   - [[#my-contact-information][My contact information]]
+  - [[#setting-the-default-shell][Setting the default shell]]
   - [[#theme][Theme]]
   - [[#font][Font]]
   - [[#line-numbers][Line Numbers]]
@@ -65,7 +66,10 @@
 (setq user-full-name "İsmail Efe Top"
       user-mail-address "ismailefetop@gmail.com")
 #+END_SRC
-
+** Setting the default shell
+#+BEGIN_SRC emacs-lisp
+(setq shell-file-name (executable-find "bash"))
+#+END_SRC
 ** Theme
 #+BEGIN_SRC emacs-lisp
 (setq doom-theme 'doom-dracula)
@@ -124,7 +128,7 @@
 
 ** Sets olivettis body width
 #+BEGIN_SRC emacs-lisp
-(setq olivetti-body-width 100)
+(setq olivetti-body-width 94)
 #+END_SRC
 
 ** Super-save
@@ -250,19 +254,27 @@
   "Toggle reading mode."
   (interactive)
   (hide-mode-line-mode +1)
+  (load-theme 'catppuccin t)
   (olivetti-mode)
   ;; (setq hl-line-mode nil)
   (menu-bar--display-line-numbers-mode-none))
+(global-set-key (kbd "C-ö") 'efe/reading-mode)
+
 #+end_src
 ** Undo Reading Mode
 #+begin_src emacs-lisp
 (defun efe/undo-reading-mode ()
   "undo reading mode."
   (interactive)
+  (disable-theme 'kanagawa)
+
+  (load-theme 'doom-dracula t)
+
   (hide-mode-line-mode -1)
   (setq olivetti-mode nil)
   ;; (setq hl-line-mode t)
   (menu-bar--display-line-numbers-mode-absolute))
+(global-set-key (kbd "C-ç") 'efe/undo-reading-mode)
 #+end_src
 ** Export to docx
 #+begin_src emacs-lisp
@@ -306,6 +318,7 @@
         ("\\.jpeg\\'" "open" (file))
         ("\\.png\\'" "open" (file))
         ("\\.pptx\\'" "open" (file))
+        ("\\.epub\\'" "open" (file))
         ;; ("\\.svg\\'" "open" (file))
         ("\\.gif\\'" "open" (file))
         ;; Add more image formats as needed
@@ -429,3 +442,5 @@ brew services start d12frosted/emacs-plus/emacs-plus@29
 #+end_src
 
 * Testing
+#+begin_src emacs-lisp
+#+end_src

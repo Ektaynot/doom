@@ -23,6 +23,7 @@
   - [[#super-save][Super-save]]
   - [[#opening-large-files][Opening Large Files]]
   - [[#disable-hl-line-mode][Disable hl-line-mode]]
+  - [[#make-the-title-bar-text-empty][Make the title bar text empty]]
   - [[#open-olivetti-mode][Open olivetti Mode]]
 - [[#pandoc][Pandoc]]
   - [[#set-pandoc-binary][Set Pandoc Binary]]
@@ -51,6 +52,8 @@
 - [[#after-save-hook][After Save hook]]
 - [[#garbage-collection][Garbage collection]]
 - [[#make-emacs-silent][Make emacs silent]]
+- [[#startup][Startup]]
+  - [[#maximize-on-startup-using-rectangle][Maximize on startup using Rectangle]]
 - [[#notes-for-myself][Notes for myself]]
   - [[#doom-doctor-warnings][Doom Doctor warnings.]]
   - [[#to-make-latex-and-latex-export-work-the-code-snippet-below-have-to-be-excuted][to make latex and latex export work the code snippet below have to be excuted]]
@@ -147,6 +150,11 @@
 (remove-hook 'doom-first-buffer-hook #'global-hl-line-mode)
 #+end_src
 
+** Make the title bar text empty :mac:
+#+begin_src emacs-lisp
+(setq ns-use-proxy-icon nil)
+(setq frame-title-format nil)
+#+end_src
 ** Open olivetti Mode
 #+begin_src emacs-lisp
 ;; (add-hook 'org-mode-hook 'olivetti-mode)
@@ -254,7 +262,7 @@
   "Toggle reading mode."
   (interactive)
   (hide-mode-line-mode +1)
-  (load-theme 'catppuccin t)
+  (load-theme 'kanagawa)
   (olivetti-mode)
   ;; (setq hl-line-mode nil)
   (menu-bar--display-line-numbers-mode-none))
@@ -367,6 +375,17 @@
 (setq native-comp-async-report-warnings-errors 'silent)
 (setq inhibit-startup-echo-area-message (user-login-name))
 
+#+end_src
+* Startup
+** Maximize on startup using Rectangle :mac:
+#+begin_src emacs-lisp
+;; Requires the mac app Rectangle to function.
+(defun rectangle-maximize ()
+  "Execute a shell command when Emacs starts."
+  (call-process-shell-command "open -g 'rectangle://execute-action?name=maximize'" nil 0))
+
+;; Add the function to the Emacs startup hook
+(add-hook 'emacs-startup-hook 'rectangle-maximize)
 #+end_src
 * Notes for myself
 ** Doom Doctor warnings.

@@ -36,6 +36,9 @@
 
 (remove-hook 'doom-first-buffer-hook #'global-hl-line-mode)
 
+(setq ns-use-proxy-icon nil)
+(setq frame-title-format nil)
+
 ;; (add-hook 'org-mode-hook 'olivetti-mode)
 
 (setq pandoc-binary "/opt/homebrew/bin/pandoc")
@@ -101,7 +104,7 @@
   "Toggle reading mode."
   (interactive)
   (hide-mode-line-mode +1)
-  (load-theme 'catppuccin t)
+  (load-theme 'kanagawa)
   (olivetti-mode)
   ;; (setq hl-line-mode nil)
   (menu-bar--display-line-numbers-mode-none))
@@ -186,5 +189,13 @@
 (setq warning-suppress-log-types '((comp) (bytecomp)))
 (setq native-comp-async-report-warnings-errors 'silent)
 (setq inhibit-startup-echo-area-message (user-login-name))
+
+;; Requires the mac app Rectangle to function.
+(defun rectangle-maximize ()
+  "Execute a shell command when Emacs starts."
+  (call-process-shell-command "open -g 'rectangle://execute-action?name=maximize'" nil 0))
+
+;; Add the function to the Emacs startup hook
+(add-hook 'emacs-startup-hook 'rectangle-maximize)
 
 

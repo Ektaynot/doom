@@ -3,7 +3,7 @@
 
 (setq shell-file-name (executable-find "bash"))
 
-(setq doom-theme 'doom-dracula)
+(setq doom-theme 'kanagawa)
 
 (setq doom-font (font-spec :family "JetBrains Mono" :size 22))
 
@@ -28,6 +28,8 @@
 (setq calendar-week-start-day 1)
 
 (setq olivetti-body-width 94)
+
+(setq org-cite-global-bibliography '("/Users/ismailefetop/uni/citation/bib.bib"))
 
 (super-save-mode +1)
 
@@ -104,7 +106,7 @@
   "Toggle reading mode."
   (interactive)
   (hide-mode-line-mode +1)
-  (load-theme 'kanagawa)
+  ;; (load-theme 'kanagawa)
   (olivetti-mode)
   ;; (setq hl-line-mode nil)
   (menu-bar--display-line-numbers-mode-none))
@@ -113,9 +115,9 @@
 (defun efe/undo-reading-mode ()
   "undo reading mode."
   (interactive)
-  (disable-theme 'kanagawa)
+  ;; (disable-theme 'kanagawa)
 
-  (load-theme 'doom-dracula t)
+  ;; (load-theme 'doom-dracula t)
 
   (hide-mode-line-mode -1)
   (setq olivetti-mode nil)

@@ -57,7 +57,7 @@
 ;; (package! insert-shebang)
 (package! super-save)
 (package! nov)
-
+(package! citeproc)
 ;; Custom Themes
 ;; (package! autothemer)
 (package! kanagawa-theme)

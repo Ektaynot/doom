@@ -20,6 +20,7 @@
   - [[#disable-unnecessary-new-os-windows][Disable unnecessary new os windows]]
   - [[#calendar][Calendar]]
   - [[#sets-olivettis-body-width][Sets olivettis body width]]
+  - [[#default-bib-file][Default Bib File]]
   - [[#super-save][Super-save]]
   - [[#opening-large-files][Opening Large Files]]
   - [[#disable-hl-line-mode][Disable hl-line-mode]]
@@ -75,12 +76,13 @@
 #+END_SRC
 ** Theme
 #+BEGIN_SRC emacs-lisp
-(setq doom-theme 'doom-dracula)
+(setq doom-theme 'kanagawa)
 #+END_SRC
 
 *** Good themes
 - doom-dracula
 - kanagawa
+- Catppuccin
 
 ** Font
 #+BEGIN_SRC emacs-lisp
@@ -133,7 +135,10 @@
 #+BEGIN_SRC emacs-lisp
 (setq olivetti-body-width 94)
 #+END_SRC
-
+** Default Bib File
+#+begin_src emacs-lisp
+(setq org-cite-global-bibliography '("/Users/ismailefetop/uni/citation/bib.bib"))
+#+end_src
 ** Super-save
 #+begin_src emacs-lisp
 (super-save-mode +1)
@@ -262,7 +267,7 @@
   "Toggle reading mode."
   (interactive)
   (hide-mode-line-mode +1)
-  (load-theme 'kanagawa)
+  ;; (load-theme 'kanagawa)
   (olivetti-mode)
   ;; (setq hl-line-mode nil)
   (menu-bar--display-line-numbers-mode-none))
@@ -274,9 +279,9 @@
 (defun efe/undo-reading-mode ()
   "undo reading mode."
   (interactive)
-  (disable-theme 'kanagawa)
+  ;; (disable-theme 'kanagawa)
 
-  (load-theme 'doom-dracula t)
+  ;; (load-theme 'doom-dracula t)
 
   (hide-mode-line-mode -1)
   (setq olivetti-mode nil)
@@ -422,6 +427,8 @@ sudo tlmgr install wrapfig
 sudo tlmgr install marvosym
 sudo tlmgr install wasysym
 sudo tlmgr install capt-of
+sudo tlmgr instal dvipng
+sudo tlmgr instal soul
 #+end_src
 
 ** to save window site(causes graphical errors)
@@ -462,4 +469,5 @@ brew services start d12frosted/emacs-plus/emacs-plus@29
 
 * Testing
 #+begin_src emacs-lisp
+
 #+end_src

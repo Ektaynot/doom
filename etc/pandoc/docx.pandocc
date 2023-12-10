@@ -1,7 +1,7 @@
 ;; -*- mode: emacs-lisp -*-
 
 ;; pandoc-mode global settings file
-;; saved on 2023.12.10 16:37
+;; saved on 2023.11.10 16:32
 
 ((mathml)
  (mathjax)
@@ -12,9 +12,9 @@
  (latexmathml)
  (jsmath)
  (mimetex)
- (citeproc . t)
- (bibliography "/Users/ismailefetop/uni/citation/bib.bib")
- (csl . "/Users/ismailefetop/uni/citation/styles/apa.csl")
+ (citeproc)
+ (bibliography)
+ (csl)
  (citation-abbreviations)
  (natbib)
  (biblatex)

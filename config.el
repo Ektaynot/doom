@@ -30,6 +30,8 @@
 (setq olivetti-body-width 94)
 
 (setq org-cite-global-bibliography '("/Users/ismailefetop/uni/citation/bib.bib"))
+(setq! bibtex-completion-bibliography '("/Users/ismailefetop/uni/citation/bib.bib"))
+(setq! citar-bibliography '("/Users/ismailefetop/uni/citation/bib.bib"))
 
 (super-save-mode +1)
 

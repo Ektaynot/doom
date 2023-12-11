@@ -135,10 +135,14 @@
 #+BEGIN_SRC emacs-lisp
 (setq olivetti-body-width 94)
 #+END_SRC
+
 ** Default Bib File
 #+begin_src emacs-lisp
 (setq org-cite-global-bibliography '("/Users/ismailefetop/uni/citation/bib.bib"))
+(setq! bibtex-completion-bibliography '("/Users/ismailefetop/uni/citation/bib.bib"))
+(setq! citar-bibliography '("/Users/ismailefetop/uni/citation/bib.bib"))
 #+end_src
+
 ** Super-save
 #+begin_src emacs-lisp
 (super-save-mode +1)
@@ -442,7 +446,6 @@ sudo tlmgr instal soul
 (remove-hook 'doom-first-buffer-hook #'global-vi-tilde-fringe-mode)
 #+end_src
 
-#+end_src
 ** Using emacs-plus
 *** Installing
 #+begin_src shell :tangle no

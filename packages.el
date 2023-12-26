@@ -62,3 +62,4 @@
 ;; (package! autothemer)
 (package! kanagawa-theme)
 (package! catppuccin-theme)
+(package! eink-theme)

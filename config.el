@@ -2,6 +2,8 @@
       user-mail-address "ismailefetop@gmail.com")
 
 (setq shell-file-name (executable-find "bash"))
+(setq-default vterm-shell (executable-find "fish"))
+(setq-default explicit-shell-file-name (executable-find "fish"))
 
 (setq doom-theme 'kanagawa)
 
@@ -193,6 +195,8 @@
 (setq warning-suppress-log-types '((comp) (bytecomp)))
 (setq native-comp-async-report-warnings-errors 'silent)
 (setq inhibit-startup-echo-area-message (user-login-name))
+
+(setq org-image-actual-width nil)
 
 ;; Requires the mac app Rectangle to function.
 (defun rectangle-maximize ()

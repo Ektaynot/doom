@@ -53,6 +53,9 @@
 - [[#after-save-hook][After Save hook]]
 - [[#garbage-collection][Garbage collection]]
 - [[#make-emacs-silent][Make emacs silent]]
+- [[#presentation][Presentation]]
+  - [[#make-images-adjust-to-width][Make images adjust to width]]
+  - [[#biu][bi"u]]
 - [[#startup][Startup]]
   - [[#maximize-on-startup-using-rectangle][Maximize on startup using Rectangle]]
 - [[#notes-for-myself][Notes for myself]]
@@ -73,6 +76,8 @@
 ** Setting the default shell
 #+BEGIN_SRC emacs-lisp
 (setq shell-file-name (executable-find "bash"))
+(setq-default vterm-shell (executable-find "fish"))
+(setq-default explicit-shell-file-name (executable-find "fish"))
 #+END_SRC
 ** Theme
 #+BEGIN_SRC emacs-lisp
@@ -385,6 +390,12 @@
 (setq inhibit-startup-echo-area-message (user-login-name))
 
 #+end_src
+* Presentation
+** Make images adjust to width
+#+begin_src emacs-lisp
+(setq org-image-actual-width nil)
+#+end_src
+** bi"u
 * Startup
 ** Maximize on startup using Rectangle :mac:
 #+begin_src emacs-lisp
@@ -472,5 +483,4 @@ brew services start d12frosted/emacs-plus/emacs-plus@29
 
 * Testing
 #+begin_src emacs-lisp
-
 #+end_src

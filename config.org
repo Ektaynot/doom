@@ -5,68 +5,6 @@
 
 # first year in uni, mba2022
 
-* Table Of Content :toc:
-- [[#one-liners][One Liners]]
-  - [[#my-contact-information][My contact information]]
-  - [[#setting-the-default-shell][Setting the default shell]]
-  - [[#theme][Theme]]
-  - [[#font][Font]]
-  - [[#line-numbers][Line Numbers]]
-  - [[#disable-confirm-on-exit][Disable Confirm on exit.]]
-  - [[#disable-autosave][Disable autosave]]
-  - [[#automatically-kill-running-processes-on-exit][Automatically Kill Running Processes on Exit]]
-  - [[#zoom][Zoom]]
-  - [[#enable-word-count][Enable Word Count]]
-  - [[#disable-unnecessary-new-os-windows][Disable unnecessary new os windows]]
-  - [[#calendar][Calendar]]
-  - [[#sets-olivettis-body-width][Sets olivettis body width]]
-  - [[#default-bib-file][Default Bib File]]
-  - [[#super-save][Super-save]]
-  - [[#opening-large-files][Opening Large Files]]
-  - [[#disable-hl-line-mode][Disable hl-line-mode]]
-  - [[#make-the-title-bar-text-empty][Make the title bar text empty]]
-  - [[#open-olivetti-mode][Open olivetti Mode]]
-- [[#pandoc][Pandoc]]
-  - [[#set-pandoc-binary][Set Pandoc Binary]]
-  - [[#global-settingsdata-file][Global Settings/Data File]]
-- [[#org][Org]]
-  - [[#org-directories][Org directories]]
-  - [[#trusting-the-org-blocks-in-org-automatically][Trusting the org-blocks in org automatically]]
-  - [[#change-the-look-of-org-agenda-to-do-view][Change the look of org-agenda to-do view.]]
-  - [[#to-open-emacs-with-orgmode][to open emacs with orgmode]]
-  - [[#set-agenda-view][Set Agenda View]]
-  - [[#org-capture-templates][Org Capture Templates]]
-  - [[#org-auto-tangle][Org Auto Tangle]]
-- [[#functions][Functions]]
-  - [[#copy-path-function][Copy Path Function]]
-  - [[#reading-mode][Reading Mode]]
-  - [[#undo-reading-mode][Undo Reading Mode]]
-  - [[#export-to-docx][Export to docx]]
-- [[#snippet-templates][Snippet Templates]]
-  - [[#week-templates][Week Templates]]
-- [[#defaults][Defaults]]
-  - [[#email-client][Email Client]]
-  - [[#openwith-defaults][Openwith Defaults]]
-- [[#dictionary-servers][Dictionary Servers]]
-  - [[#merriam-webster-thesaurus][Merriam-Webster Thesaurus]]
-  - [[#emacs-dictionary][Emacs Dictionary]]
-- [[#after-save-hook][After Save hook]]
-- [[#garbage-collection][Garbage collection]]
-- [[#make-emacs-silent][Make emacs silent]]
-- [[#presentation][Presentation]]
-  - [[#make-images-adjust-to-width][Make images adjust to width]]
-  - [[#biu][bi"u]]
-- [[#startup][Startup]]
-  - [[#maximize-on-startup-using-rectangle][Maximize on startup using Rectangle]]
-- [[#notes-for-myself][Notes for myself]]
-  - [[#doom-doctor-warnings][Doom Doctor warnings.]]
-  - [[#to-make-latex-and-latex-export-work-the-code-snippet-below-have-to-be-excuted][to make latex and latex export work the code snippet below have to be excuted]]
-  - [[#to-save-window-sitecauses-graphical-errors][to save window site(causes graphical errors)]]
-  - [[#disabling-tilde-outside-of-doom-emacs][Disabling tilde outside of doom emacs]]
-  - [[#using-emacs-plus][Using emacs-plus]]
-  - [[#to-only-show-todo-list-on-custom-agenda][To only show todo list on custom agenda]]
-- [[#testing][Testing]]
-
 * One Liners
 ** My contact information
 #+BEGIN_SRC emacs-lisp
@@ -140,6 +78,11 @@
 #+BEGIN_SRC emacs-lisp
 (setq olivetti-body-width 94)
 #+END_SRC
+** Cargo binary
+#+begin_src emacs-lisp
+;;(setq exec-path (append exec-path '("/Users/ismailefetop/.cargo/bin/")))
+
+#+end_src
 
 ** Default Bib File
 #+begin_src emacs-lisp
@@ -323,6 +266,7 @@
 #+begin_src emacs-lisp
 (set-file-template! "\\.org$" :trigger "__week.org" :mode 'org-mode)
 #+end_src
+
 * Defaults
 ** Email Client
 #+BEGIN_SRC emacs-lisp

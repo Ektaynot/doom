@@ -8,7 +8,7 @@
  '(magit-todos-insert-after '(bottom) nil nil "Changed by setter of obsolete option `magit-todos-insert-at'")
  '(org-safe-remote-resources
    '("\\`https://raw\\.githubusercontent\\.com/fniessen/org-html-themes/master/org/theme-readtheorg\\.setup\\'" "\\`https://fniessen\\.github\\.io/org-html-themes/org/theme-NAME\\.setup\\'"))
- '(package-selected-packages '(ox-hugo org-tree-slide material-theme)))
+ '(package-selected-packages '(eglot ox-hugo org-tree-slide material-theme)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

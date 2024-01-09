@@ -41,6 +41,10 @@
 #+BEGIN_SRC emacs-lisp
 (setq confirm-kill-emacs nil)
 #+END_SRC
+** Disable Which-Key Delay
+#+begin_src emacs-lisp
+(setq which-key-idle-delay 0.0)
+#+end_src
 
 ** Disable autosave
 #+BEGIN_SRC emacs-lisp
@@ -281,6 +285,7 @@
       '(("\\.pdf\\'" "open" (file))
         ("\\.docx\\'" "open" (file))
         ("\\.jpg\\'" "open" (file))
+        ("\\.psd\\'" "open" (file))
         ("\\.jpeg\\'" "open" (file))
         ("\\.png\\'" "open" (file))
         ("\\.pptx\\'" "open" (file))

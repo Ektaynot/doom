@@ -13,6 +13,8 @@
 
 (setq confirm-kill-emacs nil)
 
+(setq which-key-idle-delay 0.0)
+
 ;disable backup
  (setq backup-inhibited t)
 ;disable auto save
@@ -159,6 +161,7 @@
       '(("\\.pdf\\'" "open" (file))
         ("\\.docx\\'" "open" (file))
         ("\\.jpg\\'" "open" (file))
+        ("\\.psd\\'" "open" (file))
         ("\\.jpeg\\'" "open" (file))
         ("\\.png\\'" "open" (file))
         ("\\.pptx\\'" "open" (file))

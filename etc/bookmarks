@@ -1,0 +1,29 @@
+;;;; Emacs Bookmark Format Version 1;;;; -*- coding: utf-8-emacs; mode: lisp-data -*-
+;;; This format is meant to be slightly human-readable;
+;;; nevertheless, you probably don't want to edit it.
+;;; -*- End Of Bookmark File Format Version Stamp -*-
+(("init"
+ (filename . "~/.config/doom/init.el")
+ (front-context-string . "(doom! :input\n  ")
+ (rear-context-string . "s source code).\n")
+ (position . 756)
+ (last-modified 26013 45010 649601 0))
+("packages"
+ (filename . "~/.config/doom/packages.el")
+ (front-context-string . ";; used\n(package")
+ (rear-context-string . "IR/packages.el\n\n")
+ (position . 58)
+ (last-modified 26013 44999 639530 0))
+("config"
+ (filename . "~/.config/doom/config.org")
+ (front-context-string . "iners\n** My cont")
+ (rear-context-string . "mba2022\n\n* One L")
+ (position . 200)
+ (last-modified 26013 44897 301333 0))
+("efe kitabı"
+ (filename . "~/ideas/projeler/efe_kitabı/efe_kitabı.org")
+ (front-context-string . "s\n** DONE Önsöz\n")
+ (rear-context-string . "uları\n\n* Progres")
+ (position . 153)
+ (last-modified 26013 44856 288069 0))
+)

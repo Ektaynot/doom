@@ -33,8 +33,6 @@
 
 (setq olivetti-body-width 94)
 
-;;(setq exec-path (append exec-path '("/Users/ismailefetop/.cargo/bin/")))
-
 (setq org-cite-global-bibliography '("/Users/ismailefetop/uni/citation/bib.bib"))
 (setq! bibtex-completion-bibliography '("/Users/ismailefetop/uni/citation/bib.bib"))
 (setq! citar-bibliography '("/Users/ismailefetop/uni/citation/bib.bib"))
@@ -160,10 +158,10 @@
 (setq openwith-associations
       '(("\\.pdf\\'" "open" (file))
         ("\\.docx\\'" "open" (file))
-        ("\\.jpg\\'" "open" (file))
         ("\\.psd\\'" "open" (file))
-        ("\\.jpeg\\'" "open" (file))
-        ("\\.png\\'" "open" (file))
+        ;;("\\.jpeg\\'" "open" (file))
+        ;;("\\.jpg\\'" "open" (file))
+        ;;("\\.png\\'" "open" (file))
         ("\\.pptx\\'" "open" (file))
         ("\\.epub\\'" "open" (file))
         ;; ("\\.svg\\'" "open" (file))
@@ -200,6 +198,9 @@
 (setq warning-suppress-log-types '((comp) (bytecomp)))
 (setq native-comp-async-report-warnings-errors 'silent)
 (setq inhibit-startup-echo-area-message (user-login-name))
+(setq visible-bell t)
+(setq ring-bell-function 'ignore)
+(setq set-message-beep 'silent)
 
 (setq org-image-actual-width nil)
 

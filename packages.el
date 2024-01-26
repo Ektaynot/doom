@@ -10,12 +10,13 @@
 (package! citeproc)
 (package! reveal-in-osx-finder)
 (package! org-ros)
+(package! webfeeder)
 ;; unused
 ;; (package! insert-shebang)
 (package! autothemer)
 
 ;; Custom Themes
-(package! kanagawa-theme)
+;;(package! kanagawa-theme)
 (package! catppuccin-theme)
 (package! eink-theme)
 (package! rose-pine-emacs :recipe

@@ -139,14 +139,32 @@
   (setq pandoc-mode nil)
   )
 
-(defun insert-idiom-template ()
-  "Inserts a template for an idiom."
+(defun insert-html-blog-template ()
+  "Inserts HTML_HEAD lines at the 5th line and html code at the end of the buffer."
   (interactive)
-  (insert "\n* Idiom\n"
-          "- *Meaning:*\n"
-          "- *Example Sentence:*\n"
-          "- *Source:*\n"
-          "- *Date:*\n"))
+  (save-excursion
+    (goto-char (point-min))
+    (forward-line 4)
+    (insert "#+HTML_HEAD: <link rel=\"stylesheet\" type=\"text/css\" href=\"/templates/style.css\" />\n")
+    (insert "#+HTML_HEAD: <link rel=\"apple-touch-icon\" sizes=\"180x180\" href=\"/favicon/apple-touch-icon.png\">\n")
+    (insert "#+HTML_HEAD: <link rel=\"icon\" type=\"image/png\" sizes=\"32x32\" href=\"/favicon/favicon-32x32.png\">\n")
+    (insert "#+HTML_HEAD: <link rel=\"icon\" type=\"image/png\" sizes=\"16x16\" href=\"/favicon/favicon-16x16.png\">\n")
+    (insert "#+HTML_HEAD: <link rel=\"manifest\" href=\"/favicon/site.webmanifest\">\n"))
+  (goto-char (point-max))
+  (insert "\n\n")
+  (insert "#+BEGIN_EXPORT html\n")
+  (insert "<div class=\"bottom-header\">\n")
+  (insert "  <a class=\"bottom-header-link\" href=\"/\">Home</a>\n")
+  (insert "  <a href=\"mailto:ismailefetop@gmail.com\" class=\"bottom-header-link\">Mail Me</a>\n")
+  (insert "  <a class=\"bottom-header-link\" href=\"/feed.xml\" target=\"_blank\">RSS</a>\n")
+  (insert "  <a class=\"bottom-header-link\" href=\"https://github.com/Ektaynot/ismailefe_org\" target=\"_blank\">Source</a>\n")
+  (insert "</div>\n")
+  (insert "<div class=\"firechickenwebring\">\n")
+  (insert "  <a href=\"https://firechicken.club/efe/prev\">←</a>\n")
+  (insert "  <a href=\"https://firechicken.club\">🔥⁠🐓</a>\n")
+  (insert "  <a href=\"https://firechicken.club/efe/next\">→</a>\n")
+  (insert "</div>\n")
+  (insert "#+END_EXPORT\n"))
 
 (set-file-template! "\\.org$" :trigger "__week.org" :mode 'org-mode)
 

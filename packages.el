@@ -11,6 +11,7 @@
 (package! reveal-in-osx-finder)
 (package! org-ros)
 (package! webfeeder)
+(package! org-chef)
 ;; unused
 ;; (package! insert-shebang)
 (package! autothemer)

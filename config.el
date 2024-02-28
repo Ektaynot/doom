@@ -85,13 +85,19 @@
 
 (after! org
   (setq org-capture-templates
+        ;; Below lines are for school captures
         '(("t" "School Todo" entry (file+olp+datetree "~/uni/current-course/todo.org")
            "* TODO %?\n  %i\n  %a")
           ("j" "Journal" entry (file+olp+datetree "~/org/journal.org")
            "* %?\nEntered on %U\n  %i\n  %a")
           ("n" "Class Note" entry (file+olp+datetree "~/uni/current-course/notes/%A.org")
-           "* %?\nEntered on %U\n  %i\n  %a")))
-)
+           "* %?\nEntered on %U\n  %i\n  %a")
+          ;; Below lines are for org-chef
+          ("c" "Cookbook" entry (file "~/ideas/recipes/cookbook.org")
+           "%(org-chef-get-recipe-from-url)"
+           :empty-lines 1)
+          ("m" "Manual Cookbook" entry (file "~/ideas/recipes/cookbook.org")
+           "* %^{Recipe title: }\n  :PROPERTIES:\n  :source-url:\n  :servings:\n  :prep-time:\n  :cook-time:\n  :ready-in:\n  :END:\n** Ingredients\n   %?\n** Directions\n\n"))))
 
    (require 'org-auto-tangle)
 
@@ -144,7 +150,7 @@
   (interactive)
   (save-excursion
     (goto-char (point-min))
-    (forward-line 4)
+    (forward-line 3)
     (insert "#+HTML_HEAD: <link rel=\"webmention\" href=\"https://webmention.io/ismailefe.org/webmention\" />\n")
     (insert "#+HTML_HEAD: <link rel=\"stylesheet\" type=\"text/css\" href=\"/templates/style.css\" />\n")
     (insert "#+HTML_HEAD: <link rel=\"apple-touch-icon\" sizes=\"180x180\" href=\"/favicon/apple-touch-icon.png\">\n")

@@ -7,6 +7,8 @@
 
 (setq doom-theme 'kanagawa)
 
+;; (setq fancy-splash-image "/Users/ismailefetop/.config/doom/etc/icons/Gruvbox_Emacs_Logo.png")
+
 (setq doom-font (font-spec :family "JetBrains Mono" :size 22))
 
 (setq display-line-numbers-type t)
@@ -48,6 +50,10 @@
 (setq frame-title-format nil)
 
 ;; (add-hook 'org-mode-hook 'olivetti-mode)
+
+(define-key evil-normal-state-map "ç" 'ispell)
+(define-key evil-normal-state-map "ö" 'ispell-word)
+(define-key evil-normal-state-map "ş" 'google-current-word)
 
 (setq pandoc-binary "/opt/homebrew/bin/pandoc")
 
@@ -103,6 +109,15 @@
 
 (add-hook 'org-mode-hook 'org-auto-tangle-mode)
 
+;; below code is fixed by u/Aminumbra
+(defun google-current-word ()
+  "Search the current word on Google using browse-url."
+  (interactive)
+  (let ((word (thing-at-point 'word)))
+    (if word
+        (browse-url (concat "https://www.google.com/search?q=" word))
+      (message "No word found at point."))))
+
 (defun open-finder-and-copy-path ()
   "Open Finder and copy the selected file's path."
   (interactive)
@@ -146,17 +161,19 @@
   )
 
 (defun insert-html-blog-template ()
-  "Inserts HTML_HEAD lines at the 5th line and html code at the end of the buffer."
+  "Inserts HTML_HEAD lines at the first empty line and html code at the end of the buffer."
   (interactive)
   (save-excursion
     (goto-char (point-min))
-    (forward-line 3)
-    (insert "#+HTML_HEAD: <link rel=\"webmention\" href=\"https://webmention.io/ismailefe.org/webmention\" />\n")
-    (insert "#+HTML_HEAD: <link rel=\"stylesheet\" type=\"text/css\" href=\"/templates/style.css\" />\n")
-    (insert "#+HTML_HEAD: <link rel=\"apple-touch-icon\" sizes=\"180x180\" href=\"/favicon/apple-touch-icon.png\">\n")
-    (insert "#+HTML_HEAD: <link rel=\"icon\" type=\"image/png\" sizes=\"32x32\" href=\"/favicon/favicon-32x32.png\">\n")
-    (insert "#+HTML_HEAD: <link rel=\"icon\" type=\"image/png\" sizes=\"16x16\" href=\"/favicon/favicon-16x16.png\">\n")
-    (insert "#+HTML_HEAD: <link rel=\"manifest\" href=\"/favicon/site.webmanifest\">\n"))
+    (let ((empty-line (progn (re-search-forward "^$" nil t) (point))))
+      (goto-char empty-line)
+      (insert "\n#+LANGUAGE: en\n")
+      (insert "#+HTML_HEAD: <link rel=\"webmention\" href=\"https://webmention.io/ismailefe.org/webmention\" />\n")
+      (insert "#+HTML_HEAD: <link rel=\"stylesheet\" type=\"text/css\" href=\"/templates/style.css\" />\n")
+      (insert "#+HTML_HEAD: <link rel=\"apple-touch-icon\" sizes=\"180x180\" href=\"/favicon/apple-touch-icon.png\">\n")
+      (insert "#+HTML_HEAD: <link rel=\"icon\" type=\"image/png\" sizes=\"32x32\" href=\"/favicon/favicon-32x32.png\">\n")
+      (insert "#+HTML_HEAD: <link rel=\"icon\" type=\"image/png\" sizes=\"16x16\" href=\"/favicon/favicon-16x16.png\">\n")
+      (insert "#+HTML_HEAD: <link rel=\"manifest\" href=\"/favicon/site.webmanifest\">\n")))
   (goto-char (point-max))
   (insert "\n\n")
   (insert "#+BEGIN_EXPORT html\n")
@@ -173,7 +190,7 @@
   (insert "</div>\n")
   (insert "#+END_EXPORT\n"))
 
-(set-file-template! "\\.org$" :trigger "__week.org" :mode 'org-mode)
+(set-file-template! "\\.org$" :trigger "__orgtemplate.org" :mode 'org-mode)
 
 (setq browse-url-mailto-function 'browse-url-generic)
 (setq browse-url-generic-program "open")

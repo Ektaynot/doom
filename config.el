@@ -48,6 +48,8 @@
 
 (setq ns-use-proxy-icon nil)
 (setq frame-title-format nil)
+(add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
+(add-to-list 'default-frame-alist '(ns-appearance . dark))
 
 ;; (add-hook 'org-mode-hook 'olivetti-mode)
 

@@ -280,6 +280,10 @@
   (menu-bar--display-line-numbers-mode-absolute))
 (global-set-key (kbd "C-ç") 'efe/undo-reading-mode)
 #+end_src
+
+#+RESULTS:
+: efe/undo-reading-mode
+
 ** Export to docx
 #+begin_src emacs-lisp
 (defun efe/export-to-docx ()
@@ -299,8 +303,7 @@
     (goto-char (point-min))
     (let ((empty-line (progn (re-search-forward "^$" nil t) (point))))
       (goto-char empty-line)
-      (insert "\n#+LANGUAGE: en\n")
-      (insert "#+HTML_HEAD: <link rel=\"webmention\" href=\"https://webmention.io/ismailefe.org/webmention\" />\n")
+      (insert "\n#+HTML_HEAD: <link rel=\"webmention\" href=\"https://webmention.io/ismailefe.org/webmention\" />\n")
       (insert "#+HTML_HEAD: <link rel=\"stylesheet\" type=\"text/css\" href=\"/templates/style.css\" />\n")
       (insert "#+HTML_HEAD: <link rel=\"apple-touch-icon\" sizes=\"180x180\" href=\"/favicon/apple-touch-icon.png\">\n")
       (insert "#+HTML_HEAD: <link rel=\"icon\" type=\"image/png\" sizes=\"32x32\" href=\"/favicon/favicon-32x32.png\">\n")

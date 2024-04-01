@@ -21,7 +21,7 @@
 
 ** Theme
 #+BEGIN_SRC emacs-lisp
-(setq doom-theme 'kanagawa)
+(setq doom-theme 'catppuccin)
 #+END_SRC
 
 *** Good themes

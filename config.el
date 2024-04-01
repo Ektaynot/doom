@@ -5,7 +5,7 @@
 (setq-default vterm-shell (executable-find "fish"))
 (setq-default explicit-shell-file-name (executable-find "fish"))
 
-(setq doom-theme 'kanagawa)
+(setq doom-theme 'catppuccin)
 
 ;; (setq fancy-splash-image "/Users/ismailefetop/.config/doom/etc/icons/Gruvbox_Emacs_Logo.png")
 

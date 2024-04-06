@@ -5,7 +5,7 @@
 (setq-default vterm-shell (executable-find "fish"))
 (setq-default explicit-shell-file-name (executable-find "fish"))
 
-(setq doom-theme 'catppuccin)
+(setq doom-theme 'kanagawa)
 
 ;; (setq fancy-splash-image "/Users/ismailefetop/.config/doom/etc/icons/Gruvbox_Emacs_Logo.png")
 
@@ -56,6 +56,8 @@
 (define-key evil-normal-state-map "ç" 'ispell)
 (define-key evil-normal-state-map "ö" 'ispell-word)
 (define-key evil-normal-state-map "ş" 'google-current-word)
+(define-key evil-normal-state-map "ğ" 'tureng-english)
+(define-key evil-normal-state-map "ü" 'tureng-turkish)
 
 (setq pandoc-binary "/opt/homebrew/bin/pandoc")
 
@@ -207,6 +209,24 @@
         (save-buffer))
       (kill-buffer buf)
       (message "Export done."))))
+
+(defun tureng-turkish ()
+  "Translate the word at point using tureng program."
+  (interactive)
+  (let ((word (thing-at-point 'word)))
+    (if word
+        (let ((output (shell-command-to-string (format "tureng -l t -w %s" word))))
+          (message output))
+      (message "No word found at point."))))
+
+(defun tureng-english ()
+  "Translate the word at point using tureng program."
+  (interactive)
+  (let ((word (thing-at-point 'word)))
+    (if word
+        (let ((output (shell-command-to-string (format "tureng -l e -w %s" word))))
+          (message output))
+      (message "No word found at point."))))
 
 (set-file-template! "\\.org$" :trigger "__orgtemplate.org" :mode 'org-mode)
 

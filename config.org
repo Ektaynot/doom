@@ -21,7 +21,7 @@
 
 ** Theme
 #+BEGIN_SRC emacs-lisp
-(setq doom-theme 'catppuccin)
+(setq doom-theme 'kanagawa)
 #+END_SRC
 
 *** Good themes
@@ -135,6 +135,9 @@
 (define-key evil-normal-state-map "ç" 'ispell)
 (define-key evil-normal-state-map "ö" 'ispell-word)
 (define-key evil-normal-state-map "ş" 'google-current-word)
+(define-key evil-normal-state-map "ğ" 'tureng-english)
+(define-key evil-normal-state-map "ü" 'tureng-turkish)
+
 #+end_src
 * Pandoc
 ** Set Pandoc Binary :mac:
@@ -281,9 +284,6 @@
 (global-set-key (kbd "C-ç") 'efe/undo-reading-mode)
 #+end_src
 
-#+RESULTS:
-: efe/undo-reading-mode
-
 ** Export to docx
 #+begin_src emacs-lisp
 (defun efe/export-to-docx ()
@@ -346,6 +346,30 @@
       (kill-buffer buf)
       (message "Export done."))))
 #+end_src
+** Tureng Functions
+*** Turkish to english
+#+begin_src emacs-lisp
+(defun tureng-turkish ()
+  "Translate the word at point using tureng program."
+  (interactive)
+  (let ((word (thing-at-point 'word)))
+    (if word
+        (let ((output (shell-command-to-string (format "tureng -l t -w %s" word))))
+          (message output))
+      (message "No word found at point."))))
+#+end_src
+*** English to turkish
+#+begin_src emacs-lisp
+(defun tureng-english ()
+  "Translate the word at point using tureng program."
+  (interactive)
+  (let ((word (thing-at-point 'word)))
+    (if word
+        (let ((output (shell-command-to-string (format "tureng -l e -w %s" word))))
+          (message output))
+      (message "No word found at point."))))
+#+end_src
+
 * Snippet Templates
 ** Week Templates
 #+begin_src emacs-lisp
@@ -515,6 +539,7 @@ brew services start d12frosted/emacs-plus/emacs-plus@29
 
 * Testing
 #+begin_src emacs-lisp
+
 #+end_src
 
 

@@ -5,6 +5,11 @@
 # first year in uni, mba2022
 
 * One Liners
+** Lexical Binding
+#+begin_src emacs-lisp
+;;; ~/.config/doom/config.el -*- lexical-binding: t; -*-
+#+end_src
+
 ** My contact information
 #+BEGIN_SRC emacs-lisp
 (setq user-full-name "İsmail Efe Top"
@@ -29,8 +34,8 @@
 - Catppuccin
 
 ** Set custom splash-screen image
-#+begin_src emacs-lisp
-;; (setq fancy-splash-image "/Users/ismailefetop/.config/doom/etc/icons/Gruvbox_Emacs_Logo.png")
+#+begin_src emacs-lisp :tangle no
+(setq fancy-splash-image "/Users/ismailefetop/.config/doom/etc/icons/Gruvbox_Emacs_Logo.png")
 #+end_src
 
 ** Font
@@ -42,6 +47,11 @@
 #+BEGIN_SRC emacs-lisp
 (setq display-line-numbers-type t)
 #+END_SRC
+
+** Dashboard Customization
+#+begin_src emacs-lisp
+(setq +doom-dashboard-functions '(doom-dashboard-widget-banner))
+#+end_src
 
 ** Disable Confirm on exit.
 #+BEGIN_SRC emacs-lisp
@@ -75,6 +85,11 @@
 ** Enable Word Count
 #+begin_src emacs-lisp
 (setq doom-modeline-enable-word-count t)
+#+end_src
+
+** Disable Line Numbers
+#+begin_src emacs-lisp
+(setq display-line-numbers-type nil)
 #+end_src
 
 ** Disable unnecessary new os windows
@@ -125,7 +140,7 @@
 #+end_src
 
 ** Open olivetti Mode
-#+begin_src emacs-lisp :tangle no
+#+begin_src emacs-lisp
 (add-hook 'org-mode-hook 'olivetti-mode)
 #+end_src
 
@@ -165,6 +180,7 @@
 #+BEGIN_SRC emacs-lisp
 (setq org-confirm-babel-evaluate nil)
 #+END_SRC
+
 ** Change the look of org-agenda to-do view.
 #+begin_src emacs-lisp
 (setq org-agenda-prefix-format
@@ -173,31 +189,18 @@
         (tags   . " %i %-12:c")
         (search . " %i %-12:c")))
 #+end_src
-** to open emacs with orgmode
-*** Define the keyboard shortcut as a string
-#+BEGIN_SRC emacs-lisp :tangle no
-(setq my-keyboard-shortcut "SPC o a a n")
-#+END_SRC
-
-*** Define a function to execute the keyboard shortcut
-#+BEGIN_SRC emacs-lisp :tangle no
-(defun my-send-keyboard-shortcut ()
-  (interactive)
-  (execute-kbd-macro (kbd my-keyboard-shortcut)))
-#+END_SRC
-
-*** Call the function when Emacs starts up
-#+BEGIN_SRC emacs-lisp :tangle no
-(add-hook 'emacs-startup-hook 'my-send-keyboard-shortcut)
-#+END_SRC
 
 ** Set Agenda View
 #+BEGIN_SRC emacs-lisp
-;; to start the agende from the current day
-(setq org-agenda-start-on-weekday nil)
-(setq org-agenda-start-day "+0d")
-;; set span 7
-(setq org-agenda-span 7)
+(after! org
+  :config
+  ;; to start the agende from the current day
+  (setq org-agenda-start-on-weekday nil)
+  (setq org-agenda-start-day "+0d")
+  ;; set span 7
+  (setq org-agenda-span 7)
+  ;; Add additional configuration here
+  )
 #+END_SRC
 
 ** Org Capture Templates :mac:
@@ -525,7 +528,4 @@ brew services start d12frosted/emacs-plus/emacs-plus@29
 
 * Testing
 #+begin_src emacs-lisp
-
 #+end_src
-
-

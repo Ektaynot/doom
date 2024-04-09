@@ -1,3 +1,5 @@
+;;; ~/.config/doom/config.el -*- lexical-binding: t; -*-
+
 (setq user-full-name "İsmail Efe Top"
       user-mail-address "ismailefetop@gmail.com")
 
@@ -7,11 +9,11 @@
 
 (setq doom-theme 'kanagawa)
 
-;; (setq fancy-splash-image "/Users/ismailefetop/.config/doom/etc/icons/Gruvbox_Emacs_Logo.png")
-
 (setq doom-font (font-spec :family "JetBrains Mono" :size 22))
 
 (setq display-line-numbers-type t)
+
+(setq +doom-dashboard-functions '(doom-dashboard-widget-banner))
 
 (setq confirm-kill-emacs nil)
 
@@ -28,6 +30,8 @@
 (global-set-key (kbd "C--") 'text-scale-decrease)
 
 (setq doom-modeline-enable-word-count t)
+
+(setq display-line-numbers-type nil)
 
 (setq use-dialog-box nil)'
 
@@ -51,6 +55,8 @@
 (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
 (add-to-list 'default-frame-alist '(ns-appearance . dark))
 
+(add-hook 'org-mode-hook 'olivetti-mode)
+
 (define-key evil-normal-state-map "ç" 'ispell)
 (define-key evil-normal-state-map "ö" 'ispell-word)
 (define-key evil-normal-state-map "ş" 'google-current-word)
@@ -73,11 +79,15 @@
         (tags   . " %i %-12:c")
         (search . " %i %-12:c")))
 
-;; to start the agende from the current day
-(setq org-agenda-start-on-weekday nil)
-(setq org-agenda-start-day "+0d")
-;; set span 7
-(setq org-agenda-span 7)
+(after! org
+  :config
+  ;; to start the agende from the current day
+  (setq org-agenda-start-on-weekday nil)
+  (setq org-agenda-start-day "+0d")
+  ;; set span 7
+  (setq org-agenda-span 7)
+  ;; Add additional configuration here
+  )
 
 (after! org
   (setq org-capture-templates

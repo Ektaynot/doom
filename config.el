@@ -51,8 +51,6 @@
 (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
 (add-to-list 'default-frame-alist '(ns-appearance . dark))
 
-;; (add-hook 'org-mode-hook 'olivetti-mode)
-
 (define-key evil-normal-state-map "ç" 'ispell)
 (define-key evil-normal-state-map "ö" 'ispell-word)
 (define-key evil-normal-state-map "ş" 'google-current-word)
@@ -65,7 +63,7 @@
 
 (setq org-directory "~/.orgs/org/")
 
-(setq org-agenda-files '("~/uni/current-course/" "~/.orgs/org/" "~/ideas/" "/Users/ismailefetop/Library/Mobile Documents/com~apple~CloudDocs/org/"))
+(setq org-agenda-files '("~/uni/current-course/" "~/.orgs/org/" "~/ideas/"))
 
 (setq org-confirm-babel-evaluate nil)
 
@@ -75,23 +73,11 @@
         (tags   . " %i %-12:c")
         (search . " %i %-12:c")))
 
-(setq my-keyboard-shortcut "SPC o a a n")
-
-(defun my-send-keyboard-shortcut ()
-  (interactive)
-  (execute-kbd-macro (kbd my-keyboard-shortcut)))
-
-;; (add-hook 'emacs-startup-hook 'my-send-keyboard-shortcut)
-
-(use-package! org
-  :config
-  ;; to start the agende from the current day
-  (setq org-agenda-start-on-weekday nil)
-  (setq org-agenda-start-day "+0d")
-  ;; set span 7
-  (setq org-agenda-span 7)
-  ;; Add additional configuration here
-  )
+;; to start the agende from the current day
+(setq org-agenda-start-on-weekday nil)
+(setq org-agenda-start-day "+0d")
+;; set span 7
+(setq org-agenda-span 7)
 
 (after! org
   (setq org-capture-templates
@@ -108,8 +94,6 @@
            :empty-lines 1)
           ("m" "Manual Cookbook" entry (file "~/ideas/recipes/cookbook.org")
            "* %^{Recipe title: }\n  :PROPERTIES:\n  :source-url:\n  :servings:\n  :prep-time:\n  :cook-time:\n  :ready-in:\n  :END:\n** Ingredients\n   %?\n** Directions\n\n"))))
-
-   (require 'org-auto-tangle)
 
 (add-hook 'org-mode-hook 'org-auto-tangle-mode)
 
@@ -232,7 +216,6 @@
 (setq browse-url-mailto-function 'browse-url-generic)
 (setq browse-url-generic-program "open")
 
-(require 'openwith)
 (openwith-mode t)
 (setq openwith-associations
       '(("\\.pdf\\'" "open" (file))
@@ -247,23 +230,6 @@
         ("\\.gif\\'" "open" (file))
         ;; Add more image formats as needed
         ))
-
-(use-package! mw-thesaurus
-  :defer t
-  :commands mw-thesaurus-lookup-dwim
-  :hook (mw-thesaurus-mode . variable-pitch-mode)
-  :config
-  (map! :map mw-thesaurus-mode-map [remap evil-record-macro] #'mw-thesaurus--quit)
-
-  ;; window on the right side
-  (add-to-list
-   'display-buffer-alist
-   `(,mw-thesaurus-buffer-name
-     (display-buffer-reuse-window
-      display-buffer-in-direction)
-     (direction . right)
-     (window . root)
-     (window-width . 0.3))))
 
 (add-hook 'after-save-hook
           'executable-make-buffer-file-executable-if-script-p)

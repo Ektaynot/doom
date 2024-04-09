@@ -125,8 +125,8 @@
 #+end_src
 
 ** Open olivetti Mode
-#+begin_src emacs-lisp
-;; (add-hook 'org-mode-hook 'olivetti-mode)
+#+begin_src emacs-lisp :tangle no
+(add-hook 'org-mode-hook 'olivetti-mode)
 #+end_src
 
 ** Add ispell keybindings
@@ -158,7 +158,7 @@
 
 *** Other Org Directories :mac:
 #+BEGIN_SRC emacs-lisp
-(setq org-agenda-files '("~/uni/current-course/" "~/.orgs/org/" "~/ideas/" "/Users/ismailefetop/Library/Mobile Documents/com~apple~CloudDocs/org/"))
+(setq org-agenda-files '("~/uni/current-course/" "~/.orgs/org/" "~/ideas/"))
 #+END_SRC
 
 ** Trusting the org-blocks in org automatically
@@ -175,33 +175,29 @@
 #+end_src
 ** to open emacs with orgmode
 *** Define the keyboard shortcut as a string
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :tangle no
 (setq my-keyboard-shortcut "SPC o a a n")
 #+END_SRC
 
 *** Define a function to execute the keyboard shortcut
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :tangle no
 (defun my-send-keyboard-shortcut ()
   (interactive)
   (execute-kbd-macro (kbd my-keyboard-shortcut)))
 #+END_SRC
 
 *** Call the function when Emacs starts up
-#+BEGIN_SRC emacs-lisp
-;; (add-hook 'emacs-startup-hook 'my-send-keyboard-shortcut)
+#+BEGIN_SRC emacs-lisp :tangle no
+(add-hook 'emacs-startup-hook 'my-send-keyboard-shortcut)
 #+END_SRC
 
 ** Set Agenda View
 #+BEGIN_SRC emacs-lisp
-(use-package! org
-  :config
-  ;; to start the agende from the current day
-  (setq org-agenda-start-on-weekday nil)
-  (setq org-agenda-start-day "+0d")
-  ;; set span 7
-  (setq org-agenda-span 7)
-  ;; Add additional configuration here
-  )
+;; to start the agende from the current day
+(setq org-agenda-start-on-weekday nil)
+(setq org-agenda-start-day "+0d")
+;; set span 7
+(setq org-agenda-span 7)
 #+END_SRC
 
 ** Org Capture Templates :mac:
@@ -225,8 +221,6 @@
 #+end_src
 ** Org Auto Tangle
 #+BEGIN_SRC emacs-lisp
-   (require 'org-auto-tangle)
-
 (add-hook 'org-mode-hook 'org-auto-tangle-mode)
 #+END_SRC
 * Functions
@@ -382,7 +376,6 @@
 #+END_SRC
 ** Openwith Defaults :mac:
 #+BEGIN_SRC emacs-lisp
-(require 'openwith)
 (openwith-mode t)
 (setq openwith-associations
       '(("\\.pdf\\'" "open" (file))
@@ -401,7 +394,7 @@
 
 * Dictionary Servers
 ** Merriam-Webster Thesaurus
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :tangle no
 (use-package! mw-thesaurus
   :defer t
   :commands mw-thesaurus-lookup-dwim

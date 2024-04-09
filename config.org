@@ -7,7 +7,6 @@
 * One Liners
 ** My contact information
 #+BEGIN_SRC emacs-lisp
-
 (setq user-full-name "İsmail Efe Top"
       user-mail-address "ismailefetop@gmail.com")
 #+END_SRC
@@ -303,8 +302,7 @@
     (goto-char (point-min))
     (let ((empty-line (progn (re-search-forward "^$" nil t) (point))))
       (goto-char empty-line)
-      (insert "\n#+HTML_HEAD: <link rel=\"webmention\" href=\"https://webmention.io/ismailefe.org/webmention\" />\n")
-      (insert "#+HTML_HEAD: <link rel=\"stylesheet\" type=\"text/css\" href=\"/templates/style.css\" />\n")
+      (insert "\n#+HTML_HEAD: <link rel=\"stylesheet\" type=\"text/css\" href=\"/templates/style.css\" />\n")
       (insert "#+HTML_HEAD: <link rel=\"apple-touch-icon\" sizes=\"180x180\" href=\"/favicon/apple-touch-icon.png\">\n")
       (insert "#+HTML_HEAD: <link rel=\"icon\" type=\"image/png\" sizes=\"32x32\" href=\"/favicon/favicon-32x32.png\">\n")
       (insert "#+HTML_HEAD: <link rel=\"icon\" type=\"image/png\" sizes=\"16x16\" href=\"/favicon/favicon-16x16.png\">\n")
@@ -422,10 +420,6 @@
      (window-width . 0.3))))
 #+END_SRC
 
-** Emacs Dictionary
-#+begin_src emacs-lisp
-(setq dictionary-server "dict.org")
-#+end_src
 * After Save hook
 #+begin_src emacs-lisp
 (add-hook 'after-save-hook
@@ -451,7 +445,6 @@
 #+begin_src emacs-lisp
 (setq org-image-actual-width nil)
 #+end_src
-** bi"u
 * Startup
 ** Maximize on startup using Rectangle :mac:
 #+begin_src emacs-lisp

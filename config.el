@@ -171,8 +171,7 @@
     (goto-char (point-min))
     (let ((empty-line (progn (re-search-forward "^$" nil t) (point))))
       (goto-char empty-line)
-      (insert "\n#+HTML_HEAD: <link rel=\"webmention\" href=\"https://webmention.io/ismailefe.org/webmention\" />\n")
-      (insert "#+HTML_HEAD: <link rel=\"stylesheet\" type=\"text/css\" href=\"/templates/style.css\" />\n")
+      (insert "\n#+HTML_HEAD: <link rel=\"stylesheet\" type=\"text/css\" href=\"/templates/style.css\" />\n")
       (insert "#+HTML_HEAD: <link rel=\"apple-touch-icon\" sizes=\"180x180\" href=\"/favicon/apple-touch-icon.png\">\n")
       (insert "#+HTML_HEAD: <link rel=\"icon\" type=\"image/png\" sizes=\"32x32\" href=\"/favicon/favicon-32x32.png\">\n")
       (insert "#+HTML_HEAD: <link rel=\"icon\" type=\"image/png\" sizes=\"16x16\" href=\"/favicon/favicon-16x16.png\">\n")
@@ -265,8 +264,6 @@
      (direction . right)
      (window . root)
      (window-width . 0.3))))
-
-(setq dictionary-server "dict.org")
 
 (add-hook 'after-save-hook
           'executable-make-buffer-file-executable-if-script-p)

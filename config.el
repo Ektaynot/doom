@@ -11,8 +11,6 @@
 
 (setq doom-font (font-spec :family "JetBrains Mono" :size 22))
 
-(setq display-line-numbers-type t)
-
 (setq +doom-dashboard-functions '(doom-dashboard-widget-banner))
 
 (setq confirm-kill-emacs nil)

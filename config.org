@@ -35,7 +35,7 @@
 
 ** Set custom splash-screen image
 #+begin_src emacs-lisp :tangle no
-(setq fancy-splash-image "/Users/ismailefetop/.config/doom/etc/icons/Gruvbox_Emacs_Logo.png")
+(setq fancy-splash-image "/Users/ismailefetop/.config/doom/etc/icons/gruvbox_emacs.png")
 #+end_src
 
 ** Font
@@ -44,7 +44,7 @@
 #+END_SRC
 
 ** Line Numbers
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :tangle no
 (setq display-line-numbers-type t)
 #+END_SRC
 

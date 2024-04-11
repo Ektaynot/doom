@@ -28,11 +28,6 @@
 (setq doom-theme 'kanagawa)
 #+END_SRC
 
-*** Good themes
-- doom-dracula
-- kanagawa
-- Catppuccin
-
 ** Set custom splash-screen image
 #+begin_src emacs-lisp :tangle no
 (setq fancy-splash-image "/Users/ismailefetop/.config/doom/etc/icons/gruvbox_emacs.png")
@@ -42,7 +37,6 @@
 #+BEGIN_SRC emacs-lisp
 (setq doom-font (font-spec :family "JetBrains Mono" :size 22))
 #+END_SRC
-
 ** Line Numbers
 #+BEGIN_SRC emacs-lisp :tangle no
 (setq display-line-numbers-type t)
@@ -228,6 +222,15 @@
 #+BEGIN_SRC emacs-lisp
 (add-hook 'org-mode-hook 'org-auto-tangle-mode)
 #+END_SRC
+** Org-modern
+#+begin_src emacs-lisp
+(use-package! org-modern
+  :hook (org-mode . global-org-modern-mode)
+  :config
+  (setq org-modern-label-border 0.3)
+  (setq org-modern-block-name nil)
+  (setq org-modern-tag nil))
+#+end_src
 * Functions
 ** Google this word
 #+begin_src emacs-lisp

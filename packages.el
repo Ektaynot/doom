@@ -9,6 +9,7 @@
 (package! super-save)
 (package! citeproc)
 (package! reveal-in-osx-finder)
+(package! org-modern)
 ;;(package! org-ros)
 ;;(package! org-chef)
 ;; unused

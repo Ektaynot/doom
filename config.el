@@ -107,6 +107,13 @@
 
 (add-hook 'org-mode-hook 'org-auto-tangle-mode)
 
+(use-package! org-modern
+  :hook (org-mode . global-org-modern-mode)
+  :config
+  (setq org-modern-label-border 0.3)
+  (setq org-modern-block-name nil)
+  (setq org-modern-tag nil))
+
 ;; below code is fixed by u/Aminumbra
 (defun google-current-word ()
   "Search the current word on Google using browse-url."

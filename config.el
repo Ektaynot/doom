@@ -16,6 +16,8 @@
 (setq confirm-kill-emacs nil)
 
 (setq which-key-idle-delay 0.0)
+(setq bookmark-search-delay 0.0)
+(setq mouse-scroll-delay 0.0)
 
 ;disable backup
  (setq backup-inhibited t)

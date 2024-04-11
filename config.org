@@ -58,9 +58,11 @@
 (setq confirm-kill-emacs nil)
 #+END_SRC
 
-** Disable Which-Key Delay
+** Disable Delays
 #+begin_src emacs-lisp
 (setq which-key-idle-delay 0.0)
+(setq bookmark-search-delay 0.0)
+(setq mouse-scroll-delay 0.0)
 #+end_src
 
 ** Disable autosave

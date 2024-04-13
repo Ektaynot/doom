@@ -55,13 +55,13 @@
 (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
 (add-to-list 'default-frame-alist '(ns-appearance . dark))
 
-(add-hook 'org-mode-hook 'olivetti-mode)
+(add-hook 'text-mode-hook 'olivetti-mode)
 
 (define-key evil-normal-state-map "ç" 'ispell)
 (define-key evil-normal-state-map "ö" 'ispell-word)
 (define-key evil-normal-state-map "ş" 'google-current-word)
-(define-key evil-normal-state-map "ğ" 'tureng-english)
-(define-key evil-normal-state-map "ü" 'tureng-turkish)
+(define-key evil-normal-state-map "ğ" 'efe/tureng-english)
+(define-key evil-normal-state-map "ü" 'efe/tureng-turkish)
 
 (setq pandoc-binary "/opt/homebrew/bin/pandoc")
 
@@ -165,7 +165,7 @@
   (setq pandoc-mode nil)
   )
 
-(defun insert-html-blog-template ()
+(defun efe/insert-html-blog-template ()
   "Inserts HTML_HEAD lines at the first empty line and html code at the end of the buffer."
   (interactive)
   (save-excursion
@@ -193,7 +193,7 @@
   (insert "</div>\n")
   (insert "#+END_EXPORT\n"))
 
-(defun term2anki (file)
+(defun efe/term2anki (file)
   (interactive "FExport notes to: ")
   (let ((regex (rx bol (in "+-") " " (group (1+ nonl)) ": " (group (1+ nonl))))
         (buf (find-file-noselect file))
@@ -210,7 +210,7 @@
       (kill-buffer buf)
       (message "Export done."))))
 
-(defun tureng-turkish ()
+(defun efe/tureng-turkish ()
   "Translate the word at point using tureng program."
   (interactive)
   (let ((word (thing-at-point 'word)))
@@ -219,7 +219,7 @@
           (message output))
       (message "No word found at point."))))
 
-(defun tureng-english ()
+(defun efe/tureng-english ()
   "Translate the word at point using tureng program."
   (interactive)
   (let ((word (thing-at-point 'word)))
@@ -227,6 +227,13 @@
         (let ((output (shell-command-to-string (format "tureng -l e -w %s" word))))
           (message output))
       (message "No word found at point."))))
+
+(defun efe/insert-elisp-src-block ()
+  "Inserts a two-line emacs lisp source block."
+  (interactive)
+  (insert "\n#+begin_src elisp\n")
+  (save-excursion
+    (insert "#+end_src\n")))
 
 (set-file-template! "\\.org$" :trigger "__orgtemplate.org" :mode 'org-mode)
 

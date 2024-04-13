@@ -6,61 +6,61 @@
 
 * One Liners
 ** Lexical Binding
-#+begin_src emacs-lisp
+#+begin_src elisp
 ;;; ~/.config/doom/config.el -*- lexical-binding: t; -*-
 #+end_src
 
 ** My contact information
-#+BEGIN_SRC emacs-lisp
+#+begin_src elisp
 (setq user-full-name "İsmail Efe Top"
       user-mail-address "ismailefetop@gmail.com")
 #+END_SRC
 
 ** Setting the default shell
-#+BEGIN_SRC emacs-lisp
+#+begin_src elisp
 (setq shell-file-name (executable-find "bash"))
 (setq-default vterm-shell (executable-find "fish"))
 (setq-default explicit-shell-file-name (executable-find "fish"))
 #+END_SRC
 
 ** Theme
-#+BEGIN_SRC emacs-lisp
+#+begin_src elisp
 (setq doom-theme 'kanagawa)
 #+END_SRC
 
 ** Set custom splash-screen image
-#+begin_src emacs-lisp :tangle no
+#+begin_src elisp :tangle no
 (setq fancy-splash-image "/Users/ismailefetop/.config/doom/etc/icons/gruvbox_emacs.png")
 #+end_src
 
 ** Font
-#+BEGIN_SRC emacs-lisp
+#+begin_src elisp
 (setq doom-font (font-spec :family "JetBrains Mono" :size 22))
 #+END_SRC
 ** Line Numbers
-#+BEGIN_SRC emacs-lisp :tangle no
+#+begin_src elisp :tangle no
 (setq display-line-numbers-type t)
 #+END_SRC
 
 ** Dashboard Customization
-#+begin_src emacs-lisp
+#+begin_src elisp
 (setq +doom-dashboard-functions '(doom-dashboard-widget-banner))
 #+end_src
 
 ** Disable Confirm on exit.
-#+BEGIN_SRC emacs-lisp
+#+begin_src elisp
 (setq confirm-kill-emacs nil)
 #+END_SRC
 
 ** Disable Delays
-#+begin_src emacs-lisp
+#+begin_src elisp
 (setq which-key-idle-delay 0.0)
 (setq bookmark-search-delay 0.0)
 (setq mouse-scroll-delay 0.0)
 #+end_src
 
 ** Disable autosave
-#+BEGIN_SRC emacs-lisp
+#+begin_src elisp
 ;disable backup
  (setq backup-inhibited t)
 ;disable auto save
@@ -68,67 +68,67 @@
 #+END_SRC
 
 ** [[https://emacsredux.com/blog/2020/07/18/automatically-kill-running-processes-on-exit/][Automatically Kill Running Processes on Exit]]
-#+begin_src emacs-lisp
+#+begin_src elisp
 (setq confirm-kill-processes nil)
 #+end_src
 
 ** Zoom
-#+BEGIN_SRC emacs-lisp
+#+begin_src elisp
 (global-set-key (kbd "C-+") 'text-scale-increase)
 (global-set-key (kbd "C--") 'text-scale-decrease)
 #+END_SRC
 
 ** Enable Word Count
-#+begin_src emacs-lisp
+#+begin_src elisp
 (setq doom-modeline-enable-word-count t)
 #+end_src
 
 ** Disable Line Numbers
-#+begin_src emacs-lisp
+#+begin_src elisp
 (setq display-line-numbers-type nil)
 #+end_src
 
 ** Disable unnecessary new os windows
-#+begin_src emacs-lisp
+#+begin_src elisp
 (setq use-dialog-box nil)'
 #+end_src
 
 ** Calendar
 *** Make calendar start on monday
-#+begin_src emacs-lisp
+#+begin_src elisp
 (setq calendar-week-start-day 1)
 #+end_src
 
 ** Sets olivettis body width
-#+BEGIN_SRC emacs-lisp
+#+begin_src elisp
 (setq olivetti-body-width 94)
 #+END_SRC
 
 ** Default Bib File
-#+begin_src emacs-lisp
+#+begin_src elisp
 (setq org-cite-global-bibliography '("/Users/ismailefetop/uni/citation/bib.bib"))
 (setq! bibtex-completion-bibliography '("/Users/ismailefetop/uni/citation/bib.bib"))
 (setq! citar-bibliography '("/Users/ismailefetop/uni/citation/bib.bib"))
 #+end_src
 
 ** Super-save
-#+begin_src emacs-lisp
+#+begin_src elisp
 (super-save-mode +1)
 #+end_src
 
 ** Opening Large Files
-#+begin_src emacs-lisp
+#+begin_src elisp
 ;; warn when opening files bigger than 200MB
 (setq large-file-warning-threshold 200000000)
 #+end_src
 
 ** Disable hl-line-mode
-#+begin_src emacs-lisp
+#+begin_src elisp
 (remove-hook 'doom-first-buffer-hook #'global-hl-line-mode)
 #+end_src
 
 ** Make the title bar text empty :mac:
-#+begin_src emacs-lisp
+#+begin_src elisp
 (setq ns-use-proxy-icon nil)
 (setq frame-title-format nil)
 (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
@@ -136,49 +136,49 @@
 #+end_src
 
 ** Open olivetti Mode
-#+begin_src emacs-lisp
-(add-hook 'org-mode-hook 'olivetti-mode)
+#+begin_src elisp
+(add-hook 'text-mode-hook 'olivetti-mode)
 #+end_src
 
 ** Add ispell keybindings
-#+begin_src emacs-lisp
+#+begin_src elisp
 (define-key evil-normal-state-map "ç" 'ispell)
 (define-key evil-normal-state-map "ö" 'ispell-word)
 (define-key evil-normal-state-map "ş" 'google-current-word)
-(define-key evil-normal-state-map "ğ" 'tureng-english)
-(define-key evil-normal-state-map "ü" 'tureng-turkish)
+(define-key evil-normal-state-map "ğ" 'efe/tureng-english)
+(define-key evil-normal-state-map "ü" 'efe/tureng-turkish)
 
 #+end_src
 * Pandoc
 ** Set Pandoc Binary :mac:
-#+BEGIN_SRC emacs-lisp
+#+begin_src elisp
 (setq pandoc-binary "/opt/homebrew/bin/pandoc")
 #+END_SRC
 
 ** Global Settings/Data File :mac:
-#+begin_src emacs-lisp
+#+begin_src elisp
 (setq pandoc-data-dir "/Users/ismailefetop/.config/doom/etc/pandoc/")
 #+end_src
 
 * Org
 ** Org directories
 *** Main Directory :mac:
-#+BEGIN_SRC emacs-lisp
+#+begin_src elisp
 (setq org-directory "~/.orgs/org/")
 #+END_SRC
 
 *** Other Org Directories :mac:
-#+BEGIN_SRC emacs-lisp
+#+begin_src elisp
 (setq org-agenda-files '("~/uni/current-course/" "~/.orgs/org/" "~/ideas/"))
 #+END_SRC
 
 ** Trusting the org-blocks in org automatically
-#+BEGIN_SRC emacs-lisp
+#+begin_src elisp
 (setq org-confirm-babel-evaluate nil)
 #+END_SRC
 
 ** Change the look of org-agenda to-do view.
-#+begin_src emacs-lisp
+#+begin_src elisp
 (setq org-agenda-prefix-format
       '((agenda . " %i %-12:c%?-12t% s")
         (todo   . " ")
@@ -187,7 +187,7 @@
 #+end_src
 
 ** Set Agenda View
-#+BEGIN_SRC emacs-lisp
+#+begin_src elisp
 (after! org
   :config
   ;; to start the agende from the current day
@@ -200,7 +200,7 @@
 #+END_SRC
 
 ** Org Capture Templates :mac:
-#+begin_src emacs-lisp
+#+begin_src elisp
 (after! org
   (setq org-capture-templates
         ;; Below lines are for school captures
@@ -219,11 +219,11 @@
 
 #+end_src
 ** Org Auto Tangle
-#+BEGIN_SRC emacs-lisp
+#+begin_src elisp
 (add-hook 'org-mode-hook 'org-auto-tangle-mode)
 #+END_SRC
 ** Org-modern
-#+begin_src emacs-lisp
+#+begin_src elisp
 (use-package! org-modern
   :hook (org-mode . global-org-modern-mode)
   :config
@@ -233,7 +233,7 @@
 #+end_src
 * Functions
 ** Google this word
-#+begin_src emacs-lisp
+#+begin_src elisp
 ;; below code is fixed by u/Aminumbra
 (defun google-current-word ()
   "Search the current word on Google using browse-url."
@@ -244,7 +244,7 @@
       (message "No word found at point."))))
 #+end_src
 ** Copy Path Function :mac:
-#+BEGIN_SRC emacs-lisp
+#+begin_src elisp
 (defun open-finder-and-copy-path ()
   "Open Finder and copy the selected file's path."
   (interactive)
@@ -257,7 +257,7 @@
   (mapc 'kill-buffer (buffer-list)))
 #+END_SRC
 ** Reading Mode
-#+begin_src emacs-lisp
+#+begin_src elisp
 (defun efe/reading-mode ()
   "Toggle reading mode."
   (interactive)
@@ -270,7 +270,7 @@
 
 #+end_src
 ** Undo Reading Mode
-#+begin_src emacs-lisp
+#+begin_src elisp
 (defun efe/undo-reading-mode ()
   "undo reading mode."
   (interactive)
@@ -286,7 +286,7 @@
 #+end_src
 
 ** Export to docx
-#+begin_src emacs-lisp
+#+begin_src elisp
 (defun efe/export-to-docx ()
   "Output to docx using pandoc-mode"
   (interactive)
@@ -296,8 +296,8 @@
   )
 #+end_src
 ** Blog Html Insert
-#+begin_src emacs-lisp
-(defun insert-html-blog-template ()
+#+begin_src elisp
+(defun efe/insert-html-blog-template ()
   "Inserts HTML_HEAD lines at the first empty line and html code at the end of the buffer."
   (interactive)
   (save-excursion
@@ -328,8 +328,8 @@
 #+end_src
 
 ** Term2anki
-#+begin_src emacs-lisp
-(defun term2anki (file)
+#+begin_src elisp
+(defun efe/term2anki (file)
   (interactive "FExport notes to: ")
   (let ((regex (rx bol (in "+-") " " (group (1+ nonl)) ": " (group (1+ nonl))))
         (buf (find-file-noselect file))
@@ -348,8 +348,8 @@
 #+end_src
 ** Tureng Functions
 *** Turkish to english
-#+begin_src emacs-lisp
-(defun tureng-turkish ()
+#+begin_src elisp
+(defun efe/tureng-turkish ()
   "Translate the word at point using tureng program."
   (interactive)
   (let ((word (thing-at-point 'word)))
@@ -359,8 +359,8 @@
       (message "No word found at point."))))
 #+end_src
 *** English to turkish
-#+begin_src emacs-lisp
-(defun tureng-english ()
+#+begin_src elisp
+(defun efe/tureng-english ()
   "Translate the word at point using tureng program."
   (interactive)
   (let ((word (thing-at-point 'word)))
@@ -370,20 +370,29 @@
       (message "No word found at point."))))
 #+end_src
 
+** Insert Elisp Source Block
+#+begin_src elisp
+(defun efe/insert-elisp-src-block ()
+  "Inserts a two-line emacs lisp source block."
+  (interactive)
+  (insert "\n#+begin_src elisp\n")
+  (save-excursion
+    (insert "#+end_src\n")))
+#+end_src
 * Snippet Templates
 ** Week Templates
-#+begin_src emacs-lisp
+#+begin_src elisp
 (set-file-template! "\\.org$" :trigger "__orgtemplate.org" :mode 'org-mode)
 #+end_src
 
 * Defaults
 ** Email Client
-#+BEGIN_SRC emacs-lisp
+#+begin_src elisp
 (setq browse-url-mailto-function 'browse-url-generic)
 (setq browse-url-generic-program "open")
 #+END_SRC
 ** Openwith Defaults :mac:
-#+BEGIN_SRC emacs-lisp
+#+begin_src elisp
 (openwith-mode t)
 (setq openwith-associations
       '(("\\.pdf\\'" "open" (file))
@@ -402,7 +411,7 @@
 
 * Dictionary Servers
 ** Merriam-Webster Thesaurus
-#+BEGIN_SRC emacs-lisp :tangle no
+#+begin_src elisp :tangle no
 (use-package! mw-thesaurus
   :defer t
   :commands mw-thesaurus-lookup-dwim
@@ -422,17 +431,17 @@
 #+END_SRC
 
 * After Save hook
-#+begin_src emacs-lisp
+#+begin_src elisp
 (add-hook 'after-save-hook
           'executable-make-buffer-file-executable-if-script-p)
 #+end_src
 * Garbage collection
-#+BEGIN_SRC emacs-lisp
+#+begin_src elisp
 (after! gcmh
   (setq gcmh-high-cons-threshold (* 64 1048576)))
 #+END_SRC
 * Make emacs silent
-#+begin_src emacs-lisp
+#+begin_src elisp
 (setq byte-compile-warnings '(not obsolete))
 (setq warning-suppress-log-types '((comp) (bytecomp)))
 (setq native-comp-async-report-warnings-errors 'silent)
@@ -443,12 +452,12 @@
 #+end_src
 * Presentation
 ** Make images adjust to width
-#+begin_src emacs-lisp
+#+begin_src elisp
 (setq org-image-actual-width nil)
 #+end_src
 * Startup
 ** Maximize on startup using Rectangle :mac:
-#+begin_src emacs-lisp
+#+begin_src elisp
 ;; Requires the mac app Rectangle to function.
 (defun rectangle-maximize ()
   "Execute a shell command when Emacs starts."
@@ -497,12 +506,12 @@ sudo tlmgr instal soul
 #+end_src
 
 ** to save window site(causes graphical errors)
-#+BEGIN_SRC emacs-lisp :tangle no
+#+begin_src elisp :tangle no
   ;; remember window position
   (desktop-save-mode 1)
 #+end_src
 ** Disabling tilde outside of doom emacs
-#+begin_src emacs-lisp :tangle no
+#+begin_src elisp :tangle no
 (remove-hook 'text-mode-hook #'vi-tilde-fringe-mode)
 (remove-hook 'doom-first-buffer-hook #'global-vi-tilde-fringe-mode)
 #+end_src
@@ -524,7 +533,7 @@ brew services start d12frosted/emacs-plus/emacs-plus@29
 /opt/homebrew/opt/emacs-plus@29/bin/emacs =fg-daemon
 #+end_src
 ** To only show todo list on custom agenda
-#+begin_src emacs-lisp :tangle no
+#+begin_src elisp :tangle no
 (setq org-agenda-custom-commands
       '(("n" "Agenda and all TODOs"
         ((alltodo "")
@@ -532,5 +541,5 @@ brew services start d12frosted/emacs-plus/emacs-plus@29
 #+end_src
 
 * Testing
-#+begin_src emacs-lisp
+#+begin_src elisp
 #+end_src

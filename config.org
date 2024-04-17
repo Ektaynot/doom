@@ -223,7 +223,7 @@
 (add-hook 'org-mode-hook 'org-auto-tangle-mode)
 #+END_SRC
 ** Org-modern
-#+begin_src elisp
+#+begin_src elisp :tangle no
 (use-package! org-modern
   :hook (org-mode . global-org-modern-mode)
   :config
@@ -542,4 +542,5 @@ brew services start d12frosted/emacs-plus/emacs-plus@29
 
 * Testing
 #+begin_src elisp
+
 #+end_src

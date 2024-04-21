@@ -1,20 +1,26 @@
 ;; -*- no-byte-compile: t; -*-
 ;;; $DOOMDIR/packages.el
 
-;; used
+;; eye-candy
 (package! olivetti)
+
+;; biblio
+(package! citeproc)
+(package! org-ref)
+
+;; misc
 (package! openwith)
 (package! pandoc-mode)
 (package! org-auto-tangle)
 (package! super-save)
-(package! citeproc)
 (package! reveal-in-osx-finder)
-;;(package! org-modern)
 (package! elpher)
 
-;;(package! org-ros)
-;;(package! org-chef)
 ;; unused
+
+;;(package! org-ros)
+;;(package! org-modern)
+;;(package! org-chef)
 ;; (package! insert-shebang)
 ;;(package! autothemer)
 
@@ -26,3 +32,4 @@
 ;;  (:host github
 ;;   :repo "thongpv87/rose-pine-emacs"
 ;;   :branch "master"))
+

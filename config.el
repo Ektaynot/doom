@@ -42,6 +42,7 @@
 (setq org-cite-global-bibliography '("/Users/ismailefetop/uni/citation/bib.bib"))
 (setq! bibtex-completion-bibliography '("/Users/ismailefetop/uni/citation/bib.bib"))
 (setq! citar-bibliography '("/Users/ismailefetop/uni/citation/bib.bib"))
+(setq org-cite-csl-styles-dir "/Users/ismailefetop/uni/citation/styles/")
 
 (super-save-mode +1)
 
@@ -203,6 +204,17 @@
       (kill-buffer buf)
       (message "Export done."))))
 
+(defun remove-leading-spaces ()
+  "Remove leading spaces until the first non-space character of each line."
+  (interactive)
+  (save-excursion
+    (goto-char (point-min))
+    (while (not (eobp))
+      (beginning-of-line)
+      (skip-chars-forward " \t")
+      (delete-region (point-at-bol) (point))
+      (forward-line))))
+
 (defun efe/tureng-turkish ()
   "Translate the word at point using tureng program."
   (interactive)
@@ -224,7 +236,7 @@
 (defun efe/insert-elisp-src-block ()
   "Inserts a two-line emacs lisp source block."
   (interactive)
-  (insert "\n#+begin_src elisp\n")
+  (insert "\n#+begin_src elisp\n\n")
   (save-excursion
     (insert "#+end_src\n")))
 
@@ -247,6 +259,12 @@
         ("\\.gif\\'" "open" (file))
         ;; Add more image formats as needed
         ))
+
+(setq ispell-program-name "hunspell")
+(setq ispell-hunspell-dict-paths-alist '(("en_US" "/Users/ismailefetop/.config/dict/en_US.aff")))
+(setq ispell-local-dictionary "en_US")
+(setq ispell-local-dictionary-alist '(("en_US" "[[:alpha:]]" "[^[:alpha:]]" "[']" nil ("-d" "en_US") nil utf-8)))
+(flyspell-mode 1)
 
 (add-hook 'after-save-hook
           'executable-make-buffer-file-executable-if-script-p)
@@ -272,4 +290,14 @@
 ;; Add the function to the Emacs startup hook
 (add-hook 'emacs-startup-hook 'rectangle-maximize)
 
-
+ (use-package ox-pandoc
+        :after ox)
+;; default options for all output formats
+(setq org-pandoc-options '((standalone . t)))
+;; cancel above settings only for 'docx' format
+(setq org-pandoc-options-for-docx '((standalone . nil)))
+;; special settings for beamer-pdf and latex-pdf exporters
+(setq org-pandoc-options-for-beamer-pdf '((pdf-engine . "xelatex")))
+(setq org-pandoc-options-for-latex-pdf '((pdf-engine . "pdflatex")))
+;; special extensions for markdown_github output
+(setq org-pandoc-format-extensions '(markdown_github+pipe_tables+raw_html))

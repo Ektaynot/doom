@@ -30,7 +30,7 @@
 
 ** Set custom splash-screen image
 #+begin_src elisp :tangle no
-(setq fancy-splash-image "/Users/ismailefetop/.config/doom/etc/icons/gruvbox_emacs.png")
+(setq fancy-splash-image "/Users/ismailefetop/.config/doom/etc/icons/vtuber.png")
 #+end_src
 
 ** Font
@@ -109,6 +109,7 @@
 (setq org-cite-global-bibliography '("/Users/ismailefetop/uni/citation/bib.bib"))
 (setq! bibtex-completion-bibliography '("/Users/ismailefetop/uni/citation/bib.bib"))
 (setq! citar-bibliography '("/Users/ismailefetop/uni/citation/bib.bib"))
+(setq org-cite-csl-styles-dir "/Users/ismailefetop/uni/citation/styles/")
 #+end_src
 
 ** Super-save
@@ -346,6 +347,21 @@
       (kill-buffer buf)
       (message "Export done."))))
 #+end_src
+** Remove Leading Whitespaces
+
+#+begin_src elisp
+(defun remove-leading-spaces ()
+  "Remove leading spaces until the first non-space character of each line."
+  (interactive)
+  (save-excursion
+    (goto-char (point-min))
+    (while (not (eobp))
+      (beginning-of-line)
+      (skip-chars-forward " \t")
+      (delete-region (point-at-bol) (point))
+      (forward-line))))
+#+end_src
+
 ** Tureng Functions
 *** Turkish to english
 #+begin_src elisp
@@ -375,7 +391,7 @@
 (defun efe/insert-elisp-src-block ()
   "Inserts a two-line emacs lisp source block."
   (interactive)
-  (insert "\n#+begin_src elisp\n")
+  (insert "\n#+begin_src elisp\n\n")
   (save-excursion
     (insert "#+end_src\n")))
 #+end_src
@@ -409,26 +425,14 @@
         ))
 #+END_SRC
 
-* Dictionary Servers
-** Merriam-Webster Thesaurus
-#+begin_src elisp :tangle no
-(use-package! mw-thesaurus
-  :defer t
-  :commands mw-thesaurus-lookup-dwim
-  :hook (mw-thesaurus-mode . variable-pitch-mode)
-  :config
-  (map! :map mw-thesaurus-mode-map [remap evil-record-macro] #'mw-thesaurus--quit)
-
-  ;; window on the right side
-  (add-to-list
-   'display-buffer-alist
-   `(,mw-thesaurus-buffer-name
-     (display-buffer-reuse-window
-      display-buffer-in-direction)
-     (direction . right)
-     (window . root)
-     (window-width . 0.3))))
-#+END_SRC
+* Spellchecking
+#+begin_src elisp
+(setq ispell-program-name "hunspell")
+(setq ispell-hunspell-dict-paths-alist '(("en_US" "/Users/ismailefetop/.config/dict/en_US.aff")))
+(setq ispell-local-dictionary "en_US")
+(setq ispell-local-dictionary-alist '(("en_US" "[[:alpha:]]" "[^[:alpha:]]" "[']" nil ("-d" "en_US") nil utf-8)))
+(flyspell-mode 1)
+#+end_src
 
 * After Save hook
 #+begin_src elisp
@@ -542,5 +546,15 @@ brew services start d12frosted/emacs-plus/emacs-plus@29
 
 * Testing
 #+begin_src elisp
-
+ (use-package ox-pandoc
+        :after ox)
+;; default options for all output formats
+(setq org-pandoc-options '((standalone . t)))
+;; cancel above settings only for 'docx' format
+(setq org-pandoc-options-for-docx '((standalone . nil)))
+;; special settings for beamer-pdf and latex-pdf exporters
+(setq org-pandoc-options-for-beamer-pdf '((pdf-engine . "xelatex")))
+(setq org-pandoc-options-for-latex-pdf '((pdf-engine . "pdflatex")))
+;; special extensions for markdown_github output
+(setq org-pandoc-format-extensions '(markdown_github+pipe_tables+raw_html))
 #+end_src

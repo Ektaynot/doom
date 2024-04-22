@@ -242,6 +242,10 @@
 
 (set-file-template! "\\.org$" :trigger "__orgtemplate.org" :mode 'org-mode)
 
+(setq yas-snippet-dirs
+      '("~/.config/doom/snippets/yasnippets/"                 ;; personal snippets
+        ))
+
 (setq browse-url-mailto-function 'browse-url-generic)
 (setq browse-url-generic-program "open")
 
@@ -290,14 +294,12 @@
 ;; Add the function to the Emacs startup hook
 (add-hook 'emacs-startup-hook 'rectangle-maximize)
 
- (use-package ox-pandoc
-        :after ox)
-;; default options for all output formats
-(setq org-pandoc-options '((standalone . t)))
-;; cancel above settings only for 'docx' format
-(setq org-pandoc-options-for-docx '((standalone . nil)))
-;; special settings for beamer-pdf and latex-pdf exporters
-(setq org-pandoc-options-for-beamer-pdf '((pdf-engine . "xelatex")))
-(setq org-pandoc-options-for-latex-pdf '((pdf-engine . "pdflatex")))
-;; special extensions for markdown_github output
-(setq org-pandoc-format-extensions '(markdown_github+pipe_tables+raw_html))
+(defun my/org-tab-conditional ()
+  (interactive)
+  (if (yas-active-snippets)
+      (yas-next-field-or-maybe-expand)
+    (org-cycle)))
+
+(map! :after evil-org
+      :map evil-org-mode-map
+      :i "<tab>" #'my/org-tab-conditional)

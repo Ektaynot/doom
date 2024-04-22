@@ -401,6 +401,13 @@
 (set-file-template! "\\.org$" :trigger "__orgtemplate.org" :mode 'org-mode)
 #+end_src
 
+** Yassnippets
+#+begin_src elisp
+(setq yas-snippet-dirs
+      '("~/.config/doom/snippets/yasnippets/"                 ;; personal snippets
+        ))
+#+end_src
+
 * Defaults
 ** Email Client
 #+begin_src elisp
@@ -546,6 +553,19 @@ brew services start d12frosted/emacs-plus/emacs-plus@29
 
 * Testing
 #+begin_src elisp
+
+(defun my/org-tab-conditional ()
+  (interactive)
+  (if (yas-active-snippets)
+      (yas-next-field-or-maybe-expand)
+    (org-cycle)))
+
+(map! :after evil-org
+      :map evil-org-mode-map
+      :i "<tab>" #'my/org-tab-conditional)
+#+end_src
+
+#+begin_src elisp :tangle no
  (use-package ox-pandoc
         :after ox)
 ;; default options for all output formats
@@ -557,4 +577,5 @@ brew services start d12frosted/emacs-plus/emacs-plus@29
 (setq org-pandoc-options-for-latex-pdf '((pdf-engine . "pdflatex")))
 ;; special extensions for markdown_github output
 (setq org-pandoc-format-extensions '(markdown_github+pipe_tables+raw_html))
+
 #+end_src

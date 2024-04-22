@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: #+begin_src elisp
+# uuid: esrc
+# key: elisp src
+# --
+#+begin_src elisp
+
+#+end_src

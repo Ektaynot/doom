@@ -15,7 +15,7 @@
 (package! super-save)
 (package! reveal-in-osx-finder)
 (package! elpher)
-
+(package! doom-snippets :ignore t)
 ;; unused
 
 ;;(package! org-ros)

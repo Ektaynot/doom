@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: print biblio
+# uuid: pbib
+# key: pbib
+# --
+
+* References
+#+print_bibliography:

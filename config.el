@@ -60,7 +60,7 @@
 
 (define-key evil-normal-state-map "ç" 'ispell)
 (define-key evil-normal-state-map "ö" 'ispell-word)
-(define-key evil-normal-state-map "ş" 'google-current-word)
+(define-key evil-normal-state-map "ş" 'efe/google-current-word)
 (define-key evil-normal-state-map "ğ" 'efe/tureng-english)
 (define-key evil-normal-state-map "ü" 'efe/tureng-turkish)
 
@@ -109,7 +109,7 @@
 (add-hook 'org-mode-hook 'org-auto-tangle-mode)
 
 ;; below code is fixed by u/Aminumbra
-(defun google-current-word ()
+(defun efe/google-current-word ()
   "Search the current word on Google using browse-url."
   (interactive)
   (let ((word (thing-at-point 'word)))
@@ -117,7 +117,7 @@
         (browse-url (concat "https://www.google.com/search?q=" word))
       (message "No word found at point."))))
 
-(defun open-finder-and-copy-path ()
+(defun efe/open-finder-and-copy-path ()
   "Open Finder and copy the selected file's path."
   (interactive)
   (let ((file-path (read-file-name "Select a file: ")))
@@ -127,29 +127,6 @@
 (defun close-all-buffers ()
 (interactive)
   (mapc 'kill-buffer (buffer-list)))
-
-(defun efe/reading-mode ()
-  "Toggle reading mode."
-  (interactive)
-  (hide-mode-line-mode +1)
-  ;; (load-theme 'kanagawa)
-  (olivetti-mode)
-  ;; (setq hl-line-mode nil)
-  (menu-bar--display-line-numbers-mode-none))
-(global-set-key (kbd "C-ö") 'efe/reading-mode)
-
-(defun efe/undo-reading-mode ()
-  "undo reading mode."
-  (interactive)
-  ;; (disable-theme 'kanagawa)
-
-  ;; (load-theme 'doom-dracula t)
-
-  (hide-mode-line-mode -1)
-  (setq olivetti-mode nil)
-  ;; (setq hl-line-mode t)
-  (menu-bar--display-line-numbers-mode-absolute))
-(global-set-key (kbd "C-ç") 'efe/undo-reading-mode)
 
 (defun efe/export-to-docx ()
   "Output to docx using pandoc-mode"
@@ -188,6 +165,7 @@
   (insert "#+END_EXPORT\n"))
 
 (defun efe/term2anki (file)
+  "Turn org notes into csv files that anki can read."
   (interactive "FExport notes to: ")
   (let ((regex (rx bol (in "+-") " " (group (1+ nonl)) ": " (group (1+ nonl))))
         (buf (find-file-noselect file))
@@ -204,7 +182,7 @@
       (kill-buffer buf)
       (message "Export done."))))
 
-(defun remove-leading-spaces ()
+(defun efe/remove-leading-spaces ()
   "Remove leading spaces until the first non-space character of each line."
   (interactive)
   (save-excursion

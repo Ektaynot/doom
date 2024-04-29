@@ -19,15 +19,13 @@
 (setq bookmark-search-delay 0.0)
 (setq mouse-scroll-delay 0.0)
 
-;disable backup
- (setq backup-inhibited t)
-;disable auto save
- (setq auto-save-default nil)
+(setq auto-save-default nil)
+
+(setq backup-inhibited t)
 
 (setq confirm-kill-processes nil)
 
-(global-set-key (kbd "C-+") 'text-scale-increase)
-(global-set-key (kbd "C--") 'text-scale-decrease)
+
 
 (setq doom-modeline-enable-word-count t)
 
@@ -58,6 +56,18 @@
 
 (add-hook 'text-mode-hook 'olivetti-mode)
 
+(global-set-key (kbd "C-+") 'text-scale-increase)
+(global-set-key (kbd "C--") 'text-scale-decrease)
+
+(define-key evil-normal-state-map "ç" 'ispell)
+(define-key evil-normal-state-map "ö" 'ispell-word)
+(define-key evil-normal-state-map "ş" 'efe/google-current-word)
+(define-key evil-normal-state-map "ğ" 'efe/tureng-english)
+(define-key evil-normal-state-map "ü" 'efe/tureng-turkish)
+
+(global-set-key (kbd "C-+") 'text-scale-increase)
+(global-set-key (kbd "C--") 'text-scale-decrease)
+
 (define-key evil-normal-state-map "ç" 'ispell)
 (define-key evil-normal-state-map "ö" 'ispell-word)
 (define-key evil-normal-state-map "ş" 'efe/google-current-word)
@@ -67,6 +77,8 @@
 (setq pandoc-binary "/opt/homebrew/bin/pandoc")
 
 (setq pandoc-data-dir "/Users/ismailefetop/.config/doom/etc/pandoc/")
+
+(setq custom-safe-themes t)
 
 (setq org-directory "~/.orgs/org/")
 
@@ -108,8 +120,8 @@
 
 (add-hook 'org-mode-hook 'org-auto-tangle-mode)
 
-;; below code is fixed by u/Aminumbra
 (defun efe/google-current-word ()
+  ;; initially written by chatgpt but later modified by u/Aminumbra
   "Search the current word on Google using browse-url."
   (interactive)
   (let ((word (thing-at-point 'word)))
@@ -118,6 +130,7 @@
       (message "No word found at point."))))
 
 (defun efe/open-finder-and-copy-path ()
+  ;; probably written by chatgpt
   "Open Finder and copy the selected file's path."
   (interactive)
   (let ((file-path (read-file-name "Select a file: ")))
@@ -128,15 +141,8 @@
 (interactive)
   (mapc 'kill-buffer (buffer-list)))
 
-(defun efe/export-to-docx ()
-  "Output to docx using pandoc-mode"
-  (interactive)
-  (pandoc-mode)
-  (execute-kbd-macro (kbd "C-c / O W d b b r"))
-  (setq pandoc-mode nil)
-  )
-
 (defun efe/insert-html-blog-template ()
+  ;; Written by ChatGPT
   "Inserts HTML_HEAD lines at the first empty line and html code at the end of the buffer."
   (interactive)
   (save-excursion
@@ -165,6 +171,7 @@
   (insert "#+END_EXPORT\n"))
 
 (defun efe/term2anki (file)
+  ;; thought by ismailefetop, code by u/cottasteel
   "Turn org notes into csv files that anki can read."
   (interactive "FExport notes to: ")
   (let ((regex (rx bol (in "+-") " " (group (1+ nonl)) ": " (group (1+ nonl))))
@@ -183,6 +190,7 @@
       (message "Export done."))))
 
 (defun efe/remove-leading-spaces ()
+  ;; Written by ChatGPT
   "Remove leading spaces until the first non-space character of each line."
   (interactive)
   (save-excursion
@@ -194,6 +202,7 @@
       (forward-line))))
 
 (defun efe/tureng-turkish ()
+  ;; Written by ChatGPT
   "Translate the word at point using tureng program."
   (interactive)
   (let ((word (thing-at-point 'word)))
@@ -203,6 +212,7 @@
       (message "No word found at point."))))
 
 (defun efe/tureng-english ()
+  ;; Written by ChatGPT
   "Translate the word at point using tureng program."
   (interactive)
   (let ((word (thing-at-point 'word)))
@@ -212,11 +222,21 @@
       (message "No word found at point."))))
 
 (defun efe/insert-elisp-src-block ()
+  ;; Written by ChatGPT
   "Inserts a two-line emacs lisp source block."
   (interactive)
   (insert "\n#+begin_src elisp\n\n")
   (save-excursion
     (insert "#+end_src\n")))
+
+(defun efe/open-in-vscode ()
+  ;; Written by ChatGPT
+  "Open the current file in Visual Studio Code."
+  (interactive)
+  (let ((file-path (buffer-file-name)))
+    (if file-path
+        (shell-command (format "code %s" (shell-quote-argument file-path)))
+      (message "Buffer is not visiting a file"))))
 
 (set-file-template! "\\.org$" :trigger "__orgtemplate.org" :mode 'org-mode)
 

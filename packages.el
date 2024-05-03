@@ -16,6 +16,8 @@
 (package! reveal-in-osx-finder)
 (package! elpher)
 (package! doom-snippets :ignore t)
+(package! elisp-benchmarks)
+
 ;; unused
 
 ;;(package! org-ros)

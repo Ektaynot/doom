@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: #+begin_src shell
+# uuid: shell_src
+# key: shell src
+# --
+#+begin_src shell
+
+#+end_src

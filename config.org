@@ -147,22 +147,14 @@
 #+begin_src elisp
 (global-set-key (kbd "C-+") 'text-scale-increase)
 (global-set-key (kbd "C--") 'text-scale-decrease)
-
-(define-key evil-normal-state-map "ç" 'ispell)
-(define-key evil-normal-state-map "ö" 'ispell-word)
-(define-key evil-normal-state-map "ş" 'efe/google-current-word)
-(define-key evil-normal-state-map "ğ" 'efe/tureng-english)
-(define-key evil-normal-state-map "ü" 'efe/tureng-turkish)
 #+end_src
 
 ** Evil
 #+begin_src elisp
-(global-set-key (kbd "C-+") 'text-scale-increase)
-(global-set-key (kbd "C--") 'text-scale-decrease)
-
 (define-key evil-normal-state-map "ç" 'ispell)
 (define-key evil-normal-state-map "ö" 'ispell-word)
 (define-key evil-normal-state-map "ş" 'efe/google-current-word)
+(define-key evil-normal-state-map "Ş" 'efe/first-result-url)
 (define-key evil-normal-state-map "ğ" 'efe/tureng-english)
 (define-key evil-normal-state-map "ü" 'efe/tureng-turkish)
 #+end_src
@@ -268,6 +260,20 @@
     (if word
         (browse-url (concat "https://www.google.com/search?q=" word))
       (message "No word found at point."))))
+#+end_src
+
+** Get the first result
+#+begin_src elisp
+(defun efe/first-result-url ()
+  ;; Written by ChatGPT
+  "Get the first url from a google search."
+  (interactive)
+  (let ((word (thing-at-point 'word)))
+    (if word
+        (let ((output (shell-command-to-string (format "firstresult -w %s" word))))
+          (message output))
+      (message "No word found at point."))))
+
 #+end_src
 
 ** Copy Path Function :mac:
@@ -539,5 +545,4 @@
 
 * Testing
 #+begin_src elisp
-
 #+end_src

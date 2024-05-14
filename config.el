@@ -303,6 +303,7 @@
   (call-process-shell-command "open -g 'rectangle://execute-action?name=maximize'" nil 0))
 
 ;; Add the function to the Emacs startup hook
+(add-hook 'window-setup-hook 'toggle-frame-maximized t)
 (add-hook 'emacs-startup-hook 'rectangle-maximize)
 
 (defun er-auto-create-missing-dirs ()

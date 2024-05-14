@@ -455,6 +455,20 @@
       (message "Buffer is not visiting a file"))))
 #+end_src
 
+** Open Project in VSCode
+#+begin_src elisp
+(defun efe/open-project-in-vscode ()
+  ;; Written by ChatGPT
+  "Open the doom-project directory in VSCode."
+  (interactive)
+  (let ((project-root doom-modeline--project-root))
+    (if project-root
+        (progn
+          (shell-command (concat "code " (shell-quote-argument project-root)))
+          (message "Opened %s in VSCode" project-root))
+      (message "No project root found in doom-modeline--project-root"))))
+#+end_src
+
 * Snippet Templates
 ** Week Templates
 #+begin_src elisp
@@ -543,6 +557,16 @@
 (add-hook 'emacs-startup-hook 'rectangle-maximize)
 #+end_src
 
+** Auto-create Missing Directories
+[[https://emacsredux.com/blog/2022/06/12/auto-create-missing-directories/][Emacs Redux Article]]
+#+begin_src elisp
+(defun er-auto-create-missing-dirs ()
+  (let ((target-dir (file-name-directory buffer-file-name)))
+    (unless (file-exists-p target-dir)
+      (make-directory target-dir t))))
+
+(add-to-list 'find-file-not-found-functions #'er-auto-create-missing-dirs)
+#+end_src
 * Testing
 #+begin_src elisp
 #+end_src

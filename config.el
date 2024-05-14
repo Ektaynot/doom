@@ -240,6 +240,17 @@
         (shell-command (format "code %s" (shell-quote-argument file-path)))
       (message "Buffer is not visiting a file"))))
 
+(defun efe/open-project-in-vscode ()
+  ;; Written by ChatGPT
+  "Open the doom-project directory in VSCode."
+  (interactive)
+  (let ((project-root doom-modeline--project-root))
+    (if project-root
+        (progn
+          (shell-command (concat "code " (shell-quote-argument project-root)))
+          (message "Opened %s in VSCode" project-root))
+      (message "No project root found in doom-modeline--project-root"))))
+
 (set-file-template! "\\.org$" :trigger "__orgtemplate.org" :mode 'org-mode)
 
 (setq yas-snippet-dirs
@@ -293,5 +304,12 @@
 
 ;; Add the function to the Emacs startup hook
 (add-hook 'emacs-startup-hook 'rectangle-maximize)
+
+(defun er-auto-create-missing-dirs ()
+  (let ((target-dir (file-name-directory buffer-file-name)))
+    (unless (file-exists-p target-dir)
+      (make-directory target-dir t))))
+
+(add-to-list 'find-file-not-found-functions #'er-auto-create-missing-dirs)
 
 

@@ -17,7 +17,7 @@
 (package! elpher)
 (package! doom-snippets :ignore t)
 (package! elisp-benchmarks)
-
+(package! crux)
 ;; unused
 
 ;;(package! org-ros)

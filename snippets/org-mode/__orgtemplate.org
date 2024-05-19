@@ -1,4 +1,4 @@
-#+title: `(file-name-base (buffer-file-name))`
+#+TITLE: `(file-name-base (buffer-file-name))`
 #+AUTHOR: `(user-full-name)`
 #+DATE: `(format-time-string "%Y-%m-%d")`
 #+LANGUAGE: en

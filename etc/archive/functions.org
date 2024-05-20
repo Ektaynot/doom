@@ -58,3 +58,8 @@
   (save-excursion
     (insert "#+end_src\n")))
 #+end_src
+
+* Set custom splash-screen image
+#+begin_src elisp :tangle no
+(setq fancy-splash-image "/Users/ismailefetop/.config/doom/etc/icons/svg/emacs_vtuber.svg")
+#+end_src

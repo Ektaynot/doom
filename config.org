@@ -89,10 +89,14 @@ In doom dashboard, leave only the splash image
 (setq use-dialog-box nil)'
 #+end_src
 
-** Calendar
-*** Make calendar start on monday
+** Make calendar start on monday
 #+begin_src elisp
 (setq calendar-week-start-day 1)
+#+end_src
+
+** Automatically updating feed when opening elfeed
+#+begin_src elisp :tangle no
+(add-hook! 'elfeed-search-mode-hook #'elfeed-update)
 #+end_src
 
 ** Bib Locations

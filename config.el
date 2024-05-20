@@ -25,8 +25,6 @@
 
 (setq confirm-kill-processes nil)
 
-
-
 (setq doom-modeline-enable-word-count t)
 
 (setq display-line-numbers-type nil)
@@ -41,6 +39,8 @@
 (setq! bibtex-completion-bibliography '("/Users/ismailefetop/uni/citation/bib.bib"))
 (setq! citar-bibliography '("/Users/ismailefetop/uni/citation/bib.bib"))
 (setq org-cite-csl-styles-dir "/Users/ismailefetop/uni/citation/styles/")
+
+(setq org-image-actual-width nil)
 
 (super-save-mode +1)
 
@@ -131,17 +131,13 @@
           (message output))
       (message "No word found at point."))))
 
-(defun efe/open-finder-and-copy-path ()
-  ;; probably written by chatgpt
-  "Open Finder and copy the selected file's path."
+(defun efe/select-and-copy-file-path ()
+  ;; Written by chatgpt
+  "Copy the selected file's path."
   (interactive)
   (let ((file-path (read-file-name "Select a file: ")))
     (kill-new file-path)
     (message "Copied file path: %s" file-path)
-    (start-process "finder" nil "open" "-R" file-path)))
-(defun close-all-buffers ()
-(interactive)
-  (mapc 'kill-buffer (buffer-list)))
 
 (defun efe/insert-html-blog-template ()
   ;; Written by ChatGPT
@@ -223,14 +219,6 @@
           (message output))
       (message "No word found at point."))))
 
-(defun efe/insert-elisp-src-block ()
-  ;; Written by ChatGPT
-  "Inserts a two-line emacs lisp source block."
-  (interactive)
-  (insert "\n#+begin_src elisp\n\n")
-  (save-excursion
-    (insert "#+end_src\n")))
-
 (defun efe/open-in-vscode ()
   ;; Written by ChatGPT
   "Open the current file in Visual Studio Code."
@@ -281,8 +269,7 @@
 (setq ispell-local-dictionary-alist '(("en_US" "[[:alpha:]]" "[^[:alpha:]]" "[']" nil ("-d" "en_US") nil utf-8)))
 (flyspell-mode 1)
 
-(add-hook 'after-save-hook
-          'executable-make-buffer-file-executable-if-script-p)
+(add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
 
 (after! gcmh
   (setq gcmh-high-cons-threshold (* 64 1048576)))
@@ -295,7 +282,12 @@
 (setq ring-bell-function 'ignore)
 (setq set-message-beep 'silent)
 
-(setq org-image-actual-width nil)
+(defun er-auto-create-missing-dirs ()
+  (let ((target-dir (file-name-directory buffer-file-name)))
+    (unless (file-exists-p target-dir)
+      (make-directory target-dir t))))
+
+(add-to-list 'find-file-not-found-functions #'er-auto-create-missing-dirs)
 
 ;; Requires the mac app Rectangle to function.
 (defun rectangle-maximize ()
@@ -305,12 +297,5 @@
 ;; Add the function to the Emacs startup hook
 (add-hook 'window-setup-hook 'toggle-frame-maximized t)
 (add-hook 'emacs-startup-hook 'rectangle-maximize)
-
-(defun er-auto-create-missing-dirs ()
-  (let ((target-dir (file-name-directory buffer-file-name)))
-    (unless (file-exists-p target-dir)
-      (make-directory target-dir t))))
-
-(add-to-list 'find-file-not-found-functions #'er-auto-create-missing-dirs)
 
 

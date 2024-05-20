@@ -74,10 +74,6 @@
 (setq confirm-kill-processes nil)
 #+end_src
 
-** Zoom
-#+begin_src elisp
-#+END_SRC
-
 ** Enable Word Count
 #+begin_src elisp
 (setq doom-modeline-enable-word-count t)
@@ -110,6 +106,11 @@
 (setq! bibtex-completion-bibliography '("/Users/ismailefetop/uni/citation/bib.bib"))
 (setq! citar-bibliography '("/Users/ismailefetop/uni/citation/bib.bib"))
 (setq org-cite-csl-styles-dir "/Users/ismailefetop/uni/citation/styles/")
+#+end_src
+
+** Make images adjust to width
+#+begin_src elisp
+(setq org-image-actual-width nil)
 #+end_src
 
 ** Super-save
@@ -278,62 +279,14 @@
 
 ** Copy Path Function :mac:
 #+begin_src elisp
-(defun efe/open-finder-and-copy-path ()
-  ;; probably written by chatgpt
-  "Open Finder and copy the selected file's path."
+(defun efe/select-and-copy-file-path ()
+  ;; Written by chatgpt
+  "Copy the selected file's path."
   (interactive)
   (let ((file-path (read-file-name "Select a file: ")))
     (kill-new file-path)
     (message "Copied file path: %s" file-path)
-    (start-process "finder" nil "open" "-R" file-path)))
-(defun close-all-buffers ()
-(interactive)
-  (mapc 'kill-buffer (buffer-list)))
 #+END_SRC
-
-** Reading Mode
-#+begin_src elisp :tangle no
-(defun efe/reading-mode ()
-  ;; initially written by chatgpt, modified by ismailefetop
-  "Toggle reading mode."
-  (interactive)
-  (hide-mode-line-mode +1)
-  ;; (load-theme 'kanagawa)
-  (olivetti-mode)
-  ;; (setq hl-line-mode nil)
-  (menu-bar--display-line-numbers-mode-none))
-(global-set-key (kbd "C-ö") 'efe/reading-mode)
-
-#+end_src
-
-** Undo Reading Mode
-#+begin_src elisp :tangle no
-(defun efe/undo-reading-mode ()
-  ;; initially written by chatgpt, modified by ismailefetop
-  "undo reading mode."
-  (interactive)
-  ;; (disable-theme 'kanagawa)
-
-  ;; (load-theme 'doom-dracula t)
-
-  (hide-mode-line-mode -1)
-  (setq olivetti-mode nil)
-  ;; (setq hl-line-mode t)
-  (menu-bar--display-line-numbers-mode-absolute))
-(global-set-key (kbd "C-ç") 'efe/undo-reading-mode)
-#+end_src
-
-** Export to docx
-#+begin_src elisp :tangle no
-(defun efe/export-to-docx ()
-  ;; Written by ismailefetop
-  "Output to docx using pandoc-mode"
-  (interactive)
-  (pandoc-mode)
-  (execute-kbd-macro (kbd "C-c / O W d b b r"))
-  (setq pandoc-mode nil)
-  )
-#+end_src
 
 ** Blog Html Insert
 #+begin_src elisp
@@ -432,17 +385,6 @@
       (message "No word found at point."))))
 #+end_src
 
-** Insert Elisp Source Block
-#+begin_src elisp
-(defun efe/insert-elisp-src-block ()
-  ;; Written by ChatGPT
-  "Inserts a two-line emacs lisp source block."
-  (interactive)
-  (insert "\n#+begin_src elisp\n\n")
-  (save-excursion
-    (insert "#+end_src\n")))
-#+end_src
-
 ** Open in VSCode
 #+begin_src elisp
 (defun efe/open-in-vscode ()
@@ -470,12 +412,14 @@
 #+end_src
 
 * Snippet Templates
-** Week Templates
+** Default Org Template
+This line makes the insides of __orgtemplate.org file append on every newly created org file.
+
 #+begin_src elisp
 (set-file-template! "\\.org$" :trigger "__orgtemplate.org" :mode 'org-mode)
 #+end_src
 
-** Yassnippets
+** Yassnippets Directory
 #+begin_src elisp
 (setq yas-snippet-dirs
       '("~/.config/doom/snippets/yasnippets/"                 ;; personal snippets
@@ -508,6 +452,8 @@
 #+END_SRC
 
 * Spellchecking
+Here is the [[https://web.archive.org/web/20240520082706/https://old.reddit.com/r/emacs/comments/dgj0ae/tutorial_spellchecking_with_hunspell_170_for/][tutorial I followed]].
+
 #+begin_src elisp
 (setq ispell-program-name "hunspell")
 (setq ispell-hunspell-dict-paths-alist '(("en_US" "/Users/ismailefetop/.config/dict/en_US.aff")))
@@ -517,9 +463,10 @@
 #+end_src
 
 * After Save hook
+[[https://www.masteringemacs.org/article/script-files-executable-automatically][Mastering Emacs article.]]
+
 #+begin_src elisp
-(add-hook 'after-save-hook
-          'executable-make-buffer-file-executable-if-script-p)
+(add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
 #+end_src
 
 * Garbage collection
@@ -539,10 +486,15 @@
 (setq set-message-beep 'silent)
 #+end_src
 
-* Presentation
-** Make images adjust to width
+* Auto-create Missing Directories
+[[https://emacsredux.com/blog/2022/06/12/auto-create-missing-directories/][Emacs Redux Article]]
 #+begin_src elisp
-(setq org-image-actual-width nil)
+(defun er-auto-create-missing-dirs ()
+  (let ((target-dir (file-name-directory buffer-file-name)))
+    (unless (file-exists-p target-dir)
+      (make-directory target-dir t))))
+
+(add-to-list 'find-file-not-found-functions #'er-auto-create-missing-dirs)
 #+end_src
 
 * Startup
@@ -556,17 +508,6 @@
 ;; Add the function to the Emacs startup hook
 (add-hook 'window-setup-hook 'toggle-frame-maximized t)
 (add-hook 'emacs-startup-hook 'rectangle-maximize)
-#+end_src
-
-** Auto-create Missing Directories
-[[https://emacsredux.com/blog/2022/06/12/auto-create-missing-directories/][Emacs Redux Article]]
-#+begin_src elisp
-(defun er-auto-create-missing-dirs ()
-  (let ((target-dir (file-name-directory buffer-file-name)))
-    (unless (file-exists-p target-dir)
-      (make-directory target-dir t))))
-
-(add-to-list 'find-file-not-found-functions #'er-auto-create-missing-dirs)
 #+end_src
 
 * Testing

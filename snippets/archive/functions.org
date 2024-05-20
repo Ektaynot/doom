@@ -1,0 +1,60 @@
+#+TITLE: functions
+#+AUTHOR: İsmail Efe Top
+#+DATE: 2024-05-20
+#+LANGUAGE: en
+#+DESCRIPTION:
+
+* Reading Mode
+#+begin_src elisp :tangle no
+(defun efe/reading-mode ()
+  ;; initially written by chatgpt, modified by ismailefetop
+  "Toggle reading mode."
+  (interactive)
+  (hide-mode-line-mode +1)
+  ;; (load-theme 'kanagawa)
+  (olivetti-mode)
+  ;; (setq hl-line-mode nil)
+  (menu-bar--display-line-numbers-mode-none))
+(global-set-key (kbd "C-ö") 'efe/reading-mode)
+
+#+end_src
+
+* Undo Reading Mode
+#+begin_src elisp :tangle no
+(defun efe/undo-reading-mode ()
+  ;; initially written by chatgpt, modified by ismailefetop
+  "undo reading mode."
+  (interactive)
+  ;; (disable-theme 'kanagawa)
+
+  ;; (load-theme 'doom-dracula t)
+
+  (hide-mode-line-mode -1)
+  (setq olivetti-mode nil)
+  ;; (setq hl-line-mode t)
+  (menu-bar--display-line-numbers-mode-absolute))
+(global-set-key (kbd "C-ç") 'efe/undo-reading-mode)
+#+end_src
+
+* Export to docx
+#+begin_src elisp :tangle no
+(defun efe/export-to-docx ()
+  ;; Written by ismailefetop
+  "Output to docx using pandoc-mode"
+  (interactive)
+  (pandoc-mode)
+  (execute-kbd-macro (kbd "C-c / O W d b b r"))
+  (setq pandoc-mode nil)
+  )
+#+end_src
+
+* Insert Elisp Source Block
+#+begin_src elisp
+(defun efe/insert-elisp-src-block ()
+  ;; Written by ChatGPT
+  "Inserts a two-line emacs lisp source block."
+  (interactive)
+  (insert "\n#+begin_src elisp\n\n")
+  (save-excursion
+    (insert "#+end_src\n")))
+#+end_src

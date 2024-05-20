@@ -285,7 +285,7 @@
   (interactive)
   (let ((file-path (read-file-name "Select a file: ")))
     (kill-new file-path)
-    (message "Copied file path: %s" file-path)
+    (message "Copied file path: %s" file-path)))
 #+END_SRC
 
 ** Blog Html Insert

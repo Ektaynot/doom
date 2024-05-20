@@ -137,7 +137,7 @@
   (interactive)
   (let ((file-path (read-file-name "Select a file: ")))
     (kill-new file-path)
-    (message "Copied file path: %s" file-path)
+    (message "Copied file path: %s" file-path)))
 
 (defun efe/insert-html-blog-template ()
   ;; Written by ChatGPT

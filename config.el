@@ -33,11 +33,9 @@
 
 (setq calendar-week-start-day 1)
 
-(setq olivetti-body-width 94)
-
 (setq org-cite-global-bibliography '("/Users/ismailefetop/uni/citation/bib.bib"))
-(setq! bibtex-completion-bibliography '("/Users/ismailefetop/uni/citation/bib.bib"))
-(setq! citar-bibliography '("/Users/ismailefetop/uni/citation/bib.bib"))
+(setq bibtex-completion-bibliography '("/Users/ismailefetop/uni/citation/bib.bib"))
+(setq citar-bibliography '("/Users/ismailefetop/uni/citation/bib.bib"))
 (setq org-cite-csl-styles-dir "/Users/ismailefetop/uni/citation/styles/")
 
 (setq org-image-actual-width nil)
@@ -56,6 +54,8 @@
 
 (add-hook 'text-mode-hook 'olivetti-mode)
 
+(setq olivetti-body-width 94)
+
 (global-set-key (kbd "C-+") 'text-scale-increase)
 (global-set-key (kbd "C--") 'text-scale-decrease)
 
@@ -69,8 +69,6 @@
 (setq pandoc-binary "/opt/homebrew/bin/pandoc")
 
 (setq pandoc-data-dir "/Users/ismailefetop/.config/doom/etc/pandoc/")
-
-(setq custom-safe-themes t)
 
 (setq org-directory "~/.orgs/org/")
 
@@ -294,7 +292,6 @@
   "Execute a shell command when Emacs starts."
   (call-process-shell-command "open -g 'rectangle://execute-action?name=maximize'" nil 0))
 
-;; Add the function to the Emacs startup hook
 (add-hook 'window-setup-hook 'toggle-frame-maximized t)
 (add-hook 'emacs-startup-hook 'rectangle-maximize)
 

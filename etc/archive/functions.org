@@ -63,3 +63,8 @@
 #+begin_src elisp :tangle no
 (setq fancy-splash-image "/Users/ismailefetop/.config/doom/etc/icons/Emacs-logo.svg.png")
 #+end_src
+
+* Trust new themes
+#+begin_src elisp
+(setq custom-safe-themes t)
+#+end_src

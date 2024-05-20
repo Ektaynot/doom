@@ -1,4 +1,4 @@
-;;; ~/.config/doom/config.el -*- lexical-binding: t; -*-
+;;; config.el -*- lexical-binding: t; -*-
 
 (setq user-full-name "İsmail Efe Top"
       user-mail-address "ismailefetop@gmail.com")

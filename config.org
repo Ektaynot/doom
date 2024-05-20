@@ -7,7 +7,7 @@
 * One Liners
 ** Lexical Binding
 #+begin_src elisp
-;;; ~/.config/doom/config.el -*- lexical-binding: t; -*-
+;;; config.el -*- lexical-binding: t; -*-
 #+end_src
 
 ** My contact information
@@ -27,11 +27,6 @@
 #+begin_src elisp
 (setq doom-theme 'kanagawa)
 #+END_SRC
-
-** Set custom splash-screen image
-#+begin_src elisp :tangle no
-(setq fancy-splash-image "/Users/ismailefetop/.config/doom/etc/icons/svg/emacs_vtuber.svg")
-#+end_src
 
 ** Font
 #+begin_src elisp

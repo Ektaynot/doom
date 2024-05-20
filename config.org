@@ -7,7 +7,7 @@
 * One Liners
 ** Lexical Binding
 #+begin_src elisp
-;;; config.el -*- lexical-binding: t; -*-
+;;; ~/.config/doom/config.el -*- lexical-binding: t; -*-
 #+end_src
 
 ** My contact information

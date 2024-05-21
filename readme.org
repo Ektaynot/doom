@@ -1,0 +1,12 @@
+* İsmail Efe's Doom Config
+
+This config is mostly focused on writing improvements. It uses a literate config. You can check what everything does and why it does that certain thing in [[https://github.com/Ektaynot/doom/blob/master/config.org][config.org]]. Couple of things about my config are
+
+- [[https://github.com/rnkn/olivetti][Olivetti]] Mode enabled on text modes
+- Automatic resizing thanks to [[https://rectangleapp.com/][rectangle]]
+- Autosave thanks to [[https://github.com/bbatsov/super-save][supersave]]
+- Removed line numbers and hl-line-mode
+- Spellcheck that uses Hunspell, tutorial [[https://web.archive.org/web/20240520082706/https://old.reddit.com/r/emacs/comments/dgj0ae/tutorial_spellchecking_with_hunspell_170_for/][here]]
+
+
+Feel free to give me feedback with [[mailto:ismailefetop@gmail.com][email]]

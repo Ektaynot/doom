@@ -1,6 +1,6 @@
 * İsmail Efe's Doom Config
 
-This config is mostly focused on writing improvements. It uses a literate config. You can check what everything does and why it does that certain thing in [[https://github.com/Ektaynot/doom/blob/master/config.org][config.org]]. Couple of things about my config are
+This is a [[https://github.com/doomemacs/doomemacs][Doom Emacs]] config and is mostly focused on writing improvements. It uses a literate config. You can check what everything does and why it does that certain thing in [[https://github.com/Ektaynot/doom/blob/master/config.org][config.org]]. Couple of things about my config are
 
 - [[https://github.com/rnkn/olivetti][Olivetti]] Mode enabled on text modes
 - Automatic resizing thanks to [[https://rectangleapp.com/][rectangle]]
@@ -8,5 +8,10 @@ This config is mostly focused on writing improvements. It uses a literate config
 - Removed line numbers and hl-line-mode
 - Spellcheck that uses Hunspell, tutorial [[https://web.archive.org/web/20240520082706/https://old.reddit.com/r/emacs/comments/dgj0ae/tutorial_spellchecking_with_hunspell_170_for/][here]]
 
+** Installation
 
-Feel free to give me feedback with [[mailto:ismailefetop@gmail.com][email]]
+If you are on MacOS, all you have to do is clone this repo to your .config folder. If you are on Linux or Windows, take a look at the config.org and remove anything that has :mac: tag or you deem is related to mac and then clone it into your .config folder.
+
+** Reach out to me
+
+Feel free to give me feedback or suggestions via [[mailto:ismailefetop@gmail.com][email]]

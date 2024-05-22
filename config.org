@@ -89,7 +89,7 @@ In doom dashboard, leave only the splash image
 (setq use-dialog-box nil)'
 #+end_src
 
-** Make calendar start on monday
+** Make calendar start on Monday
 #+begin_src elisp
 (setq calendar-week-start-day 1)
 #+end_src
@@ -446,7 +446,6 @@ This line makes the insides of __orgtemplate.org file append on every newly crea
         ("\\.epub\\'" "open" (file))
         ;; ("\\.svg\\'" "open" (file))
         ("\\.gif\\'" "open" (file))
-        ;; Add more image formats as needed
         ))
 #+END_SRC
 

@@ -258,7 +258,6 @@
         ("\\.epub\\'" "open" (file))
         ;; ("\\.svg\\'" "open" (file))
         ("\\.gif\\'" "open" (file))
-        ;; Add more image formats as needed
         ))
 
 (setq ispell-program-name "hunspell")

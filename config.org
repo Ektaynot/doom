@@ -86,7 +86,7 @@ In doom dashboard, leave only the splash image
 
 ** Disable unnecessary new os windows
 #+begin_src elisp
-(setq use-dialog-box nil)'
+(setq use-dialog-box nil)
 #+end_src
 
 ** Make calendar start on Monday
@@ -467,12 +467,6 @@ Here is the [[https://web.archive.org/web/20240520082706/https://old.reddit.com/
 (add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
 #+end_src
 
-* Garbage collection
-#+begin_src elisp
-(after! gcmh
-  (setq gcmh-high-cons-threshold (* 64 1048576)))
-#+END_SRC
-
 * Make emacs silent
 #+begin_src elisp
 (setq byte-compile-warnings '(not obsolete))
@@ -509,4 +503,5 @@ Here is the [[https://web.archive.org/web/20240520082706/https://old.reddit.com/
 
 * Testing
 #+begin_src elisp
+
 #+end_src

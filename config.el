@@ -29,7 +29,7 @@
 
 (setq display-line-numbers-type nil)
 
-(setq use-dialog-box nil)'
+(setq use-dialog-box nil)
 
 (setq calendar-week-start-day 1)
 
@@ -267,9 +267,6 @@
 (flyspell-mode 1)
 
 (add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
-
-(after! gcmh
-  (setq gcmh-high-cons-threshold (* 64 1048576)))
 
 (setq byte-compile-warnings '(not obsolete))
 (setq warning-suppress-log-types '((comp) (bytecomp)))

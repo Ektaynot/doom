@@ -89,6 +89,11 @@ In doom dashboard, leave only the splash image
 (setq use-dialog-box nil)
 #+end_src
 
+** Deleted files to trash
+#+begin_src elisp
+(setq delete-by-moving-to-trash t)
+#+end_src
+
 ** Make calendar start on Monday
 #+begin_src elisp
 (setq calendar-week-start-day 1)

@@ -31,6 +31,8 @@
 
 (setq use-dialog-box nil)
 
+(setq delete-by-moving-to-trash t)
+
 (setq calendar-week-start-day 1)
 
 (setq org-cite-global-bibliography '("/Users/ismailefetop/uni/citation/bib.bib"))

@@ -17,7 +17,6 @@
 (package! elpher)
 (package! doom-snippets :ignore t)
 (package! crux)
-(package! jinx)
 
 ;; unused
 ;;(package! org-ros)

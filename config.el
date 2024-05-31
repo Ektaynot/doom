@@ -61,8 +61,8 @@
 (global-set-key (kbd "C-+") 'text-scale-increase)
 (global-set-key (kbd "C--") 'text-scale-decrease)
 
-(define-key evil-normal-state-map "ç" 'jinx-correct-all)
-(define-key evil-normal-state-map "ö" 'jinx-correct)
+(define-key evil-normal-state-map "ç" 'ispell)
+(define-key evil-normal-state-map "ö" 'ispell-word)
 (define-key evil-normal-state-map "Ö" 'evil-avy-goto-char-timer)
 (define-key evil-normal-state-map "ş" 'efe/google-current-word)
 (define-key evil-normal-state-map "Ş" 'efe/first-result-url)
@@ -242,8 +242,6 @@
 (setq ispell-local-dictionary "en_US")
 (setq ispell-local-dictionary-alist '(("en_US" "[[:alpha:]]" "[^[:alpha:]]" "[']" nil ("-d" "en_US") nil utf-8)))
 (flyspell-mode 1)
-
-(add-hook 'emacs-startup-hook #'global-jinx-mode)
 
 (add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
 

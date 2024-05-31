@@ -161,8 +161,8 @@ In doom dashboard, leave only the splash image
 
 ** Evil
 #+begin_src elisp
-(define-key evil-normal-state-map "ç" 'jinx-correct-all)
-(define-key evil-normal-state-map "ö" 'jinx-correct)
+(define-key evil-normal-state-map "ç" 'ispell)
+(define-key evil-normal-state-map "ö" 'ispell-word)
 (define-key evil-normal-state-map "Ö" 'evil-avy-goto-char-timer)
 (define-key evil-normal-state-map "ş" 'efe/google-current-word)
 (define-key evil-normal-state-map "Ş" 'efe/first-result-url)
@@ -465,12 +465,6 @@ Here is the [[https://web.archive.org/web/20240520082706/https://old.reddit.com/
 (setq ispell-local-dictionary-alist '(("en_US" "[[:alpha:]]" "[^[:alpha:]]" "[']" nil ("-d" "en_US") nil utf-8)))
 (flyspell-mode 1)
 #+end_src
-
-** Jinx
-#+begin_src elisp
-(add-hook 'emacs-startup-hook #'global-jinx-mode)
-#+end_src
-
 
 * After Save hook
 [[https://www.masteringemacs.org/article/script-files-executable-automatically][Mastering Emacs article.]]

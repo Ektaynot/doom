@@ -161,8 +161,9 @@ In doom dashboard, leave only the splash image
 
 ** Evil
 #+begin_src elisp
-(define-key evil-normal-state-map "ç" 'ispell)
-(define-key evil-normal-state-map "ö" 'ispell-word)
+(define-key evil-normal-state-map "ç" 'jinx-correct-all)
+(define-key evil-normal-state-map "ö" 'jinx-correct)
+(define-key evil-normal-state-map "Ö" 'evil-avy-goto-char-timer)
 (define-key evil-normal-state-map "ş" 'efe/google-current-word)
 (define-key evil-normal-state-map "Ş" 'efe/first-result-url)
 (define-key evil-normal-state-map "ğ" 'efe/tureng-english)
@@ -207,7 +208,7 @@ In doom dashboard, leave only the splash image
 #+end_src
 
 ** Set Agenda View
-#+begin_src elisp
+#+begin_src elisp :tangle no
 (after! org
   :config
   ;; to start the agende from the current day
@@ -220,7 +221,7 @@ In doom dashboard, leave only the splash image
 #+END_SRC
 
 ** Org Capture Templates :mac:
-#+begin_src elisp
+#+begin_src elisp :tangle no
 (after! org
   (setq org-capture-templates
         ;; Below lines are for school captures
@@ -465,6 +466,12 @@ Here is the [[https://web.archive.org/web/20240520082706/https://old.reddit.com/
 (flyspell-mode 1)
 #+end_src
 
+** Jinx
+#+begin_src elisp
+(add-hook 'emacs-startup-hook #'global-jinx-mode)
+#+end_src
+
+
 * After Save hook
 [[https://www.masteringemacs.org/article/script-files-executable-automatically][Mastering Emacs article.]]
 
@@ -508,5 +515,4 @@ Here is the [[https://web.archive.org/web/20240520082706/https://old.reddit.com/
 
 * Testing
 #+begin_src elisp
-
 #+end_src

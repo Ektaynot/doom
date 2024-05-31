@@ -61,8 +61,9 @@
 (global-set-key (kbd "C-+") 'text-scale-increase)
 (global-set-key (kbd "C--") 'text-scale-decrease)
 
-(define-key evil-normal-state-map "ç" 'ispell)
-(define-key evil-normal-state-map "ö" 'ispell-word)
+(define-key evil-normal-state-map "ç" 'jinx-correct-all)
+(define-key evil-normal-state-map "ö" 'jinx-correct)
+(define-key evil-normal-state-map "Ö" 'evil-avy-goto-char-timer)
 (define-key evil-normal-state-map "ş" 'efe/google-current-word)
 (define-key evil-normal-state-map "Ş" 'efe/first-result-url)
 (define-key evil-normal-state-map "ğ" 'efe/tureng-english)
@@ -83,32 +84,6 @@
         (todo   . " ")
         (tags   . " %i %-12:c")
         (search . " %i %-12:c")))
-
-(after! org
-  :config
-  ;; to start the agende from the current day
-  (setq org-agenda-start-on-weekday nil)
-  (setq org-agenda-start-day "+0d")
-  ;; set span 7
-  (setq org-agenda-span 7)
-  ;; Add additional configuration here
-  )
-
-(after! org
-  (setq org-capture-templates
-        ;; Below lines are for school captures
-        '(("t" "School Todo" entry (file+olp+datetree "~/uni/current-course/todo.org")
-           "* TODO %?\n  %i\n  %a")
-          ("j" "Journal" entry (file+olp+datetree "~/org/journal.org")
-           "* %?\nEntered on %U\n  %i\n  %a")
-          ("n" "Class Note" entry (file+olp+datetree "~/uni/current-course/notes/%A.org")
-           "* %?\nEntered on %U\n  %i\n  %a")
-          ;; Below lines are for org-chef
-          ("c" "Cookbook" entry (file "~/ideas/recipes/cookbook.org")
-           "%(org-chef-get-recipe-from-url)"
-           :empty-lines 1)
-          ("m" "Manual Cookbook" entry (file "~/ideas/recipes/cookbook.org")
-           "* %^{Recipe title: }\n  :PROPERTIES:\n  :source-url:\n  :servings:\n  :prep-time:\n  :cook-time:\n  :ready-in:\n  :END:\n** Ingredients\n   %?\n** Directions\n\n"))))
 
 (add-hook 'org-mode-hook 'org-auto-tangle-mode)
 
@@ -267,6 +242,8 @@
 (setq ispell-local-dictionary "en_US")
 (setq ispell-local-dictionary-alist '(("en_US" "[[:alpha:]]" "[^[:alpha:]]" "[']" nil ("-d" "en_US") nil utf-8)))
 (flyspell-mode 1)
+
+(add-hook 'emacs-startup-hook #'global-jinx-mode)
 
 (add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
 

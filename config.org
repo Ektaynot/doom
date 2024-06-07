@@ -170,6 +170,13 @@ In doom dashboard, leave only the splash image
 (define-key evil-normal-state-map "ü" 'efe/tureng-turkish)
 #+end_src
 
+** Stop font resizing when pressing control while scrolling
+#+begin_src elisp
+(global-set-key (kbd "<pinch>") 'ignore)
+(global-set-key (kbd "<C-wheel-up>") 'ignore)
+(global-set-key (kbd "<C-wheel-down>") 'ignore)
+#+end_src
+
 * Pandoc
 ** Set Pandoc Binary :mac:
 #+begin_src elisp

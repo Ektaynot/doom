@@ -69,6 +69,10 @@
 (define-key evil-normal-state-map "ğ" 'efe/tureng-english)
 (define-key evil-normal-state-map "ü" 'efe/tureng-turkish)
 
+(global-set-key (kbd "<pinch>") 'ignore)
+(global-set-key (kbd "<C-wheel-up>") 'ignore)
+(global-set-key (kbd "<C-wheel-down>") 'ignore)
+
 (setq pandoc-binary "/opt/homebrew/bin/pandoc")
 
 (setq pandoc-data-dir "/Users/ismailefetop/.config/doom/etc/pandoc/")

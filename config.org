@@ -14,29 +14,29 @@
 #+begin_src elisp
 (setq user-full-name "İsmail Efe Top"
       user-mail-address "ismailefetop@gmail.com")
-#+END_SRC
+#+end_src
 
 ** Setting the default shell
 #+begin_src elisp
 (setq shell-file-name (executable-find "bash"))
 (setq-default vterm-shell (executable-find "fish"))
 (setq-default explicit-shell-file-name (executable-find "fish"))
-#+END_SRC
+#+end_src
 
 ** Theme
 #+begin_src elisp
 (setq doom-theme 'kanagawa)
-#+END_SRC
+#+end_src
 
 ** Font
 #+begin_src elisp
 (setq doom-font (font-spec :family "JetBrains Mono" :size 22))
-#+END_SRC
+#+end_src
 
 ** Line Numbers
 #+begin_src elisp :tangle no
 (setq display-line-numbers-type t)
-#+END_SRC
+#+end_src
 
 ** Dashboard Customization
 In doom dashboard, leave only the splash image
@@ -48,7 +48,7 @@ In doom dashboard, leave only the splash image
 ** Disable Confirm on exit
 #+begin_src elisp
 (setq confirm-kill-emacs nil)
-#+END_SRC
+#+end_src
 
 ** Disable Delays
 #+begin_src elisp
@@ -60,12 +60,12 @@ In doom dashboard, leave only the splash image
 ** Disable autosave
 #+begin_src elisp
 (setq auto-save-default nil)
-#+END_SRC
+#+end_src
 
 ** Disable Backup
 #+begin_src elisp
 (setq backup-inhibited t)
-#+END_SRC
+#+end_src
 
 ** Automatically Kill Running Processes on Exit
 [[https://emacsredux.com/blog/2020/07/18/automatically-kill-running-processes-on-exit/][Emacs Redux Article]]
@@ -149,7 +149,7 @@ In doom dashboard, leave only the splash image
 ** Sets olivettis body width
 #+begin_src elisp
 (setq olivetti-body-width 94)
-#+END_SRC
+#+end_src
 
 * Keybindings
 
@@ -181,7 +181,7 @@ In doom dashboard, leave only the splash image
 ** Set Pandoc Binary :mac:
 #+begin_src elisp
 (setq pandoc-binary "/opt/homebrew/bin/pandoc")
-#+END_SRC
+#+end_src
 
 ** Global Settings/Data File :mac:
 #+begin_src elisp
@@ -193,17 +193,17 @@ In doom dashboard, leave only the splash image
 *** Main Directory :mac:
 #+begin_src elisp
 (setq org-directory "~/.orgs/org/")
-#+END_SRC
+#+end_src
 
 *** Other Org Directories :mac:
 #+begin_src elisp
 (setq org-agenda-files '("~/uni/current-course/" "~/.orgs/org/" "~/ideas/"))
-#+END_SRC
+#+end_src
 
 ** Trusting the org-blocks in org automatically
 #+begin_src elisp
 (setq org-confirm-babel-evaluate nil)
-#+END_SRC
+#+end_src
 
 ** Change the look of org-agenda to-do view.
 #+begin_src elisp
@@ -225,7 +225,7 @@ In doom dashboard, leave only the splash image
   (setq org-agenda-span 7)
   ;; Add additional configuration here
   )
-#+END_SRC
+#+end_src
 
 ** Org Capture Templates :mac:
 #+begin_src elisp :tangle no
@@ -250,7 +250,7 @@ In doom dashboard, leave only the splash image
 ** Org Auto Tangle
 #+begin_src elisp
 (add-hook 'org-mode-hook 'org-auto-tangle-mode)
-#+END_SRC
+#+end_src
 
 ** Org-modern
 #+begin_src elisp :tangle no
@@ -298,7 +298,7 @@ In doom dashboard, leave only the splash image
   (let ((file-path (read-file-name "Select a file: ")))
     (kill-new file-path)
     (message "Copied file path: %s" file-path)))
-#+END_SRC
+#+end_src
 
 ** Blog Html Insert
 #+begin_src elisp
@@ -443,7 +443,7 @@ This line makes the insides of __orgtemplate.org file append on every newly crea
 #+begin_src elisp
 (setq browse-url-mailto-function 'browse-url-generic)
 (setq browse-url-generic-program "open")
-#+END_SRC
+#+end_src
 
 ** Openwith Defaults :mac:
 #+begin_src elisp
@@ -460,7 +460,7 @@ This line makes the insides of __orgtemplate.org file append on every newly crea
         ;; ("\\.svg\\'" "open" (file))
         ("\\.gif\\'" "open" (file))
         ))
-#+END_SRC
+#+end_src
 
 * Spellchecking
 Here is the [[https://web.archive.org/web/20240520082706/https://old.reddit.com/r/emacs/comments/dgj0ae/tutorial_spellchecking_with_hunspell_170_for/][tutorial I followed]].

@@ -49,14 +49,20 @@
 
 (remove-hook 'doom-first-buffer-hook #'global-hl-line-mode)
 
-(setq ns-use-proxy-icon nil)
-(setq frame-title-format nil)
-(add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
-(add-to-list 'default-frame-alist '(ns-appearance . dark))
+(when (memq system-type '(darwin))
+  (setq ns-use-proxy-icon nil)
+  (setq frame-title-format nil)
+  (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
+  (add-to-list 'default-frame-alist '(ns-appearance . dark)))
 
 (add-hook 'text-mode-hook 'olivetti-mode)
 
 (setq olivetti-body-width 94)
+
+(when (memq system-type '(darwin))
+  (set-fontset-font t nil "SF Pro Display" nil 'append))
+
+(add-hook 'org-mode-hook #'valign-mode)
 
 (global-set-key (kbd "C-+") 'text-scale-increase)
 (global-set-key (kbd "C--") 'text-scale-decrease)
@@ -77,9 +83,9 @@
 
 (setq pandoc-data-dir "/Users/ismailefetop/.config/doom/etc/pandoc/")
 
-(setq org-directory "~/.orgs/org/")
+(setq org-directory "/Users/ismailefetop/.orgs/org/")
 
-(setq org-agenda-files '("~/uni/current-course/" "~/.orgs/org/" "~/ideas/"))
+(setq org-agenda-files '("/Users/ismailefetop/uni/current-course/" "/Users/ismailefetop/.orgs/org/" "/Users/ismailefetop/ideas/"))
 
 (setq org-confirm-babel-evaluate nil)
 
@@ -222,13 +228,13 @@
 (set-file-template! "\\.org$" :trigger "__orgtemplate.org" :mode 'org-mode)
 
 (setq yas-snippet-dirs
-      '("~/.config/doom/snippets/yasnippets/"                 ;; personal snippets
+      '("/Users/ismailefetop/.config/doom/snippets/yasnippets/"                 ;; personal snippets
         ))
 
 (setq browse-url-mailto-function 'browse-url-generic)
 (setq browse-url-generic-program "open")
 
-(openwith-mode t)
+(add-hook 'emacs-startup-hook 'openwith-mode)
 (setq openwith-associations
       '(("\\.pdf\\'" "open" (file))
         ("\\.docx\\'" "open" (file))
@@ -271,6 +277,9 @@
   (call-process-shell-command "open -g 'rectangle://execute-action?name=maximize'" nil 0))
 
 (add-hook 'window-setup-hook 'toggle-frame-maximized t)
-(add-hook 'emacs-startup-hook 'rectangle-maximize)
+
+(when (memq system-type '(darwin))
+  (add-hook 'emacs-startup-hook 'rectangle-maximize)
+)
 
 

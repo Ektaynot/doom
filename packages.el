@@ -17,6 +17,7 @@
 (package! elpher)
 (package! doom-snippets :ignore t)
 (package! crux)
+(package! valign)
 
 ;; unused
 ;;(package! org-ros)
@@ -24,7 +25,10 @@
 ;;(package! org-chef)
 ;; (package! insert-shebang)
 ;;(package! autothemer)
-
+;;(package! ready-player :recipe
+;;  (:host github
+;;   :repo "xenodium/ready-player"
+;;   :branch "main"))
 ;; Custom Themes
 ;;(package! kanagawa-theme)
 ;;(package! catppuccin-theme)

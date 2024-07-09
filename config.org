@@ -104,7 +104,7 @@ In doom dashboard, leave only the splash image
 (add-hook! 'elfeed-search-mode-hook #'elfeed-update)
 #+end_src
 
-** Bib Locations
+** Bib Locations :dir:
 #+begin_src elisp
 (setq org-cite-global-bibliography '("/Users/ismailefetop/uni/citation/bib.bib"))
 (setq bibtex-completion-bibliography '("/Users/ismailefetop/uni/citation/bib.bib"))
@@ -135,10 +135,11 @@ In doom dashboard, leave only the splash image
 
 ** Make the title bar text empty :mac:
 #+begin_src elisp
-(setq ns-use-proxy-icon nil)
-(setq frame-title-format nil)
-(add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
-(add-to-list 'default-frame-alist '(ns-appearance . dark))
+(when (memq system-type '(darwin))
+  (setq ns-use-proxy-icon nil)
+  (setq frame-title-format nil)
+  (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
+  (add-to-list 'default-frame-alist '(ns-appearance . dark)))
 #+end_src
 
 ** Open olivetti Mode on Text Mode buffers
@@ -149,6 +150,17 @@ In doom dashboard, leave only the splash image
 ** Sets olivettis body width
 #+begin_src elisp
 (setq olivetti-body-width 94)
+#+end_src
+
+** Enable rendering SF symbols on macOS
+#+begin_src elisp
+(when (memq system-type '(darwin))
+  (set-fontset-font t nil "SF Pro Display" nil 'append))
+#+end_src
+
+** Enable valign
+#+begin_src elisp
+(add-hook 'org-mode-hook #'valign-mode)
 #+end_src
 
 * Keybindings
@@ -178,26 +190,26 @@ In doom dashboard, leave only the splash image
 #+end_src
 
 * Pandoc
-** Set Pandoc Binary :mac:
+** Set Pandoc Binary :dir:
 #+begin_src elisp
 (setq pandoc-binary "/opt/homebrew/bin/pandoc")
 #+end_src
 
-** Global Settings/Data File :mac:
+** Global Settings/Data File :dir:
 #+begin_src elisp
 (setq pandoc-data-dir "/Users/ismailefetop/.config/doom/etc/pandoc/")
 #+end_src
 
 * Org
 ** Org directories
-*** Main Directory :mac:
+*** Main Directory :dir:
 #+begin_src elisp
-(setq org-directory "~/.orgs/org/")
+(setq org-directory "/Users/ismailefetop/.orgs/org/")
 #+end_src
 
-*** Other Org Directories :mac:
+*** Other Org Directories :dir:
 #+begin_src elisp
-(setq org-agenda-files '("~/uni/current-course/" "~/.orgs/org/" "~/ideas/"))
+(setq org-agenda-files '("/Users/ismailefetop/uni/current-course/" "/Users/ismailefetop/.orgs/org/" "/Users/ismailefetop/ideas/"))
 #+end_src
 
 ** Trusting the org-blocks in org automatically
@@ -227,7 +239,7 @@ In doom dashboard, leave only the splash image
   )
 #+end_src
 
-** Org Capture Templates :mac:
+** Org Capture Templates :dir:
 #+begin_src elisp :tangle no
 (after! org
   (setq org-capture-templates
@@ -289,7 +301,7 @@ In doom dashboard, leave only the splash image
 
 #+end_src
 
-** Copy Path Function :mac:
+** Copy Path Function
 #+begin_src elisp
 (defun efe/select-and-copy-file-path ()
   ;; Written by chatgpt
@@ -432,10 +444,10 @@ This line makes the insides of __orgtemplate.org file append on every newly crea
 (set-file-template! "\\.org$" :trigger "__orgtemplate.org" :mode 'org-mode)
 #+end_src
 
-** Yassnippets Directory
+** Yassnippets Directory :dir:
 #+begin_src elisp
 (setq yas-snippet-dirs
-      '("~/.config/doom/snippets/yasnippets/"                 ;; personal snippets
+      '("/Users/ismailefetop/.config/doom/snippets/yasnippets/"                 ;; personal snippets
         ))
 #+end_src
 
@@ -446,9 +458,9 @@ This line makes the insides of __orgtemplate.org file append on every newly crea
 (setq browse-url-generic-program "open")
 #+end_src
 
-** Openwith Defaults :mac:
+** Openwith Defaults
 #+begin_src elisp
-(openwith-mode t)
+(add-hook 'emacs-startup-hook 'openwith-mode)
 (setq openwith-associations
       '(("\\.pdf\\'" "open" (file))
         ("\\.docx\\'" "open" (file))
@@ -463,7 +475,7 @@ This line makes the insides of __orgtemplate.org file append on every newly crea
         ))
 #+end_src
 
-* Spellchecking
+* Spellchecking :dir:
 Here is the [[https://web.archive.org/web/20240520082706/https://old.reddit.com/r/emacs/comments/dgj0ae/tutorial_spellchecking_with_hunspell_170_for/][tutorial I followed]].
 
 #+begin_src elisp
@@ -512,7 +524,10 @@ Here is the [[https://web.archive.org/web/20240520082706/https://old.reddit.com/
   (call-process-shell-command "open -g 'rectangle://execute-action?name=maximize'" nil 0))
 
 (add-hook 'window-setup-hook 'toggle-frame-maximized t)
-(add-hook 'emacs-startup-hook 'rectangle-maximize)
+
+(when (memq system-type '(darwin))
+  (add-hook 'emacs-startup-hook 'rectangle-maximize)
+)
 #+end_src
 
 * Testing

@@ -12,12 +12,9 @@
 (package! openwith)
 (package! pandoc-mode)
 (package! org-auto-tangle)
-(package! super-save)
 (package! reveal-in-osx-finder)
-(package! elpher)
 (package! doom-snippets :ignore t)
 (package! crux)
-(package! valign)
 
 ;; unused
 ;;(package! org-ros)

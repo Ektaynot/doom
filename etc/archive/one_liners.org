@@ -1,0 +1,62 @@
+#+TITLE: one_liners
+#+AUTHOR: İsmail Efe Top
+#+DATE: 2024-07-14
+#+LANGUAGE: en
+#+DESCRIPTION:
+
+** Line Numbers
+#+begin_src elisp :tangle no
+(setq display-line-numbers-type t)
+#+end_src
+
+** Enable valign
+#+begin_src elisp
+(add-hook 'org-mode-hook #'valign-mode)
+#+end_src
+
+** Set Agenda View
+#+begin_src elisp :tangle no
+(after! org
+  :config
+  ;; to start the agende from the current day
+  (setq org-agenda-start-on-weekday nil)
+  (setq org-agenda-start-day "+0d")
+  ;; set span 7
+  (setq org-agenda-span 7)
+  ;; Add additional configuration here
+  )
+#+end_src
+
+** Org Capture Templates :dir:
+#+begin_src elisp :tangle no
+(after! org
+  (setq org-capture-templates
+        ;; Below lines are for school captures
+        '(("t" "School Todo" entry (file+olp+datetree "~/uni/current-course/todo.org")
+           "* TODO %?\n  %i\n  %a")
+          ("j" "Journal" entry (file+olp+datetree "~/org/journal.org")
+           "* %?\nEntered on %U\n  %i\n  %a")
+          ("n" "Class Note" entry (file+olp+datetree "~/uni/current-course/notes/%A.org")
+           "* %?\nEntered on %U\n  %i\n  %a")
+          ;; Below lines are for org-chef
+          ("c" "Cookbook" entry (file "~/ideas/recipes/cookbook.org")
+           "%(org-chef-get-recipe-from-url)"
+           :empty-lines 1)
+          ("m" "Manual Cookbook" entry (file "~/ideas/recipes/cookbook.org")
+           "* %^{Recipe title: }\n  :PROPERTIES:\n  :source-url:\n  :servings:\n  :prep-time:\n  :cook-time:\n  :ready-in:\n  :END:\n** Ingredients\n   %?\n** Directions\n\n"))))
+
+#+end_src
+
+** Yassnippets Directory :dir:
+#+begin_src elisp
+(setq yas-snippet-dirs
+      '("/Users/ismailefetop/.config/doom/snippets/yasnippets/"
+        ))
+#+end_src
+
+* After Save hook
+[[https://www.masteringemacs.org/article/script-files-executable-automatically][Mastering Emacs article.]]
+
+#+begin_src elisp
+(add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
+#+end_src

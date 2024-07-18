@@ -42,7 +42,7 @@
 
 (setq org-image-actual-width nil)
 
-(super-save-mode +1)
+;;(super-save-mode +1)
 
 ;; warn when opening files bigger than 200MB
 (setq large-file-warning-threshold 200000000)
@@ -61,8 +61,6 @@
 
 (when (memq system-type '(darwin))
   (set-fontset-font t nil "SF Pro Display" nil 'append))
-
-(add-hook 'org-mode-hook #'valign-mode)
 
 (global-set-key (kbd "C-+") 'text-scale-increase)
 (global-set-key (kbd "C--") 'text-scale-decrease)
@@ -133,7 +131,7 @@
     (let ((empty-line (progn (re-search-forward "^$" nil t) (point))))
       (goto-char empty-line)
       (insert "\n#+HTML_HEAD: <link rel=\"stylesheet\" type=\"text/css\" href=\"/templates/style.css\" />\n")
-      (insert "#+HTML_HEAD: #+HTML_HEAD: <meta name=\"theme-color\" content=\"#fffcf0\">")
+      (insert "#+HTML_HEAD: <meta name=\"theme-color\" content=\"#fffcf0\">\n")
       (insert "#+HTML_HEAD: <link rel=\"apple-touch-icon\" sizes=\"180x180\" href=\"/favicon/apple-touch-icon.png\">\n")
       (insert "#+HTML_HEAD: <link rel=\"icon\" type=\"image/png\" sizes=\"32x32\" href=\"/favicon/favicon-32x32.png\">\n")
       (insert "#+HTML_HEAD: <link rel=\"icon\" type=\"image/png\" sizes=\"16x16\" href=\"/favicon/favicon-16x16.png\">\n")
@@ -227,10 +225,6 @@
 
 (set-file-template! "\\.org$" :trigger "__orgtemplate.org" :mode 'org-mode)
 
-(setq yas-snippet-dirs
-      '("/Users/ismailefetop/.config/doom/snippets/yasnippets/"                 ;; personal snippets
-        ))
-
 (setq browse-url-mailto-function 'browse-url-generic)
 (setq browse-url-generic-program "open")
 
@@ -253,16 +247,6 @@
 (setq ispell-local-dictionary "en_US")
 (setq ispell-local-dictionary-alist '(("en_US" "[[:alpha:]]" "[^[:alpha:]]" "[']" nil ("-d" "en_US") nil utf-8)))
 (flyspell-mode 1)
-
-(add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
-
-(setq byte-compile-warnings '(not obsolete))
-(setq warning-suppress-log-types '((comp) (bytecomp)))
-(setq native-comp-async-report-warnings-errors 'silent)
-(setq inhibit-startup-echo-area-message (user-login-name))
-(setq visible-bell t)
-(setq ring-bell-function 'ignore)
-(setq set-message-beep 'silent)
 
 (defun er-auto-create-missing-dirs ()
   (let ((target-dir (file-name-directory buffer-file-name)))

@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: pandoc apa export
-# uuid: pandoc-apa
-# key: papa
-# --
-#+PANDOC_OPTIONS: reference-doc:/Users/ismailefetop/uni/etc/apa.docx
-#+cite_export: csl /Users/ismailefetop/uni/citation/styles/apa.csl

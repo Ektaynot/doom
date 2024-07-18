@@ -33,14 +33,8 @@
 (setq doom-font (font-spec :family "JetBrains Mono" :size 22))
 #+end_src
 
-** Line Numbers
-#+begin_src elisp :tangle no
-(setq display-line-numbers-type t)
-#+end_src
-
 ** Dashboard Customization
 In doom dashboard, leave only the splash image
-
 #+begin_src elisp
 (setq +doom-dashboard-functions '(doom-dashboard-widget-banner))
 #+end_src
@@ -119,7 +113,7 @@ In doom dashboard, leave only the splash image
 
 ** Super-save
 #+begin_src elisp
-(super-save-mode +1)
+;;(super-save-mode +1)
 #+end_src
 
 ** Opening Large Files
@@ -156,11 +150,6 @@ In doom dashboard, leave only the splash image
 #+begin_src elisp
 (when (memq system-type '(darwin))
   (set-fontset-font t nil "SF Pro Display" nil 'append))
-#+end_src
-
-** Enable valign
-#+begin_src elisp
-(add-hook 'org-mode-hook #'valign-mode)
 #+end_src
 
 * Keybindings
@@ -224,39 +213,6 @@ In doom dashboard, leave only the splash image
         (todo   . " ")
         (tags   . " %i %-12:c")
         (search . " %i %-12:c")))
-#+end_src
-
-** Set Agenda View
-#+begin_src elisp :tangle no
-(after! org
-  :config
-  ;; to start the agende from the current day
-  (setq org-agenda-start-on-weekday nil)
-  (setq org-agenda-start-day "+0d")
-  ;; set span 7
-  (setq org-agenda-span 7)
-  ;; Add additional configuration here
-  )
-#+end_src
-
-** Org Capture Templates :dir:
-#+begin_src elisp :tangle no
-(after! org
-  (setq org-capture-templates
-        ;; Below lines are for school captures
-        '(("t" "School Todo" entry (file+olp+datetree "~/uni/current-course/todo.org")
-           "* TODO %?\n  %i\n  %a")
-          ("j" "Journal" entry (file+olp+datetree "~/org/journal.org")
-           "* %?\nEntered on %U\n  %i\n  %a")
-          ("n" "Class Note" entry (file+olp+datetree "~/uni/current-course/notes/%A.org")
-           "* %?\nEntered on %U\n  %i\n  %a")
-          ;; Below lines are for org-chef
-          ("c" "Cookbook" entry (file "~/ideas/recipes/cookbook.org")
-           "%(org-chef-get-recipe-from-url)"
-           :empty-lines 1)
-          ("m" "Manual Cookbook" entry (file "~/ideas/recipes/cookbook.org")
-           "* %^{Recipe title: }\n  :PROPERTIES:\n  :source-url:\n  :servings:\n  :prep-time:\n  :cook-time:\n  :ready-in:\n  :END:\n** Ingredients\n   %?\n** Directions\n\n"))))
-
 #+end_src
 
 ** Org Auto Tangle
@@ -323,7 +279,7 @@ In doom dashboard, leave only the splash image
     (let ((empty-line (progn (re-search-forward "^$" nil t) (point))))
       (goto-char empty-line)
       (insert "\n#+HTML_HEAD: <link rel=\"stylesheet\" type=\"text/css\" href=\"/templates/style.css\" />\n")
-      (insert "#+HTML_HEAD: #+HTML_HEAD: <meta name=\"theme-color\" content=\"#fffcf0\">")
+      (insert "#+HTML_HEAD: <meta name=\"theme-color\" content=\"#fffcf0\">\n")
       (insert "#+HTML_HEAD: <link rel=\"apple-touch-icon\" sizes=\"180x180\" href=\"/favicon/apple-touch-icon.png\">\n")
       (insert "#+HTML_HEAD: <link rel=\"icon\" type=\"image/png\" sizes=\"32x32\" href=\"/favicon/favicon-32x32.png\">\n")
       (insert "#+HTML_HEAD: <link rel=\"icon\" type=\"image/png\" sizes=\"16x16\" href=\"/favicon/favicon-16x16.png\">\n")
@@ -439,16 +395,8 @@ In doom dashboard, leave only the splash image
 * Snippets
 ** Default Org Template
 This line makes the insides of __orgtemplate.org file append on every newly created org file.
-
 #+begin_src elisp
 (set-file-template! "\\.org$" :trigger "__orgtemplate.org" :mode 'org-mode)
-#+end_src
-
-** Yassnippets Directory :dir:
-#+begin_src elisp
-(setq yas-snippet-dirs
-      '("/Users/ismailefetop/.config/doom/snippets/yasnippets/"                 ;; personal snippets
-        ))
 #+end_src
 
 * Defaults
@@ -477,7 +425,6 @@ This line makes the insides of __orgtemplate.org file append on every newly crea
 
 * Spellchecking :dir:
 Here is the [[https://web.archive.org/web/20240520082706/https://old.reddit.com/r/emacs/comments/dgj0ae/tutorial_spellchecking_with_hunspell_170_for/][tutorial I followed]].
-
 #+begin_src elisp
 (setq ispell-program-name "hunspell")
 (setq ispell-hunspell-dict-paths-alist '(("en_US" "/Users/ismailefetop/.config/dict/en_US.aff")))
@@ -486,15 +433,8 @@ Here is the [[https://web.archive.org/web/20240520082706/https://old.reddit.com/
 (flyspell-mode 1)
 #+end_src
 
-* After Save hook
-[[https://www.masteringemacs.org/article/script-files-executable-automatically][Mastering Emacs article.]]
-
-#+begin_src elisp
-(add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
-#+end_src
-
 * Make emacs silent
-#+begin_src elisp
+#+begin_src elisp :tangle no
 (setq byte-compile-warnings '(not obsolete))
 (setq warning-suppress-log-types '((comp) (bytecomp)))
 (setq native-comp-async-report-warnings-errors 'silent)

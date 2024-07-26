@@ -46,7 +46,6 @@ In doom dashboard, leave only the splash image
 
 ** Disable Delays
 #+begin_src elisp
-(setq which-key-idle-delay 0.0)
 (setq bookmark-search-delay 0.0)
 (setq mouse-scroll-delay 0.0)
 #+end_src

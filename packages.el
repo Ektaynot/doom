@@ -15,6 +15,7 @@
 (package! reveal-in-osx-finder)
 (package! doom-snippets :ignore t)
 (package! crux)
+(package! ready-player)
 
 ;; unused
 ;;(package! org-ros)

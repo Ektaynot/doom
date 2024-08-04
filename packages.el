@@ -16,7 +16,11 @@
 (package! doom-snippets :ignore t)
 (package! crux)
 (package! ready-player)
-
+(package! kana)
+(package! org-pandoc-import
+  :recipe (:host github
+           :repo "tecosaur/org-pandoc-import"
+           :files ("*.el" "filters" "preprocessors")))
 ;; unused
 ;;(package! org-ros)
 ;;(package! org-modern)

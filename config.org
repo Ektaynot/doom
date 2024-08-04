@@ -151,6 +151,20 @@ In doom dashboard, leave only the splash image
   (set-fontset-font t nil "SF Pro Display" nil 'append))
 #+end_src
 
+** Set undo limit to 80mb
+#+begin_src elisp
+(setq undo-limit 80000000)
+#+end_src
+
+** Fine tuning the evil-undo
+#+begin_src elisp
+(setq evil-want-fine-undo t)
+#+end_src
+
+** Activate org-pandoc-import
+#+begin_src elisp
+(use-package! org-pandoc-import :after org)
+#+end_src
 * Keybindings
 
 ** Global
@@ -217,16 +231,6 @@ In doom dashboard, leave only the splash image
 ** Org Auto Tangle
 #+begin_src elisp
 (add-hook 'org-mode-hook 'org-auto-tangle-mode)
-#+end_src
-
-** Org-modern
-#+begin_src elisp :tangle no
-(use-package! org-modern
-  :hook (org-mode . global-org-modern-mode)
-  :config
-  (setq org-modern-label-border 0.3)
-  (setq org-modern-block-name nil)
-  (setq org-modern-tag nil))
 #+end_src
 
 * Functions
@@ -423,6 +427,7 @@ This line makes the insides of __orgtemplate.org file append on every newly crea
 #+end_src
 
 * Spellchecking :dir:
+** hunspell
 Here is the [[https://web.archive.org/web/20240520082706/https://old.reddit.com/r/emacs/comments/dgj0ae/tutorial_spellchecking_with_hunspell_170_for/][tutorial I followed]].
 #+begin_src elisp
 (setq ispell-program-name "hunspell")
@@ -430,6 +435,19 @@ Here is the [[https://web.archive.org/web/20240520082706/https://old.reddit.com/
 (setq ispell-local-dictionary "en_US")
 (setq ispell-local-dictionary-alist '(("en_US" "[[:alpha:]]" "[^[:alpha:]]" "[']" nil ("-d" "en_US") nil utf-8)))
 (flyspell-mode 1)
+#+end_src
+** Skip certain sections
+Thanks to Endless Parentheses for the [[https://endlessparentheses.com/ispell-and-org-mode.html][wonderful post]].
+#+begin_src elisp
+(defun endless/org-ispell ()
+  (make-local-variable 'ispell-skip-region-alist)
+  (add-to-list 'ispell-skip-region-alist '(org-property-drawer-re))
+  (add-to-list 'ispell-skip-region-alist '("~" "~"))
+  (add-to-list 'ispell-skip-region-alist '("=" "="))
+  (add-to-list 'ispell-skip-region-alist '("^#\\+begin_src" . "^#\\+end_src"))
+  (add-to-list 'ispell-skip-region-alist '("^#\\+HTML_HEAD:" . ">"))
+  (add-to-list 'ispell-skip-region-alist '("^#\\+begin_export" . "^#\\+end_export")))
+(add-hook 'org-mode-hook #'endless/org-ispell)
 #+end_src
 
 * Make emacs silent

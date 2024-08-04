@@ -61,6 +61,12 @@
 (when (memq system-type '(darwin))
   (set-fontset-font t nil "SF Pro Display" nil 'append))
 
+(setq undo-limit 80000000)
+
+(setq evil-want-fine-undo t)
+
+(use-package! org-pandoc-import :after org)
+
 (global-set-key (kbd "C-+") 'text-scale-increase)
 (global-set-key (kbd "C--") 'text-scale-decrease)
 
@@ -246,6 +252,16 @@
 (setq ispell-local-dictionary "en_US")
 (setq ispell-local-dictionary-alist '(("en_US" "[[:alpha:]]" "[^[:alpha:]]" "[']" nil ("-d" "en_US") nil utf-8)))
 (flyspell-mode 1)
+
+(defun endless/org-ispell ()
+  (make-local-variable 'ispell-skip-region-alist)
+  (add-to-list 'ispell-skip-region-alist '(org-property-drawer-re))
+  (add-to-list 'ispell-skip-region-alist '("~" "~"))
+  (add-to-list 'ispell-skip-region-alist '("=" "="))
+  (add-to-list 'ispell-skip-region-alist '("^#\\+begin_src" . "^#\\+end_src"))
+  (add-to-list 'ispell-skip-region-alist '("^#\\+HTML_HEAD:" . ">"))
+  (add-to-list 'ispell-skip-region-alist '("^#\\+begin_export" . "^#\\+end_export")))
+(add-hook 'org-mode-hook #'endless/org-ispell)
 
 (defun er-auto-create-missing-dirs ()
   (let ((target-dir (file-name-directory buffer-file-name)))

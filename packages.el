@@ -8,29 +8,28 @@
 (package! citeproc)
 (package! org-ref)
 
-;; misc
-(package! openwith)
+;; org
 (package! pandoc-mode)
 (package! org-auto-tangle)
+(package! org-pandoc-import :recipe (:host github :repo "tecosaur/org-pandoc-import" :files ("*.el" "filters" "preprocessors")))
+
+;; misc
+(package! openwith)
 (package! reveal-in-osx-finder)
 (package! doom-snippets :ignore t)
 (package! crux)
 (package! ready-player)
 (package! kana)
-(package! org-pandoc-import
-  :recipe (:host github
-           :repo "tecosaur/org-pandoc-import"
-           :files ("*.el" "filters" "preprocessors")))
+
+(package! dwim-shell-command)
+
 ;; unused
 ;;(package! org-ros)
 ;;(package! org-modern)
 ;;(package! org-chef)
-;; (package! insert-shebang)
+;;(package! insert-shebang)
 ;;(package! autothemer)
-;;(package! ready-player :recipe
-;;  (:host github
-;;   :repo "xenodium/ready-player"
-;;   :branch "main"))
+
 ;; Custom Themes
 ;;(package! kanagawa-theme)
 ;;(package! catppuccin-theme)

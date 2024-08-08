@@ -72,7 +72,6 @@
 
 (define-key evil-normal-state-map "ç" 'ispell)
 (define-key evil-normal-state-map "ö" 'ispell-word)
-(define-key evil-normal-state-map "Ö" 'evil-avy-goto-char-timer)
 (define-key evil-normal-state-map "ş" 'efe/google-current-word)
 (define-key evil-normal-state-map "Ş" 'efe/first-result-url)
 (define-key evil-normal-state-map "ğ" 'efe/tureng-english)

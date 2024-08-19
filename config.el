@@ -67,6 +67,8 @@
 
 (use-package! org-pandoc-import :after org)
 
+(add-hook 'org-mode-hook #'valign-mode)
+
 (global-set-key (kbd "C-+") 'text-scale-increase)
 (global-set-key (kbd "C--") 'text-scale-decrease)
 

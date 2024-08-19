@@ -146,6 +146,7 @@ In doom dashboard, leave only the splash image
 #+end_src
 
 ** Enable rendering SF symbols on macOS
+[[https://developer.apple.com/fonts/][SF Pro font]] is needed for this to work.
 #+begin_src elisp
 (when (memq system-type '(darwin))
   (set-fontset-font t nil "SF Pro Display" nil 'append))
@@ -165,6 +166,12 @@ In doom dashboard, leave only the splash image
 #+begin_src elisp
 (use-package! org-pandoc-import :after org)
 #+end_src
+
+** Enable valign
+#+begin_src elisp
+(add-hook 'org-mode-hook #'valign-mode)
+#+end_src
+
 * Keybindings
 
 ** Global
@@ -246,6 +253,7 @@ In doom dashboard, leave only the splash image
 #+end_src
 
 ** Get the first result
+[[https://gist.github.com/Ektaynot/46681539aa1c030b3a58986e7f3df397][Link to the firstresult script.]]
 #+begin_src elisp
 (defun efe/first-result-url ()
   ;; Written by ChatGPT

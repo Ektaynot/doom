@@ -23,6 +23,8 @@
 
 (package! dwim-shell-command)
 
+
+(package! valign)
 ;; unused
 ;;(package! org-ros)
 ;;(package! org-modern)

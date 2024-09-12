@@ -3,6 +3,7 @@
 #+PROPERTY: header-args :tangle /Users/ismailefetop/.config/doom/config.el
 #+auto_tangle: t
 # first year in uni, mba2022
+# second year in uni, mba2022
 
 * One Liners
 ** Lexical Binding
@@ -453,6 +454,7 @@ Thanks to Endless Parentheses for the [[https://endlessparentheses.com/ispell-an
   (add-to-list 'ispell-skip-region-alist '("=" "="))
   (add-to-list 'ispell-skip-region-alist '("^#\\+begin_src" . "^#\\+end_src"))
   (add-to-list 'ispell-skip-region-alist '("^#\\+HTML_HEAD:" . ">"))
+  (add-to-list 'ispell-skip-region-alist '("^#\\+HTML" . ">"))
   (add-to-list 'ispell-skip-region-alist '("^#\\+begin_export" . "^#\\+end_export")))
 (add-hook 'org-mode-hook #'endless/org-ispell)
 #+end_src

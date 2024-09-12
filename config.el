@@ -261,6 +261,7 @@
   (add-to-list 'ispell-skip-region-alist '("=" "="))
   (add-to-list 'ispell-skip-region-alist '("^#\\+begin_src" . "^#\\+end_src"))
   (add-to-list 'ispell-skip-region-alist '("^#\\+HTML_HEAD:" . ">"))
+  (add-to-list 'ispell-skip-region-alist '("^#\\+HTML" . ">"))
   (add-to-list 'ispell-skip-region-alist '("^#\\+begin_export" . "^#\\+end_export")))
 (add-hook 'org-mode-hook #'endless/org-ispell)
 

@@ -11,6 +11,12 @@ This is a [[https://github.com/doomemacs/doomemacs][Doom Emacs]] config and is m
 
 If you are on MacOS, all you have to do is clone this repo to your .config folder. If you are on Linux or Windows, take a look at the config.org and remove anything that has :mac: tag or you deem is related to mac and then clone it into your .config folder.
 
+** Screenshots
+
+[[file:etc/screenshots/ss1.png]]
+[[file:etc/screenshots/ss2.png]]
+[[file:etc/screenshots/ss3.png]]
+
 ** Reach out to me
 
 Feel free to give me feedback or suggestions via [[mailto:ismailefetop@gmail.com][email]]

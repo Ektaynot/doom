@@ -54,9 +54,9 @@
   (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
   (add-to-list 'default-frame-alist '(ns-appearance . dark)))
 
-(add-hook 'text-mode-hook 'olivetti-mode)
-
 (setq olivetti-body-width 94)
+
+(add-hook 'text-mode-hook 'olivetti-mode)
 
 (when (memq system-type '(darwin))
   (set-fontset-font t nil "SF Pro Display" nil 'append))
@@ -265,13 +265,6 @@
   (add-to-list 'ispell-skip-region-alist '("^#\\+begin_export" . "^#\\+end_export")))
 (add-hook 'org-mode-hook #'endless/org-ispell)
 
-(defun er-auto-create-missing-dirs ()
-  (let ((target-dir (file-name-directory buffer-file-name)))
-    (unless (file-exists-p target-dir)
-      (make-directory target-dir t))))
-
-(add-to-list 'find-file-not-found-functions #'er-auto-create-missing-dirs)
-
 ;; Requires the mac app Rectangle to function.
 (defun rectangle-maximize ()
   "Execute a shell command when Emacs starts."
@@ -282,5 +275,18 @@
 (when (memq system-type '(darwin))
   (add-hook 'emacs-startup-hook 'rectangle-maximize)
 )
+
+(defun er-auto-create-missing-dirs ()
+  (let ((target-dir (file-name-directory buffer-file-name)))
+    (unless (file-exists-p target-dir)
+      (make-directory target-dir t))))
+
+(add-to-list 'find-file-not-found-functions #'er-auto-create-missing-dirs)
+
+(defadvice! fixed-doom-modeline-update-vcs-a (&rest _)
+  :after #'doom-modeline-update-vcs
+  (and doom-modeline--vcs
+       (equal (alist-get 'text doom-modeline--vcs) "master")
+       (setf (alist-get 'text doom-modeline--vcs) "")))
 
 

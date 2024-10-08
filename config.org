@@ -136,14 +136,14 @@ In doom dashboard, leave only the splash image
   (add-to-list 'default-frame-alist '(ns-appearance . dark)))
 #+end_src
 
-** Open olivetti Mode on Text Mode buffers
-#+begin_src elisp
-(add-hook 'text-mode-hook 'olivetti-mode)
-#+end_src
-
 ** Sets olivettis body width
 #+begin_src elisp
 (setq olivetti-body-width 94)
+#+end_src
+
+** Open olivetti Mode on Text Mode buffers
+#+begin_src elisp
+(add-hook 'text-mode-hook 'olivetti-mode)
 #+end_src
 
 ** Enable rendering SF symbols on macOS
@@ -174,7 +174,6 @@ In doom dashboard, leave only the splash image
 #+end_src
 
 * Keybindings
-
 ** Global
 #+begin_src elisp
 (global-set-key (kbd "C-+") 'text-scale-increase)
@@ -459,28 +458,6 @@ Thanks to Endless Parentheses for the [[https://endlessparentheses.com/ispell-an
 (add-hook 'org-mode-hook #'endless/org-ispell)
 #+end_src
 
-* Make emacs silent
-#+begin_src elisp :tangle no
-(setq byte-compile-warnings '(not obsolete))
-(setq warning-suppress-log-types '((comp) (bytecomp)))
-(setq native-comp-async-report-warnings-errors 'silent)
-(setq inhibit-startup-echo-area-message (user-login-name))
-(setq visible-bell t)
-(setq ring-bell-function 'ignore)
-(setq set-message-beep 'silent)
-#+end_src
-
-* Auto-create Missing Directories
-[[https://emacsredux.com/blog/2022/06/12/auto-create-missing-directories/][Emacs Redux Article]]
-#+begin_src elisp
-(defun er-auto-create-missing-dirs ()
-  (let ((target-dir (file-name-directory buffer-file-name)))
-    (unless (file-exists-p target-dir)
-      (make-directory target-dir t))))
-
-(add-to-list 'find-file-not-found-functions #'er-auto-create-missing-dirs)
-#+end_src
-
 * Startup
 ** Maximize on startup using Rectangle :mac:
 #+begin_src elisp
@@ -496,6 +473,37 @@ Thanks to Endless Parentheses for the [[https://endlessparentheses.com/ispell-an
 )
 #+end_src
 
+* Misc.
+** Make emacs silent
+#+begin_src elisp :tangle no
+(setq byte-compile-warnings '(not obsolete))
+(setq warning-suppress-log-types '((comp) (bytecomp)))
+(setq native-comp-async-report-warnings-errors 'silent)
+(setq inhibit-startup-echo-area-message (user-login-name))
+(setq visible-bell t)
+(setq ring-bell-function 'ignore)
+(setq set-message-beep 'silent)
+#+end_src
+
+** Auto-create Missing Directories
+[[https://emacsredux.com/blog/2022/06/12/auto-create-missing-directories/][Emacs Redux Article]]
+#+begin_src elisp
+(defun er-auto-create-missing-dirs ()
+  (let ((target-dir (file-name-directory buffer-file-name)))
+    (unless (file-exists-p target-dir)
+      (make-directory target-dir t))))
+
+(add-to-list 'find-file-not-found-functions #'er-auto-create-missing-dirs)
+#+end_src
+
+** Remove branch name from doom-modeline when on master
+#+begin_src elisp
+(defadvice! fixed-doom-modeline-update-vcs-a (&rest _)
+  :after #'doom-modeline-update-vcs
+  (and doom-modeline--vcs
+       (equal (alist-get 'text doom-modeline--vcs) "master")
+       (setf (alist-get 'text doom-modeline--vcs) "")))
+#+end_src
 * Testing
 #+begin_src elisp
 #+end_src

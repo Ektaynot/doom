@@ -21,6 +21,7 @@
 (package! ready-player)
 (package! kana)
 (package! valign)
+(package! dwim-shell-command)
 
 ;; unused
 ;;(package! org-ros)

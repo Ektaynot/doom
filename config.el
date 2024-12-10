@@ -218,16 +218,27 @@
         (shell-command (format "code %s" (shell-quote-argument file-path)))
       (message "Buffer is not visiting a file"))))
 
-(defun efe/open-project-in-vscode ()
+(defun efe/open-buffer-as-vscode-project ()
   ;; Written by ChatGPT
-  "Open the doom-project directory in VSCode."
+  "Open the current buffer's file in Visual Studio Code with the project directory as the workspace."
   (interactive)
-  (let ((project-root doom-modeline--project-root))
-    (if project-root
+  (let ((file-path (buffer-file-name))
+        (project-root (or (project-root (project-current)) ;; Detect project root dynamically
+                          (locate-dominating-file default-directory ".git") ;; Fallback to git root
+                          default-directory))) ;; Fallback to the current directory
+    (if file-path
         (progn
-          (shell-command (concat "code " (shell-quote-argument project-root)))
-          (message "Opened %s in VSCode" project-root))
-      (message "No project root found in doom-modeline--project-root"))))
+          (shell-command (format "code --folder-uri %s --goto %s"
+                                 (shell-quote-argument (expand-file-name project-root))
+                                 (shell-quote-argument (expand-file-name file-path))))
+          (message "Opened file %s in VSCode using project root %s" file-path project-root))
+      (message "Buffer is not visiting a file"))))
+
+(defun dos2unix ()
+  "Replace DOS eolns CR LF with Unix eolns CR"
+  (interactive)
+    (goto-char (point-min))
+      (while (search-forward "\r" nil t) (replace-match "")))
 
 (set-file-template! "\\.org$" :trigger "__orgtemplate.org" :mode 'org-mode)
 
@@ -243,6 +254,7 @@
         ;;("\\.jpg\\'" "open" (file))
         ;;("\\.png\\'" "open" (file))
         ("\\.pptx\\'" "open" (file))
+        ("\\.ppt\\'" "open" (file))
         ("\\.epub\\'" "open" (file))
         ;; ("\\.svg\\'" "open" (file))
         ("\\.gif\\'" "open" (file))

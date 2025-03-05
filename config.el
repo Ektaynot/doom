@@ -7,7 +7,7 @@
 (setq-default vterm-shell (executable-find "fish"))
 (setq-default explicit-shell-file-name (executable-find "fish"))
 
-(setq doom-theme 'kanagawa)
+(setq doom-theme 'doom-nord)
 
 (setq doom-font (font-spec :family "JetBrains Mono" :size 22))
 
@@ -78,6 +78,8 @@
 (define-key evil-normal-state-map "Ş" 'efe/first-result-url)
 (define-key evil-normal-state-map "ğ" 'efe/tureng-english)
 (define-key evil-normal-state-map "ü" 'efe/tureng-turkish)
+(define-key evil-normal-state-map "Ğ" 'efe/tureng-en-fr)
+(define-key evil-normal-state-map "Ü" 'efe/tureng-fr-en)
 
 (global-set-key (kbd "<pinch>") 'ignore)
 (global-set-key (kbd "<C-wheel-up>") 'ignore)
@@ -159,23 +161,21 @@
   (insert "#+END_EXPORT\n"))
 
 (defun efe/term2anki (file)
-  ;; thought by ismailefetop, code by u/cottasteel
-  "Turn org notes into csv files that anki can read."
+  "Turn org notes into csv files that anki can read, creating a new file."
   (interactive "FExport notes to: ")
-  (let ((regex (rx bol (in "+-") " " (group (1+ nonl)) ": " (group (1+ nonl))))
-        (buf (find-file-noselect file))
-        (output ""))
+  (let* ((regex (rx bol (in "+-") " " (group (1+ nonl)) ": " (group (1+ nonl))))
+         (buf (find-file-noselect file))
+         (output "")
+         (new-file (concat file ".anki.csv")))
     (save-excursion
       (goto-char (point-min))
       (while (re-search-forward regex nil t)
         (setq output (concat output (format "%s;%s\n" (match-string 1)
                                             (match-string 2)))))
-      (with-current-buffer buf
-        (erase-buffer)
-        (insert output)
-        (save-buffer))
+      (with-temp-file new-file
+        (insert output))
       (kill-buffer buf)
-      (message "Export done."))))
+      (message "Export done. New file: %s" new-file))))
 
 (defun efe/remove-leading-spaces ()
   ;; Written by ChatGPT
@@ -195,7 +195,7 @@
   (interactive)
   (let ((word (thing-at-point 'word)))
     (if word
-        (let ((output (shell-command-to-string (format "tureng -l t -w %s" word))))
+        (let ((output (shell-command-to-string (format "tureng -l t -t e -w %s" word))))
           (message output))
       (message "No word found at point."))))
 
@@ -205,7 +205,27 @@
   (interactive)
   (let ((word (thing-at-point 'word)))
     (if word
-        (let ((output (shell-command-to-string (format "tureng -l e -w %s" word))))
+        (let ((output (shell-command-to-string (format "tureng -l e -t t -w %s" word))))
+          (message output))
+      (message "No word found at point."))))
+
+(defun efe/tureng-en-fr ()
+  ;; Written by ChatGPT
+  "Translate the word at point using tureng program."
+  (interactive)
+  (let ((word (thing-at-point 'word)))
+    (if word
+        (let ((output (shell-command-to-string (format "tureng -l e -t f -w %s" word))))
+          (message output))
+      (message "No word found at point."))))
+
+(defun efe/tureng-fr-en ()
+  ;; Written by ChatGPT
+  "Translate the word at point using tureng program."
+  (interactive)
+  (let ((word (thing-at-point 'word)))
+    (if word
+        (let ((output (shell-command-to-string (format "tureng -l f -t e -w %s" word))))
           (message output))
       (message "No word found at point."))))
 

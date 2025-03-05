@@ -26,7 +26,7 @@
 
 ** Theme
 #+begin_src elisp
-(setq doom-theme 'kanagawa)
+(setq doom-theme 'doom-nord)
 #+end_src
 
 ** Font
@@ -188,6 +188,8 @@ In doom dashboard, leave only the splash image
 (define-key evil-normal-state-map "Ş" 'efe/first-result-url)
 (define-key evil-normal-state-map "ğ" 'efe/tureng-english)
 (define-key evil-normal-state-map "ü" 'efe/tureng-turkish)
+(define-key evil-normal-state-map "Ğ" 'efe/tureng-en-fr)
+(define-key evil-normal-state-map "Ü" 'efe/tureng-fr-en)
 #+end_src
 
 ** Stop font resizing when pressing control while scrolling
@@ -315,23 +317,21 @@ In doom dashboard, leave only the splash image
 ** Term2anki
 #+begin_src elisp
 (defun efe/term2anki (file)
-  ;; thought by ismailefetop, code by u/cottasteel
-  "Turn org notes into csv files that anki can read."
+  "Turn org notes into csv files that anki can read, creating a new file."
   (interactive "FExport notes to: ")
-  (let ((regex (rx bol (in "+-") " " (group (1+ nonl)) ": " (group (1+ nonl))))
-        (buf (find-file-noselect file))
-        (output ""))
+  (let* ((regex (rx bol (in "+-") " " (group (1+ nonl)) ": " (group (1+ nonl))))
+         (buf (find-file-noselect file))
+         (output "")
+         (new-file (concat file ".anki.csv")))
     (save-excursion
       (goto-char (point-min))
       (while (re-search-forward regex nil t)
         (setq output (concat output (format "%s;%s\n" (match-string 1)
                                             (match-string 2)))))
-      (with-current-buffer buf
-        (erase-buffer)
-        (insert output)
-        (save-buffer))
+      (with-temp-file new-file
+        (insert output))
       (kill-buffer buf)
-      (message "Export done."))))
+      (message "Export done. New file: %s" new-file))))
 #+end_src
 
 ** Remove Leading Whitespaces
@@ -358,7 +358,7 @@ In doom dashboard, leave only the splash image
   (interactive)
   (let ((word (thing-at-point 'word)))
     (if word
-        (let ((output (shell-command-to-string (format "tureng -l t -w %s" word))))
+        (let ((output (shell-command-to-string (format "tureng -l t -t e -w %s" word))))
           (message output))
       (message "No word found at point."))))
 #+end_src
@@ -371,11 +371,36 @@ In doom dashboard, leave only the splash image
   (interactive)
   (let ((word (thing-at-point 'word)))
     (if word
-        (let ((output (shell-command-to-string (format "tureng -l e -w %s" word))))
+        (let ((output (shell-command-to-string (format "tureng -l e -t t -w %s" word))))
           (message output))
       (message "No word found at point."))))
 #+end_src
 
+*** English to French
+#+begin_src elisp
+(defun efe/tureng-en-fr ()
+  ;; Written by ChatGPT
+  "Translate the word at point using tureng program."
+  (interactive)
+  (let ((word (thing-at-point 'word)))
+    (if word
+        (let ((output (shell-command-to-string (format "tureng -l e -t f -w %s" word))))
+          (message output))
+      (message "No word found at point."))))
+#+end_src
+
+*** French to English
+#+begin_src elisp
+(defun efe/tureng-fr-en ()
+  ;; Written by ChatGPT
+  "Translate the word at point using tureng program."
+  (interactive)
+  (let ((word (thing-at-point 'word)))
+    (if word
+        (let ((output (shell-command-to-string (format "tureng -l f -t e -w %s" word))))
+          (message output))
+      (message "No word found at point."))))
+#+end_src
 ** Open in VSCode
 #+begin_src elisp
 (defun efe/open-in-vscode ()

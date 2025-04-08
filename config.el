@@ -166,7 +166,7 @@
   (let* ((regex (rx bol (in "+-") " " (group (1+ nonl)) ": " (group (1+ nonl))))
          (buf (find-file-noselect file))
          (output "")
-         (new-file (concat file ".anki.csv")))
+         (new-file (concat file ".csv")))
     (save-excursion
       (goto-char (point-min))
       (while (re-search-forward regex nil t)

@@ -1,69 +1,69 @@
 ;;; ~/.config/doom/config.el -*- lexical-binding: t; -*-
 
-(setq user-full-name "İsmail Efe Top"
+(setopt user-full-name "İsmail Efe Top"
       user-mail-address "ismailefetop@gmail.com")
 
-(setq shell-file-name (executable-find "bash"))
+(setopt shell-file-name (executable-find "bash"))
 (setq-default vterm-shell (executable-find "fish"))
 (setq-default explicit-shell-file-name (executable-find "fish"))
 
-(setq doom-theme 'doom-nord)
+(setopt doom-theme 'kanagawa)
 
-(setq doom-font (font-spec :family "JetBrains Mono" :size 22))
+(setopt doom-font (font-spec :family "JetBrains Mono" :size 22))
 
-(setq +doom-dashboard-functions '(doom-dashboard-widget-banner))
+(setopt +doom-dashboard-functions '(doom-dashboard-widget-banner))
 
-(setq confirm-kill-emacs nil)
+(setopt confirm-kill-emacs nil)
 
-(setq bookmark-search-delay 0.0)
-(setq mouse-scroll-delay 0.0)
+(setopt bookmark-search-delay 0.0)
+(setopt mouse-scroll-delay 0.0)
 
-(setq auto-save-default nil)
+(setopt auto-save-default nil)
 
-(setq backup-inhibited t)
+(setopt backup-inhibited t)
 
-(setq confirm-kill-processes nil)
+(setopt confirm-kill-processes nil)
 
-(setq doom-modeline-enable-word-count t)
+(setopt doom-modeline-enable-word-count t)
 
-(setq display-line-numbers-type nil)
+(setopt display-line-numbers-type nil)
 
-(setq use-dialog-box nil)
+(setopt use-dialog-box nil)
 
-(setq delete-by-moving-to-trash t)
+(setopt delete-by-moving-to-trash t)
 
-(setq calendar-week-start-day 1)
+(setopt calendar-week-start-day 1)
 
-(setq org-cite-global-bibliography '("/Users/ismailefetop/uni/citation/bib.bib"))
-(setq bibtex-completion-bibliography '("/Users/ismailefetop/uni/citation/bib.bib"))
-(setq citar-bibliography '("/Users/ismailefetop/uni/citation/bib.bib"))
-(setq org-cite-csl-styles-dir "/Users/ismailefetop/uni/citation/styles/")
+(setopt org-cite-global-bibliography '("/Users/ismailefetop/uni/citation/bib.bib"))
+(setopt bibtex-completion-bibliography '("/Users/ismailefetop/uni/citation/bib.bib"))
+(setopt citar-bibliography '("/Users/ismailefetop/uni/citation/bib.bib"))
+(setopt org-cite-csl-styles-dir "/Users/ismailefetop/uni/citation/styles/")
 
-(setq org-image-actual-width nil)
+(setopt org-image-actual-width nil)
 
 ;;(super-save-mode +1)
 
 ;; warn when opening files bigger than 200MB
-(setq large-file-warning-threshold 200000000)
+(setopt large-file-warning-threshold 200000000)
 
 (remove-hook 'doom-first-buffer-hook #'global-hl-line-mode)
 
 (when (memq system-type '(darwin))
-  (setq ns-use-proxy-icon nil)
-  (setq frame-title-format nil)
+  (setopt ns-use-proxy-icon nil)
+  (setopt frame-title-format nil)
   (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
   (add-to-list 'default-frame-alist '(ns-appearance . dark)))
 
-(setq olivetti-body-width 94)
+(setopt olivetti-body-width 94)
 
 (add-hook 'text-mode-hook 'olivetti-mode)
 
 (when (memq system-type '(darwin))
   (set-fontset-font t nil "SF Pro Display" nil 'append))
 
-(setq undo-limit 80000000)
+(setopt undo-limit 80000000)
 
-(setq evil-want-fine-undo t)
+(setopt evil-want-fine-undo t)
 
 (use-package! org-pandoc-import :after org)
 
@@ -74,7 +74,7 @@
 
 (define-key evil-normal-state-map "ç" 'ispell)
 (define-key evil-normal-state-map "ö" 'ispell-word)
-(define-key evil-normal-state-map "ş" 'efe/google-current-word)
+(define-key evil-normal-state-map "ş" 'efe/google-search)
 (define-key evil-normal-state-map "Ş" 'efe/first-result-url)
 (define-key evil-normal-state-map "ğ" 'efe/tureng-english)
 (define-key evil-normal-state-map "ü" 'efe/tureng-turkish)
@@ -85,17 +85,17 @@
 (global-set-key (kbd "<C-wheel-up>") 'ignore)
 (global-set-key (kbd "<C-wheel-down>") 'ignore)
 
-(setq pandoc-binary "/opt/homebrew/bin/pandoc")
+(setopt pandoc-binary "/opt/homebrew/bin/pandoc")
 
-(setq pandoc-data-dir "/Users/ismailefetop/.config/doom/etc/pandoc/")
+(setopt pandoc-data-dir "/Users/ismailefetop/.config/doom/etc/pandoc/")
 
-(setq org-directory "/Users/ismailefetop/.orgs/org/")
+(setopt org-directory "/Users/ismailefetop/.orgs/org/")
 
-(setq org-agenda-files '("/Users/ismailefetop/uni/current-course/" "/Users/ismailefetop/.orgs/org/" "/Users/ismailefetop/ideas/"))
+(setopt org-agenda-files '("/Users/ismailefetop/uni/current-course/" "/Users/ismailefetop/.orgs/org/" "/Users/ismailefetop/ideas/"))
 
-(setq org-confirm-babel-evaluate nil)
+(setopt org-confirm-babel-evaluate nil)
 
-(setq org-agenda-prefix-format
+(setopt org-agenda-prefix-format
       '((agenda . " %i %-12:c%?-12t% s")
         (todo   . " ")
         (tags   . " %i %-12:c")
@@ -103,14 +103,22 @@
 
 (add-hook 'org-mode-hook 'org-auto-tangle-mode)
 
-(defun efe/google-current-word ()
-  ;; initially written by chatgpt but later modified by u/Aminumbra
-  "Search the current word on Google using browse-url."
-  (interactive)
-  (let ((word (thing-at-point 'word)))
-    (if word
-        (browse-url (concat "https://www.google.com/search?q=" word))
-      (message "No word found at point."))))
+(defun efe/google-search (arg)
+  "Search the current word or region on Google using browse-url.
+With prefix argument ARG, prompt for a search term instead.
+If region is active, use the region text as the search term."
+  (interactive "P")
+  (let* ((bounds (if (use-region-p)
+                     (cons (region-beginning) (region-end))
+                   (bounds-of-thing-at-point 'word)))
+         (text (cond
+                (arg (read-string "Google search: "))
+                (bounds (buffer-substring-no-properties (car bounds) (cdr bounds)))
+                (t nil)))
+         (encoded-text (when text (url-hexify-string text))))
+    (if encoded-text
+        (browse-url (concat "https://www.google.com/search?q=" encoded-text))
+      (user-error "No text to search for"))))
 
 (defun efe/first-result-url ()
   ;; Written by ChatGPT
@@ -170,7 +178,7 @@
     (save-excursion
       (goto-char (point-min))
       (while (re-search-forward regex nil t)
-        (setq output (concat output (format "%s;%s\n" (match-string 1)
+        (setopt output (concat output (format "%s;%s\n" (match-string 1)
                                             (match-string 2)))))
       (with-temp-file new-file
         (insert output))
@@ -263,10 +271,10 @@
 (set-file-template! "\\.org$" :trigger "__orgtemplate.org" :mode 'org-mode)
 
 (setq browse-url-mailto-function 'browse-url-generic)
-(setq browse-url-generic-program "open")
+(setopt browse-url-generic-program "open")
 
 (add-hook 'emacs-startup-hook 'openwith-mode)
-(setq openwith-associations
+(setopt openwith-associations
       '(("\\.pdf\\'" "open" (file))
         ("\\.docx\\'" "open" (file))
         ("\\.psd\\'" "open" (file))
@@ -280,10 +288,10 @@
         ("\\.gif\\'" "open" (file))
         ))
 
-(setq ispell-program-name "hunspell")
-(setq ispell-hunspell-dict-paths-alist '(("en_US" "/Users/ismailefetop/.config/dict/en_US.aff")))
-(setq ispell-local-dictionary "en_US")
-(setq ispell-local-dictionary-alist '(("en_US" "[[:alpha:]]" "[^[:alpha:]]" "[']" nil ("-d" "en_US") nil utf-8)))
+(setopt ispell-program-name "hunspell")
+(setopt ispell-hunspell-dict-paths-alist '(("en_US" "/Users/ismailefetop/.config/dict/en_US.aff")))
+(setopt ispell-local-dictionary "en_US")
+(setopt ispell-local-dictionary-alist '(("en_US" "[[:alpha:]]" "[^[:alpha:]]" "[']" nil ("-d" "en_US") nil utf-8)))
 (flyspell-mode 1)
 
 (defun endless/org-ispell ()

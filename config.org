@@ -13,84 +13,84 @@
 
 ** My contact information
 #+begin_src elisp
-(setq user-full-name "İsmail Efe Top"
+(setopt user-full-name "İsmail Efe Top"
       user-mail-address "ismailefetop@gmail.com")
 #+end_src
 
 ** Setting the default shell
 #+begin_src elisp
-(setq shell-file-name (executable-find "bash"))
+(setopt shell-file-name (executable-find "bash"))
 (setq-default vterm-shell (executable-find "fish"))
 (setq-default explicit-shell-file-name (executable-find "fish"))
 #+end_src
 
 ** Theme
 #+begin_src elisp
-(setq doom-theme 'doom-nord)
+(setopt doom-theme 'kanagawa)
 #+end_src
 
 ** Font
 #+begin_src elisp
-(setq doom-font (font-spec :family "JetBrains Mono" :size 22))
+(setopt doom-font (font-spec :family "JetBrains Mono" :size 22))
 #+end_src
 
 ** Dashboard Customization
 In doom dashboard, leave only the splash image
 #+begin_src elisp
-(setq +doom-dashboard-functions '(doom-dashboard-widget-banner))
+(setopt +doom-dashboard-functions '(doom-dashboard-widget-banner))
 #+end_src
 
 ** Disable Confirm on exit
 #+begin_src elisp
-(setq confirm-kill-emacs nil)
+(setopt confirm-kill-emacs nil)
 #+end_src
 
 ** Disable Delays
 #+begin_src elisp
-(setq bookmark-search-delay 0.0)
-(setq mouse-scroll-delay 0.0)
+(setopt bookmark-search-delay 0.0)
+(setopt mouse-scroll-delay 0.0)
 #+end_src
 
 ** Disable autosave
 #+begin_src elisp
-(setq auto-save-default nil)
+(setopt auto-save-default nil)
 #+end_src
 
 ** Disable Backup
 #+begin_src elisp
-(setq backup-inhibited t)
+(setopt backup-inhibited t)
 #+end_src
 
 ** Automatically Kill Running Processes on Exit
 [[https://emacsredux.com/blog/2020/07/18/automatically-kill-running-processes-on-exit/][Emacs Redux Article]]
 
 #+begin_src elisp
-(setq confirm-kill-processes nil)
+(setopt confirm-kill-processes nil)
 #+end_src
 
 ** Enable Word Count in the Doom Modeline
 #+begin_src elisp
-(setq doom-modeline-enable-word-count t)
+(setopt doom-modeline-enable-word-count t)
 #+end_src
 
 ** Disable Line Numbers
 #+begin_src elisp
-(setq display-line-numbers-type nil)
+(setopt display-line-numbers-type nil)
 #+end_src
 
 ** Disable unnecessary new os windows
 #+begin_src elisp
-(setq use-dialog-box nil)
+(setopt use-dialog-box nil)
 #+end_src
 
 ** Deleted files to trash
 #+begin_src elisp
-(setq delete-by-moving-to-trash t)
+(setopt delete-by-moving-to-trash t)
 #+end_src
 
 ** Make calendar start on Monday
 #+begin_src elisp
-(setq calendar-week-start-day 1)
+(setopt calendar-week-start-day 1)
 #+end_src
 
 ** Automatically updating feed when opening elfeed
@@ -100,15 +100,15 @@ In doom dashboard, leave only the splash image
 
 ** Bib Locations :dir:
 #+begin_src elisp
-(setq org-cite-global-bibliography '("/Users/ismailefetop/uni/citation/bib.bib"))
-(setq bibtex-completion-bibliography '("/Users/ismailefetop/uni/citation/bib.bib"))
-(setq citar-bibliography '("/Users/ismailefetop/uni/citation/bib.bib"))
-(setq org-cite-csl-styles-dir "/Users/ismailefetop/uni/citation/styles/")
+(setopt org-cite-global-bibliography '("/Users/ismailefetop/uni/citation/bib.bib"))
+(setopt bibtex-completion-bibliography '("/Users/ismailefetop/uni/citation/bib.bib"))
+(setopt citar-bibliography '("/Users/ismailefetop/uni/citation/bib.bib"))
+(setopt org-cite-csl-styles-dir "/Users/ismailefetop/uni/citation/styles/")
 #+end_src
 
 ** Make images adjust to width
 #+begin_src elisp
-(setq org-image-actual-width nil)
+(setopt org-image-actual-width nil)
 #+end_src
 
 ** Super-save
@@ -119,7 +119,7 @@ In doom dashboard, leave only the splash image
 ** Opening Large Files
 #+begin_src elisp
 ;; warn when opening files bigger than 200MB
-(setq large-file-warning-threshold 200000000)
+(setopt large-file-warning-threshold 200000000)
 #+end_src
 
 ** Disable hl-line-mode
@@ -130,15 +130,15 @@ In doom dashboard, leave only the splash image
 ** Make the title bar text empty :mac:
 #+begin_src elisp
 (when (memq system-type '(darwin))
-  (setq ns-use-proxy-icon nil)
-  (setq frame-title-format nil)
+  (setopt ns-use-proxy-icon nil)
+  (setopt frame-title-format nil)
   (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
   (add-to-list 'default-frame-alist '(ns-appearance . dark)))
 #+end_src
 
 ** Sets olivettis body width
 #+begin_src elisp
-(setq olivetti-body-width 94)
+(setopt olivetti-body-width 94)
 #+end_src
 
 ** Open olivetti Mode on Text Mode buffers
@@ -155,12 +155,12 @@ In doom dashboard, leave only the splash image
 
 ** Set undo limit to 80mb
 #+begin_src elisp
-(setq undo-limit 80000000)
+(setopt undo-limit 80000000)
 #+end_src
 
 ** Fine tuning the evil-undo
 #+begin_src elisp
-(setq evil-want-fine-undo t)
+(setopt evil-want-fine-undo t)
 #+end_src
 
 ** Activate org-pandoc-import
@@ -184,7 +184,7 @@ In doom dashboard, leave only the splash image
 #+begin_src elisp
 (define-key evil-normal-state-map "ç" 'ispell)
 (define-key evil-normal-state-map "ö" 'ispell-word)
-(define-key evil-normal-state-map "ş" 'efe/google-current-word)
+(define-key evil-normal-state-map "ş" 'efe/google-search)
 (define-key evil-normal-state-map "Ş" 'efe/first-result-url)
 (define-key evil-normal-state-map "ğ" 'efe/tureng-english)
 (define-key evil-normal-state-map "ü" 'efe/tureng-turkish)
@@ -202,34 +202,34 @@ In doom dashboard, leave only the splash image
 * Pandoc
 ** Set Pandoc Binary :dir:
 #+begin_src elisp
-(setq pandoc-binary "/opt/homebrew/bin/pandoc")
+(setopt pandoc-binary "/opt/homebrew/bin/pandoc")
 #+end_src
 
 ** Global Settings/Data File :dir:
 #+begin_src elisp
-(setq pandoc-data-dir "/Users/ismailefetop/.config/doom/etc/pandoc/")
+(setopt pandoc-data-dir "/Users/ismailefetop/.config/doom/etc/pandoc/")
 #+end_src
 
 * Org
 ** Org directories
 *** Main Directory :dir:
 #+begin_src elisp
-(setq org-directory "/Users/ismailefetop/.orgs/org/")
+(setopt org-directory "/Users/ismailefetop/.orgs/org/")
 #+end_src
 
 *** Other Org Directories :dir:
 #+begin_src elisp
-(setq org-agenda-files '("/Users/ismailefetop/uni/current-course/" "/Users/ismailefetop/.orgs/org/" "/Users/ismailefetop/ideas/"))
+(setopt org-agenda-files '("/Users/ismailefetop/uni/current-course/" "/Users/ismailefetop/.orgs/org/" "/Users/ismailefetop/ideas/"))
 #+end_src
 
 ** Trusting the org-blocks in org automatically
 #+begin_src elisp
-(setq org-confirm-babel-evaluate nil)
+(setopt org-confirm-babel-evaluate nil)
 #+end_src
 
 ** Change the look of org-agenda to-do view.
 #+begin_src elisp
-(setq org-agenda-prefix-format
+(setopt org-agenda-prefix-format
       '((agenda . " %i %-12:c%?-12t% s")
         (todo   . " ")
         (tags   . " %i %-12:c")
@@ -242,16 +242,24 @@ In doom dashboard, leave only the splash image
 #+end_src
 
 * Functions
-** Google this word
+** Google Search
 #+begin_src elisp
-(defun efe/google-current-word ()
-  ;; initially written by chatgpt but later modified by u/Aminumbra
-  "Search the current word on Google using browse-url."
-  (interactive)
-  (let ((word (thing-at-point 'word)))
-    (if word
-        (browse-url (concat "https://www.google.com/search?q=" word))
-      (message "No word found at point."))))
+(defun efe/google-search (arg)
+  "Search the current word or region on Google using browse-url.
+With prefix argument ARG, prompt for a search term instead.
+If region is active, use the region text as the search term."
+  (interactive "P")
+  (let* ((bounds (if (use-region-p)
+                     (cons (region-beginning) (region-end))
+                   (bounds-of-thing-at-point 'word)))
+         (text (cond
+                (arg (read-string "Google search: "))
+                (bounds (buffer-substring-no-properties (car bounds) (cdr bounds)))
+                (t nil)))
+         (encoded-text (when text (url-hexify-string text))))
+    (if encoded-text
+        (browse-url (concat "https://www.google.com/search?q=" encoded-text))
+      (user-error "No text to search for"))))
 #+end_src
 
 ** Get the first result
@@ -326,7 +334,7 @@ In doom dashboard, leave only the splash image
     (save-excursion
       (goto-char (point-min))
       (while (re-search-forward regex nil t)
-        (setq output (concat output (format "%s;%s\n" (match-string 1)
+        (setopt output (concat output (format "%s;%s\n" (match-string 1)
                                             (match-string 2)))))
       (with-temp-file new-file
         (insert output))
@@ -453,13 +461,13 @@ This line makes the insides of __orgtemplate.org file append on every newly crea
 ** Email Client
 #+begin_src elisp
 (setq browse-url-mailto-function 'browse-url-generic)
-(setq browse-url-generic-program "open")
+(setopt browse-url-generic-program "open")
 #+end_src
 
 ** Openwith Defaults
 #+begin_src elisp
 (add-hook 'emacs-startup-hook 'openwith-mode)
-(setq openwith-associations
+(setopt openwith-associations
       '(("\\.pdf\\'" "open" (file))
         ("\\.docx\\'" "open" (file))
         ("\\.psd\\'" "open" (file))
@@ -478,10 +486,10 @@ This line makes the insides of __orgtemplate.org file append on every newly crea
 ** hunspell
 Here is the [[https://web.archive.org/web/20240520082706/https://old.reddit.com/r/emacs/comments/dgj0ae/tutorial_spellchecking_with_hunspell_170_for/][tutorial I followed]].
 #+begin_src elisp
-(setq ispell-program-name "hunspell")
-(setq ispell-hunspell-dict-paths-alist '(("en_US" "/Users/ismailefetop/.config/dict/en_US.aff")))
-(setq ispell-local-dictionary "en_US")
-(setq ispell-local-dictionary-alist '(("en_US" "[[:alpha:]]" "[^[:alpha:]]" "[']" nil ("-d" "en_US") nil utf-8)))
+(setopt ispell-program-name "hunspell")
+(setopt ispell-hunspell-dict-paths-alist '(("en_US" "/Users/ismailefetop/.config/dict/en_US.aff")))
+(setopt ispell-local-dictionary "en_US")
+(setopt ispell-local-dictionary-alist '(("en_US" "[[:alpha:]]" "[^[:alpha:]]" "[']" nil ("-d" "en_US") nil utf-8)))
 (flyspell-mode 1)
 #+end_src
 ** Skip certain sections
@@ -517,13 +525,13 @@ Thanks to Endless Parentheses for the [[https://endlessparentheses.com/ispell-an
 * Misc.
 ** Make emacs silent
 #+begin_src elisp :tangle no
-(setq byte-compile-warnings '(not obsolete))
-(setq warning-suppress-log-types '((comp) (bytecomp)))
-(setq native-comp-async-report-warnings-errors 'silent)
-(setq inhibit-startup-echo-area-message (user-login-name))
-(setq visible-bell t)
-(setq ring-bell-function 'ignore)
-(setq set-message-beep 'silent)
+(setopt byte-compile-warnings '(not obsolete))
+(setopt warning-suppress-log-types '((comp) (bytecomp)))
+(setopt native-comp-async-report-warnings-errors 'silent)
+(setopt inhibit-startup-echo-area-message (user-login-name))
+(setopt visible-bell t)
+(setopt ring-bell-function 'ignore)
+(setopt set-message-beep 'silent)
 #+end_src
 
 ** Auto-create Missing Directories

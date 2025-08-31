@@ -11,24 +11,21 @@
 ;; org
 (package! pandoc-mode)
 (package! org-auto-tangle)
-(package! org-pandoc-import :recipe (:host github :repo "tecosaur/org-pandoc-import" :files ("*.el" "filters" "preprocessors")))
 
 ;; misc
 (package! openwith)
 (package! reveal-in-osx-finder)
 (package! doom-snippets :ignore t)
-(package! crux)
-(package! ready-player)
-(package! kana)
 (package! valign)
-(package! dwim-shell-command)
 
 ;; unused
+;;(package! org-pandoc-import :recipe (:host github :repo "tecosaur/org-pandoc-import" :files ("*.el" "filters" "preprocessors")))
 ;;(package! org-ros)
 ;;(package! org-modern)
 ;;(package! org-chef)
 ;;(package! insert-shebang)
 ;;(package! autothemer)
+;;(package! crux)
 
 ;; Custom Themes
 ;;(package! kanagawa-theme)

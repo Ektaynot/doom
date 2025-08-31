@@ -30,8 +30,6 @@
 
 (setopt use-dialog-box nil)
 
-(setopt delete-by-moving-to-trash t)
-
 (setopt calendar-week-start-day 1)
 
 (setopt org-cite-global-bibliography '("/Users/ismailefetop/uni/citation/bib.bib"))
@@ -40,8 +38,6 @@
 (setopt org-cite-csl-styles-dir "/Users/ismailefetop/uni/citation/styles/")
 
 (setopt org-image-actual-width nil)
-
-;;(super-save-mode +1)
 
 ;; warn when opening files bigger than 200MB
 (setopt large-file-warning-threshold 200000000)
@@ -65,8 +61,6 @@
 
 (setopt evil-want-fine-undo t)
 
-(use-package! org-pandoc-import :after org)
-
 (add-hook 'org-mode-hook #'valign-mode)
 
 (global-set-key (kbd "C-+") 'text-scale-increase)
@@ -78,8 +72,6 @@
 (define-key evil-normal-state-map "Ş" 'efe/first-result-url)
 (define-key evil-normal-state-map "ğ" 'efe/tureng-english)
 (define-key evil-normal-state-map "ü" 'efe/tureng-turkish)
-(define-key evil-normal-state-map "Ğ" 'efe/tureng-en-fr)
-(define-key evil-normal-state-map "Ü" 'efe/tureng-fr-en)
 
 (global-set-key (kbd "<pinch>") 'ignore)
 (global-set-key (kbd "<C-wheel-up>") 'ignore)
@@ -91,9 +83,7 @@
 
 (setopt org-directory "/Users/ismailefetop/.orgs/org/")
 
-(setopt org-agenda-files '("/Users/ismailefetop/uni/current-course/" "/Users/ismailefetop/.orgs/org/" "/Users/ismailefetop/ideas/"))
-
-(setopt org-confirm-babel-evaluate nil)
+(setopt org-agenda-files '("/Users/ismailefetop/uni/current-course/" "/Users/ismailefetop/.orgs/org/"))
 
 (setopt org-agenda-prefix-format
       '((agenda . " %i %-12:c%?-12t% s")
@@ -217,26 +207,6 @@ If region is active, use the region text as the search term."
           (message output))
       (message "No word found at point."))))
 
-(defun efe/tureng-en-fr ()
-  ;; Written by ChatGPT
-  "Translate the word at point using tureng program."
-  (interactive)
-  (let ((word (thing-at-point 'word)))
-    (if word
-        (let ((output (shell-command-to-string (format "tureng -l e -t f -w %s" word))))
-          (message output))
-      (message "No word found at point."))))
-
-(defun efe/tureng-fr-en ()
-  ;; Written by ChatGPT
-  "Translate the word at point using tureng program."
-  (interactive)
-  (let ((word (thing-at-point 'word)))
-    (if word
-        (let ((output (shell-command-to-string (format "tureng -l f -t e -w %s" word))))
-          (message output))
-      (message "No word found at point."))))
-
 (defun efe/open-in-vscode ()
   ;; Written by ChatGPT
   "Open the current file in Visual Studio Code."
@@ -278,13 +248,9 @@ If region is active, use the region text as the search term."
       '(("\\.pdf\\'" "open" (file))
         ("\\.docx\\'" "open" (file))
         ("\\.psd\\'" "open" (file))
-        ;;("\\.jpeg\\'" "open" (file))
-        ;;("\\.jpg\\'" "open" (file))
-        ;;("\\.png\\'" "open" (file))
         ("\\.pptx\\'" "open" (file))
         ("\\.ppt\\'" "open" (file))
         ("\\.epub\\'" "open" (file))
-        ;; ("\\.svg\\'" "open" (file))
         ("\\.gif\\'" "open" (file))
         ))
 

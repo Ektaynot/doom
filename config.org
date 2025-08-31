@@ -63,7 +63,6 @@ In doom dashboard, leave only the splash image
 
 ** Automatically Kill Running Processes on Exit
 [[https://emacsredux.com/blog/2020/07/18/automatically-kill-running-processes-on-exit/][Emacs Redux Article]]
-
 #+begin_src elisp
 (setopt confirm-kill-processes nil)
 #+end_src
@@ -83,19 +82,9 @@ In doom dashboard, leave only the splash image
 (setopt use-dialog-box nil)
 #+end_src
 
-** Deleted files to trash
-#+begin_src elisp
-(setopt delete-by-moving-to-trash t)
-#+end_src
-
 ** Make calendar start on Monday
 #+begin_src elisp
 (setopt calendar-week-start-day 1)
-#+end_src
-
-** Automatically updating feed when opening elfeed
-#+begin_src elisp :tangle no
-(add-hook! 'elfeed-search-mode-hook #'elfeed-update)
 #+end_src
 
 ** Bib Locations :dir:
@@ -109,11 +98,6 @@ In doom dashboard, leave only the splash image
 ** Make images adjust to width
 #+begin_src elisp
 (setopt org-image-actual-width nil)
-#+end_src
-
-** Super-save
-#+begin_src elisp
-;;(super-save-mode +1)
 #+end_src
 
 ** Opening Large Files
@@ -163,11 +147,6 @@ In doom dashboard, leave only the splash image
 (setopt evil-want-fine-undo t)
 #+end_src
 
-** Activate org-pandoc-import
-#+begin_src elisp
-(use-package! org-pandoc-import :after org)
-#+end_src
-
 ** Enable valign
 #+begin_src elisp
 (add-hook 'org-mode-hook #'valign-mode)
@@ -188,8 +167,6 @@ In doom dashboard, leave only the splash image
 (define-key evil-normal-state-map "Ş" 'efe/first-result-url)
 (define-key evil-normal-state-map "ğ" 'efe/tureng-english)
 (define-key evil-normal-state-map "ü" 'efe/tureng-turkish)
-(define-key evil-normal-state-map "Ğ" 'efe/tureng-en-fr)
-(define-key evil-normal-state-map "Ü" 'efe/tureng-fr-en)
 #+end_src
 
 ** Stop font resizing when pressing control while scrolling
@@ -219,12 +196,7 @@ In doom dashboard, leave only the splash image
 
 *** Other Org Directories :dir:
 #+begin_src elisp
-(setopt org-agenda-files '("/Users/ismailefetop/uni/current-course/" "/Users/ismailefetop/.orgs/org/" "/Users/ismailefetop/ideas/"))
-#+end_src
-
-** Trusting the org-blocks in org automatically
-#+begin_src elisp
-(setopt org-confirm-babel-evaluate nil)
+(setopt org-agenda-files '("/Users/ismailefetop/uni/current-course/" "/Users/ismailefetop/.orgs/org/"))
 #+end_src
 
 ** Change the look of org-agenda to-do view.
@@ -384,31 +356,6 @@ If region is active, use the region text as the search term."
       (message "No word found at point."))))
 #+end_src
 
-*** English to French
-#+begin_src elisp
-(defun efe/tureng-en-fr ()
-  ;; Written by ChatGPT
-  "Translate the word at point using tureng program."
-  (interactive)
-  (let ((word (thing-at-point 'word)))
-    (if word
-        (let ((output (shell-command-to-string (format "tureng -l e -t f -w %s" word))))
-          (message output))
-      (message "No word found at point."))))
-#+end_src
-
-*** French to English
-#+begin_src elisp
-(defun efe/tureng-fr-en ()
-  ;; Written by ChatGPT
-  "Translate the word at point using tureng program."
-  (interactive)
-  (let ((word (thing-at-point 'word)))
-    (if word
-        (let ((output (shell-command-to-string (format "tureng -l f -t e -w %s" word))))
-          (message output))
-      (message "No word found at point."))))
-#+end_src
 ** Open in VSCode
 #+begin_src elisp
 (defun efe/open-in-vscode ()
@@ -471,13 +418,9 @@ This line makes the insides of __orgtemplate.org file append on every newly crea
       '(("\\.pdf\\'" "open" (file))
         ("\\.docx\\'" "open" (file))
         ("\\.psd\\'" "open" (file))
-        ;;("\\.jpeg\\'" "open" (file))
-        ;;("\\.jpg\\'" "open" (file))
-        ;;("\\.png\\'" "open" (file))
         ("\\.pptx\\'" "open" (file))
         ("\\.ppt\\'" "open" (file))
         ("\\.epub\\'" "open" (file))
-        ;; ("\\.svg\\'" "open" (file))
         ("\\.gif\\'" "open" (file))
         ))
 #+end_src
@@ -523,17 +466,6 @@ Thanks to Endless Parentheses for the [[https://endlessparentheses.com/ispell-an
 #+end_src
 
 * Misc.
-** Make emacs silent
-#+begin_src elisp :tangle no
-(setopt byte-compile-warnings '(not obsolete))
-(setopt warning-suppress-log-types '((comp) (bytecomp)))
-(setopt native-comp-async-report-warnings-errors 'silent)
-(setopt inhibit-startup-echo-area-message (user-login-name))
-(setopt visible-bell t)
-(setopt ring-bell-function 'ignore)
-(setopt set-message-beep 'silent)
-#+end_src
-
 ** Auto-create Missing Directories
 [[https://emacsredux.com/blog/2022/06/12/auto-create-missing-directories/][Emacs Redux Article]]
 #+begin_src elisp

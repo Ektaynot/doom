@@ -246,7 +246,6 @@ If region is active, use the region text as the search term."
         (let ((output (shell-command-to-string (format "firstresult -w %s" word))))
           (message output))
       (message "No word found at point."))))
-
 #+end_src
 
 ** Copy Path Function
@@ -291,7 +290,6 @@ If region is active, use the region text as the search term."
   (insert "  <a href=\"https://firechicken.club/efe/next\">→</a>\n")
   (insert "</div>\n")
   (insert "#+END_EXPORT\n"))
-
 #+end_src
 
 ** Term2anki
@@ -385,7 +383,6 @@ If region is active, use the region text as the search term."
                                  (shell-quote-argument (expand-file-name file-path))))
           (message "Opened file %s in VSCode using project root %s" file-path project-root))
       (message "Buffer is not visiting a file"))))
-
 #+end_src
 
 ** Dos2unix
@@ -461,8 +458,7 @@ Thanks to Endless Parentheses for the [[https://endlessparentheses.com/ispell-an
 (add-hook 'window-setup-hook 'toggle-frame-maximized t)
 
 (when (memq system-type '(darwin))
-  (add-hook 'emacs-startup-hook 'rectangle-maximize)
-)
+  (add-hook 'emacs-startup-hook 'rectangle-maximize))
 #+end_src
 
 * Misc.

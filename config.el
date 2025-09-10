@@ -279,8 +279,7 @@ If region is active, use the region text as the search term."
 (add-hook 'window-setup-hook 'toggle-frame-maximized t)
 
 (when (memq system-type '(darwin))
-  (add-hook 'emacs-startup-hook 'rectangle-maximize)
-)
+  (add-hook 'emacs-startup-hook 'rectangle-maximize))
 
 (defun er-auto-create-missing-dirs ()
   (let ((target-dir (file-name-directory buffer-file-name)))

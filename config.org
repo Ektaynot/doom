@@ -4,6 +4,7 @@
 #+auto_tangle: t
 # first year in uni, mba2022
 # second year in uni, mba2022
+# third year in uni, mba2022
 
 * One Liners
 ** Lexical Binding
@@ -234,9 +235,9 @@ If region is active, use the region text as the search term."
       (user-error "No text to search for"))))
 #+end_src
 
-** Get the first result
+** Get the first result - WIP
 [[https://gist.github.com/Ektaynot/46681539aa1c030b3a58986e7f3df397][Link to the firstresult script.]]
-#+begin_src elisp
+#+begin_src elisp :tangle no
 (defun efe/first-result-url ()
   ;; Written by ChatGPT
   "Get the first url from a google search."

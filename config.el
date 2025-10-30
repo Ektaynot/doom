@@ -110,16 +110,6 @@ If region is active, use the region text as the search term."
         (browse-url (concat "https://www.google.com/search?q=" encoded-text))
       (user-error "No text to search for"))))
 
-(defun efe/first-result-url ()
-  ;; Written by ChatGPT
-  "Get the first url from a google search."
-  (interactive)
-  (let ((word (thing-at-point 'word)))
-    (if word
-        (let ((output (shell-command-to-string (format "firstresult -w %s" word))))
-          (message output))
-      (message "No word found at point."))))
-
 (defun efe/select-and-copy-file-path ()
   ;; Written by chatgpt
   "Copy the selected file's path."
